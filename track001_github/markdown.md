@@ -49,3 +49,7 @@ public class Hello{
 ![프로필](./me.png)
 
 ---
+|이름|나이|
+|-|-|
+|sally|7살|
+|alpha|3살|

@@ -16,9 +16,8 @@
 1. 이미지 (캐리커쳐)
 2. <!--이름, 이메일, 깃허브 주소, 포트폴리오 2*4의 테이블 형식으로 -->
 ## Contact & Links
-<img src="./track001_github/me.png"
+<img src="./me.png"
 alt="프로필" width=200>
-
 
 |||
 |-|-|
@@ -50,8 +49,7 @@ GitHub의 워크플로우(Git Flow, Fork & PR 등)를 익히며, 실제 협업 �
 <br/>
 
 ---
-## ✔ 기술스택 기반 CS 역량
-|||
+## ✔ 기술스택 기반 CS 역량|
 |-|-|
 |**Git & GitHub**|버전 관리와 협업의 핵심 도구로, 브랜치 전략과 코드 리뷰를 통해 <span style="color:#1976d2"><b>실무에서 요구되는 안정적이고 효율적인 개발 프로세스 경험</b></span>. *CS 연결*: 소프트웨어 공학의 형상관리, 협업 및 배포 자동화.|
 |**Markdown**|기술 문서화 및 README 작성으로 팀 내 지식 공유와 <span style="color:#1976d2"><b>커뮤니케이션 능력 강화</b></span>. *CS 연결*: 문서화의 중요성, 유지보수성과 정보 전달력|
@@ -130,4 +128,123 @@ SOLID 원칙 기반의 유지보수 가능한 코드 작성
 <br/>
 
 ---
-## ✔ 포트폴리오
+<!--## ✔ 포트폴리오
+JAVA, HTML+CSS+JS/JQUERY-->
+
+
+<br/>
+<br/>
+
+---
+<!-- 정리해놓은 내용-->
+## 트러블슈팅
+#### 문제코드(1)
+```bash
+ TJ-BU-703-P03@DESKTOP-5CVIKGS MINGW64 /c/KIMYOUNGMIN/workspace (master)
+$ git commit -m "git 수정 후 다시올리기"
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)       
+        modified:   day001.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+#### 해결방안(1)
+```bash
+아래 명령어를 입력해서 수정된 파일을 스테이지에 올린 후 커밋하세요:
+
+bash
+git add day001.md
+git commit -m "git 수정 후 다시올리기"
+혹은, 모든 변경된 파일을 한 번에 스테이지에 올리고 싶다면:
+
+bash
+git add .
+git commit -m "git 수정 후 다시올리기"
+💡 참고로 git commit -a 명령어는 추적 중인 파일만 자동으로 add하고 커밋합니다. 새로 추가된 파일은 포함되지 않아요.
+
+혹시 day001.md 파일을 커밋하지 않으려는 경우라면, git restore day001.md로 변경 사항을 되돌릴 수도 있어요.
+
+필요하시면 Git 워크플로우 전체를 정리해드릴 수도 있어요. 계속 도와드릴까요?
+
+-위 방법들을 모두 실행하였으나 해결이 되지않았음
+옆자리에서 조언을 받아 해결
+원인은 단순하게 저장버튼을 누르지 않아서 생긴 문제
+
+결론 : ★★★저장하는 습관을 들여야함★★★
+```
+
+#### 문제코드(2)
+```bash
+$ git pull origin master
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 965 bytes | 120.00 KiB/s, done.
+From https://github.com/ryu199212-coder/Fullstack_Ryu
+ * branch            master     -> FETCH_HEAD
+   2ce3cb3..fb4bb0f  master     -> origin/master
+Updating 2ce3cb3..fb4bb0f
+error: Your local changes to the following files would be overwritten by merge:
+        day002.md
+Please commit your changes or stash them before you merge.
+Aborting
+```
+#### 해결방안(2) : 두개파일 비교해서 local파일 수정
+```bash
+결론 : 웹과 로컬의 내용이 같은지 다른지를 체크하고 pull을 먼저 해준 후에 
+그 다음 과정을 이어가야함
+```
+#### 트러블슈팅(3)
+```bash
+TJ-BU-703-013PC@DESKTOP-3AIRPJC MINGW64 /c/Ryuheejae/workspace (master)
+$ git add .
+fatal: Unable to create 'C:/Ryuheejae/workspace/.git/index.lock': File exists.
+
+Another git process seems to be running in this repository, e.g.
+an editor opened by 'git commit'. Please make sure all processes
+are terminated then try again. If it still fails, a git process
+may have crashed in this repository earlier:
+remove the file manually to continue.
+```
+#### 해결 방안(3)
+```bash
+Git 관련 프로세스가 실행 중인지 확인
+
+혹시 Git 명령어를 실행 중인 터미널이나 에디터가 열려 있다면 모두 종료하세요.
+
+특히 git commit 메시지를 작성 중인 에디터(VS Code, Vim 등)가 열려 있으면 닫아야 합니다.
+
+잠금 파일 수동 삭제
+
+bash
+rm -f .git/index.lock
+또는 Windows 명령 프롬프트에서는:
+
+cmd
+del .git\index.lock
+이 명령어는 .git/index.lock 파일을 강제로 삭제합니다.
+
+다시 시도
+
+bash
+git add .
+⚠️ 주의사항
+index.lock 파일을 삭제하기 전에 Git 작업이 실제로 진행 중인지 꼭 확인하세요. 작업 중인 상태에서 삭제하면 데이터 손실이 발생할 수 있습니다.
+
+이 문제는 Git이 비정상 종료되었을 때 자주 발생하므로, Git 작업 중에는 에디터나 터미널을 갑자기 종료하지 않는 것이 좋습니다.
+
+결론 - 작업중 저장폴더를 잘 못 선택하여 삭제하다 벌어진 일
+index.lock 파일을 지우고 해결 완료
+```
+<br/>
+<br/>
+
+---
+## 참고문헌
+- [Git 공식 문서](https://git-scm.com/doc)  
+- [Markdown 가이드](https://www.markdownguide.org/basic-syntax/)  
+- [VS Code 공식 사이트](https://code.visualstudio.com/)  
+- [AI 프롬프트 작성 팁](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/prompt-engineering)
