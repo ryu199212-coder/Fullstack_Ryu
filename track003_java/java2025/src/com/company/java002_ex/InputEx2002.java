@@ -16,12 +16,11 @@ public class InputEx2002 {
 		mat=scanner.nextInt();
 		//처리
 		total = kor + eng + mat;
-		average = (kor + eng + mat)/3;
+		average = total/3.0;
 		//출력
 		System.out.println("총점은" + total + "입니다.");
-		System.out.print("평균은" + average + "입니다.");
+		System.out.println("평균은" + average + "입니다.");
 	}
-
 }
 
 /*연습문제2)
