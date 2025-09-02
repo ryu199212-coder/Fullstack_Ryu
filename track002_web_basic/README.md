@@ -78,3 +78,21 @@
 - [MDN Web Docs](https://developer.mozilla.org/ko/docs/Learn_web_development)
 - [Subicura](https://subicura.com/2021/06/27/study-guide.html)
 - ["subicura"네이버 블로그](https://blog.naver.com/daza0531/223747646151)
+
+---
+
+## 트러블슈팅
+### 문제발생
+- 카드에 수치값 적용 불가
+.card {
+    width: 250;
+    margin: 30px auto;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0);
+    text-align: center;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+### 문제해결
+- width : 230(px이 빠짐);
+단위를 항상 잊지말고 달아주자
