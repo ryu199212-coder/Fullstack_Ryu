@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9.3 실습</title>
+    <style>
+  /* Q1. body 여백제거, 안쪽여백 : 30px, 글꼴 : 'Segoe UI', 배경 : 그라디언트 #fff1eb → #ace0f9 */
+  body{margin: 0; padding: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: linear-gradient(135deg, #fff1eb, #ace0f9);}   
+
+  /* Q2. h1 중앙정렬, 글자색상 : #34495e, 아래쪽여백 : 40px */
+  h1{text-align: center; color:#34495e; margin-bottom: 40px;}
+
+  /* Q3. .portfolio 너비 : 250px, 여백 : 아래쪽 30px 중앙정렬, 테두리 둥글게 : 20px, 그림자효과, 안쪽여백 : 20px, 트랜지션 : 0.3초 */
+  .portfolio{width:250px; margin: 0 auto 30px; border-radius: 20px; padding: 20px; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,1); cursor:pointer;}
+
+  /* Q4. .portfolio:hover 확대 + 회전 + 밝기 + 그림자 강조 */
+  .portfolio:hover{transform: scale(1.1) rotate(5deg); filter: brightness(1.2); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); transition:0.3s ease;}
+
+  /* Q5. .project1 배경 : 그라디언트 #fceabb → #f8b500 */
+  .project1{background-image: linear-gradient(135deg,#fceabb, #f8b500);}
+
+  /* Q6. .project2 배경 : 그라디언트 #d5fefd → #a1c4fd */
+  .portfolio.project2{background-image: linear-gradient(135deg,#d5fefd, #a1c4fd);}
+
+  /* Q7. .project3 배경 : 그라디언트 #fbc2eb → #a6c1ee */
+  .project3{background-image: linear-gradient(135deg,#fbc2eb, #a6c1ee);}
+
+  /* Q8. .portfolio img 너비 :150px, 높이 : 90px, 원형처리, 이미지 비율 유지, 테두리 : 3px 실선 #34495e */
+  .portfolio img{width: 150px; height: 90px; border-radius:20px; object-fit:cover; border: 3px solid #34495e;
+    display: block;/* 블록 요소로 변경 */
+    margin: 0 auto;}/* 좌우 자동 여백으로 가운데 정렬 */
+
+  /* Q9. .portfolio h2 여백 : 위10px 아래5px, 글자크기 : 18px, 글자색상 : #2c3e50 */
+  .portfolio h2{margin:10px 0 5px; font-size: 18px; color: #2c3e50;}
+
+  /* Q10. .portfolio p 글자크기 : 14px, 글자색상 : #555, 아래쪽여백 : 10px */
+  .portfolio p{font-size: 14px; color: #555; margin-bottom: 10px;}
+
+  /* Q11. .portfolio a 글자크기 : 13px, 글자색상 : #34495e, 밑줄 제거 */
+  .portfolio a{font-size: 13px; color: #34495e; text-decoration: none;}
+
+  /* Q12. .portfolio h3 위쪽여백 : 20px, 글자크기 : 16px, 글자색상 : #2c3e50 */
+  .portfolio h3{margin-top: 20px; font-size: 16px; color: #2c3e50;}
+
+  /* Q13. .portfolio ul 왼쪽정렬, 왼쪽 안쪽여백 : 20px, 글자색상 : #2c3e50  */
+  .portfolio ul{text-align: left; margin-left: 20px; padding: 20px; color: #2c3e50;}
+</style>
+</head>
+<body>
+    <div>
+        <h1>📁 프로젝트 설명 카드</h1> 
+        <div class="portfolio project1">
+          <p><img src="./web004_3/portfolio1.jpg" alt="project1"></p>  
+          <h2>도서 추천 웹앱</h2>
+          <p>기획자: 사장님</p>
+          <p>사용자 취향 기반으로 도서를 추천하는 웹 서비스</p>
+          <p><a href="" title="">배포된 페이지 보기</a></p>
+          <h3>핵심 기능</h3>
+          <ul>
+            <li>사용자 입력 기반 추천 알고리즘</li>
+            <li>카드 UI를 활용한 도서 정보 시각화</li>
+            <li>팀원 역할 분담 및 협업 관리</li>
+            <li>프로젝트 썸네일 이미지</li>
+            </ul>
+        </div>
+    </div><!--end div1 -->       
+
+    <div>
+        <div class="portfolio project2">
+          <p><img src="./web004_3/portfolio2.jpg" alt="project2"></p>  
+          <h2>반응형 포트폴리오 사이트</h2>
+          <p>프론트엔드: June</p>
+          <p>디자이너와 협업하여 제작한 개인 포트폴리오 웹사이트</p>
+          <p><a href="" title="">배포된 페이지 보기</a></p>
+          <h3>주요 기술</h3>
+          <ul>
+            <li>HTML5 / CSS3 / JavaScript</li>
+            <li>미디어쿼리를 활용한 반응형 디자인</li>
+            <li>Figma 기반 UI 설계</li>
+            <li>프로젝트 썸네일 이미지</li>
+            </ul>
+    </div><!--end div2 -->
+
+        <div class="portfolio project3"> 
+          <p><img src="./web004_3/portfolio3.jpg" alt="project3"></p>  
+          <h2>AI 기반 독서 취향 분석기</h2>
+          <p>독서 이력 데이터를 기반으로 취향을 분석하고 도서를 추천</p>
+          <p>AI 분석: Mina</p>
+          <p><a href="" title="">프로젝트 상세 보기</a></p>
+          <h3>기술 스택</h3>
+          <ul>
+            <li>Python / Pandas / Scikit-learn</li>
+            <li>미디어쿼리를 활용한 반응형 디자인</li>
+            <li>데이터 시각화 및 사용자 피드백 반영</li>
+            </ul>
+            
+    </div><!--end div3 -->
+    </div><!--end div-->
+</body>
+</html>
