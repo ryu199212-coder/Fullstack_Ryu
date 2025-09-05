@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>우주 CSS 탐험</title>
+  <style>
+/* Q1: 모든 요소의 기본 여백을 없애고 박스 크기 계산을 통일하려면? (margin: 0, padding: 0, box-sizing: border-box) */
+*{margin: 0; padding: 0; box-sizing: border-box;}
+
+/* Q2: 페이지 전체에 어두운 배경(#0b0c10), 흰 글씨(#fff), 글꼴(Segoe UI)을 적용하려면? */
+body{background-color: #0b0c10; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+; color: #fff;}
+
+/* Q3: 제목(h3)에 왼쪽 테두리(10px solid #00bfff), 배경색(#1f2833), 아래 여백(1em), 패딩(1em)을 주려면? */
+h3{border-left: 10px solid #00bfff; background-color: #1f2833; margin-bottom: 1em; padding: 1em;}
+
+/* Q4: 콘텐츠 박스를 중앙에 배치하고 너비(80%), 바깥 여백(2em auto), 안쪽 여백(2em), 배경색(#2c3e50), 모서리 둥글게(10px) 하려면? */
+.container{width: 80%; margin: 2em auto; padding: 2em; background-color: #2c3e50; border-radius: 10px;}
+
+/* Q5: 왼쪽으로 float된 행성 박스를 만들고 너비(40%), 배경색(#ff6347), 패딩(1em), 모서리 둥글게(10px) 하려면? */
+.planet{float:left; width: 40%; background-color: #ff6347; padding: 1em; border-radius: 10px;}
+
+/* Q6: 오른쪽으로 float된 우주선 박스를 만들고 너비(40%), 배경색(#f1c40f), 패딩(1em), 모서리 둥글게(10px) 하려면? */
+.spaceship{float:right; width: 40%; background-color: #f1c40f; padding : 1em; border-radius: 10px;}
+
+/* Q7: float 해제(clear: both) 후 콘텐츠 공간 확보 + 위쪽 여백(2em), 배경색(#34495e), 패딩(1em), 모서리 둥글게(10px) 하려면? */
+.clear{clear:both; margin: 2em 0; background-color: #34495e; padding: 1em; border-radius: 10px;}
+
+/* Q8: 자식 absolute 요소 기준이 되는 공간을 만들고 배경색(#1abc9c), 패딩(2em), 모서리 둥글게(10px) 하려면? */
+.space{position:relative; background-color: #1abc9c; padding: 2em; border-radius: 10px;}
+
+/* Q9: 부모 기준으로 위치 지정된 우주비행사 박스를 만들고 위치(top:10px, left:10px), 배경색(#ecf0f1), 글자색(#2c3e50), 패딩(0.5em), 모서리 둥글게(5px) 하려면? */
+.astronaut{position:absolute; top: 10px; left: 10px; background-color: #ecf0f1; color: #2c3e50; padding: 0.5em; border-radius: 5px;}
+
+/* Q10: 화면 고정 위치에 붙어 있는 위성 박스를 만들고 위치(bottom:10px, right:10px), 배경색(#9b59b6), 패딩(0.5em), 모서리 둥글게(5px) 하려면? */
+.satellite{position:fixed; bottom: 10px; right: 10px; background-color: #9b59b6; padding: 0.5em; border-radius: 5px;}
+
+/* Q11: 인라인으로 나열된 은하 항목을 만들고 오른쪽 여백(10px), 배경색(#95a5a6), 패딩(0.5em), 모서리 둥글게(5px) 하려면? */
+
+
+/* Q12: 너비(120px) 지정 가능한 인라인 블록 항목을 만들고 배경색(#e74c3c), 바깥 여백(5px), 패딩(1em), 텍스트 가운데 정렬, 모서리 둥글게(10px) 하려면? */
+
+/* Q13: 여백(margin:30px)과 안쪽 공간(padding:20px)이 있는 탐사 미션 박스를 만들고 배경색(#2980b9), 모서리 둥글게(10px) 하려면? */
+
+
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <h3>001. BLOCK vs INLINE - 우주 요소 정렬</h3>
+  <div class="container">
+    <p><strong>BLOCK 요소:</strong> 우주선, 행성 등 큰 구조물 (div, p)</p>
+    <p><strong>INLINE 요소:</strong> 별, 텍스트 등 작은 요소 (span, a)</p>
+  </div>
+
+  <h3>002. float 배치 - 행성과 우주선</h3>
+  <div class="container float-zone">
+    <div class="planet">🌍 행성</div>
+    <div class="spaceship">🚀 우주선</div>
+    <div class="clear">float 이후 우주 공간 확보 완료!</div>
+  </div>
+
+  <h3>003. position 배치 - 우주비행사와 위성</h3>
+  <div class="container space">
+    <div class="astronaut">🧑‍🚀 우주비행사</div>
+    <p>position:relative 영역에서 absolute로 위치 지정</p>
+  </div>
+  <div class="satellite">🛰️ 고정된 위성 (fixed)</div>
+
+  <h3>004. display 속성 - 은하계 리스트</h3>
+  <div class="container">
+    <ul class="galaxy">
+      <li>🌟 별</li>
+      <li>🌌 은하</li>
+      <li>🪐 행성</li>
+    </ul>
+    <hr/>
+    <ul class="nebula">
+      <li>🌟 별</li>
+      <li>🌌 은하</li>
+      <li>🪐 행성</li>
+    </ul>
+  </div>
+
+  <h3>005. margin & padding - 탐사 미션 박스</h3>
+  <div class="container mission">
+    <p>📦 이 박스는 margin과 padding을 통해 우주 공간을 확보했어요!</p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> web005_1.html </title>
+    <style>
+        /* Q1. 전체여백 빼기 
+           박스 크기 계산 통일(box-sizing: border-box)
+           width와 hegiht에 padding과 border까지 포함해서 계산
+           박스크기가 100px, padding: 10px 자동으로 크기 조정*/
+        *{margin : 0; padding : 0; box-sizing: border-box;}
+
+        /* Q2. body 글꼴, 전체배경색상*/
+        body{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-image:linear-gradient(135deg, #e6893e, #6bbd53);}
+
+        /* Q3. h3 왼쪽에 선넣기, 배경색상*/
+        h3{background-color: forestgreen; 
+            border-left: 10px solid;
+            border-bottom: 2px solid;
+            margin: 60px 0;}
+
+        /* Q4. strong 배경색상*/
+        strong{background-color: rgb(113, 185, 30);
+            padding: 2px ;
+            margin: 10px;
+            width: 500px;/*적용X inline*/}
+
+        /* Q5. box 예) */
+        .container{width: 60%; margin: 60px auto; background-color:#496840;
+        padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 1);}
+
+        .item{padding: 10px; background-color: rgb(143, 145, 61);;}
+
+        
+        /* Q6. float */
+        .i1{float: left; width: 100px; text-align: center;}
+        .i2{float: right;}
+        .i3{clear:both; margin: 10px 0;}
+
+
+        /*Q7. position */
+        .me{background-color:gold; padding: 10px; color: rgb(255, 255, 255);}
+        .p1{position: relative;}  /* 부모(감싸는 박스에 공간확보)*/
+        .p1 .me{position: absolute; right:0; bottom: 0;} /*자식(absolute)*/
+
+        .p2 .me{position: fixed; bottom: 100px; right: 0; background-color: aquamarine;} /*브라우저 기준*/
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>1. block vs inline</h3>
+        <P><strong>block</strong> 그릇 width/height O, 줄바꿈 O</P>
+        <p><strong>inline</strong> 컨텐츠-간장 width/height X, 줄바꿈 X</p>
+    </div>
+
+    <div class="container f1">
+        <h3>2. 배치 - float</h3>
+        <p class="item i1">LEFT</p>
+        <p class="item i2">RIGHT</p>
+        <p class="item i3">float:left, float:right 사용시 왼쪽,오른쪽 배치 / clear:both</p>
+    </div>
+
+    <div class="container p1">
+        <h3>3. 배치 (2) position - relative + absolute</h3>
+        <p class="me">WHERE I AM?</p>
+        <p>부모:relative(공간확보) / 자식:absolute(공간유지X)</p>
+    </div>
+
+    <div class="container p2">
+        <h3>3. 배치 (2) position</h3>
+        <p class="me">WHERE I AM?</p>
+    
+    
+    
+    </div>
+    
+</body>
+</html>

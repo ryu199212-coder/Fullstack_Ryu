@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>내부적용 css -users</title>
+  <style>
+    * { margin:0; padding:0; }
+    body {
+      font-family:'Franklin Gothic Medium',Arial;
+      background-image:linear-gradient(135deg,#fdfbfb , #ffa4dc);
+    }
+    h1 {
+      text-align: center;
+      color:#e1306c;
+      margin-bottom:40px;
+    }
+    .container {
+      width:90%;
+      margin:50px auto;
+    }
+    .clear{clear:both; background-color: #333; border-radius: 10px; color: #dbeafe;
+    font-size: 15px; padding:1em;}
+    .card {
+      position: relative;
+      width:200px;
+      margin:30px;
+      border-radius:20px;
+      box-shadow: 0 0 10px rgba(0,0,0, 0.1);
+      text-align: center;
+      padding:10px;
+      transition: all 0.3s ease; 
+      float:left;
+
+    }
+    .card:hover {
+      transform:translateY(-5px);
+      box-shadow: 0 0 10px rgba(0,0,0, 0.2);
+    }
+    .jack { background-image: linear-gradient(135deg, #dbeafe , #f0f9ff); }
+    .june { background-image: linear-gradient(135deg, #ffe0f0 , #fff0f5); }
+    .mina { background-image: linear-gradient(135deg, #ede9fe , #f5f3ff); } 
+    .yuna { background-image: linear-gradient(135deg, #fce7f3 , #fff1f2); }
+    .leo  { background-image: linear-gradient(135deg, #e0f2f1 , #f1f8e9); }
+
+    .card .more{ position:absolute; top:0; right:0; border-radius: 30px; background-color: #333; color: #ffffff;
+    margin:10px; padding: 0.5em; }
+    .card .more:hover{ background-color: #e1306c;}
+
+    /*Q1: float  카드들을 가로방향으로 배치*/
+    /*Q2: position 카드 오른쪽 상단에 고정된 '더보기'버튼을 만들고, 배경색과 글자 스타일을 설정하며 hover시 색상이 바뀌도록 한다*/
+
+    .card img {
+      width:90px;
+      height:90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border:3px solid #e1306c;
+      
+    }
+    .card h2 { margin:10px 0 5px 0; font-size:18px; color:#333; }
+    .card p { font-size:14px; color:#444; margin-bottom:10px; }
+    .card a { font-size:13px; color:#e1306c; text-decoration: none; }
+    .card h3 { margin-top:20px; font-size:16px; color:#333; }
+    .card ul, .card ol, .card dl {
+      text-align: left;
+      padding-left:20px;
+      color:#333;
+      margin:0;
+    }
+    .card dt { font-weight: bold; }
+    .card dd { margin-bottom:10px; }
+
+
+ 
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>사용자 프로필 카드</h1>
+
+    <div class="card jack">
+      <p><img src="./img/1.png" alt="Jack 프로필사진"/></p>
+      <h2>Jack</h2>
+      <p>백엔드 개발자 | Node.js & DB전문가</p>
+      <p>팔로워 : 3200명</p>
+      <p><a href="#">깃허브 보기</a></p>
+      <h3>Jack이 좋아하는 기술</h3>
+      <ul>
+        <li>Node js</li><li>MongoDB</li><li>Docker</li>
+      </ul>
+      <P><a class="more">더보기</a></P>
+    </div>
+
+    <div class="card june">
+      <p><img src="./img/2.png" alt="June 프로필사진"/></p>
+      <h2>June</h2>
+      <p>프론트엔드 디자이너 | React & UI/UX</p>
+      <p>팔로워 : 2,100명</p>
+      <p><a href="#">깃허브 보기</a></p>
+      <h3>프론트엔드 학습 추천 순서</h3>
+      <ol>
+        <li>HTML & CSS</li><li>JavaScript</li><li>React</li>
+      </ol>
+      <P><a class="more">더보기</a></P>
+    </div>
+
+    <div class="card mina">
+      <p><img src="./img/3.png" alt="Mina 프로필사진"/></p>
+      <h2>Mina</h2>
+      <p>AI 연구원 + Python & 머신러닝</p>
+      <p>팔로워 : 1,500명</p>
+      <p><a href="#">깃허브 보기</a></p>
+      <h3>Mina의 역할</h3>
+      <dl>
+        <dt>직무</dt><dd>AI 연구원</dd>
+        <dt>주요기술</dt><dd>Python, 머신러닝</dd>
+        <dt>관심분야</dt><dd>자연어 처리, 딥러닝</dd>
+      </dl>
+      <P><a class="more">더보기</a></P>
+    </div>
+
+
+    <div class="card yuna">
+      <p><img src="./img/1.png" alt="Yuna 프로필사진"/></p>
+      <h2>Yuna</h2>
+      <p>사이버 보안 전문가 | 네트워크 & 침투 테스트</p>
+      <p>팔로워 : 2,900명</p>
+      <p><a href="#">깃허브 보기</a></p>
+      <h3>Yuna의 보안 스킬셋</h3>
+      <dl>
+        <dt>직무</dt><dd>보안 컨설팅 및 모의 해킹</dd>
+        <dt>사용 툴</dt><dd>Wireshark, Metasploit</dd>
+        <dt>관심분야</dt><dd>정보보호, 취약점 분석</dd>
+      </dl>
+      <P><a class="more">더보기</a></P>
+    </div>
+
+    <div class="card leo">
+      <p><img src="./img/2.png" alt="Leo 프로필사진"/></p>
+      <h2>Leo</h2>
+      <p>모바일 앱 개발자 | iOS & Android</p>
+      <p>팔로워 : 4,200명</p>
+      <p><a href="#">깃허브 보기</a></p>
+      <h3>Leo의 개발 환경</h3>
+      <ol>
+        <li>Swift</li><li>Kotlin</li><li>Flutter</li>
+      </ol>
+      <P><a class="more">더보기</a></P>
+    </div>
+
+    <div class="clear">
+      우리는 기술을 통해 문제를 해결하고, 사용자 경험을 혁신하는 것을 목표로 하는 팀입니다.<br/>
+      Jack은 안정적인 서버를, June은 아름다운 인터페이스를, Mina는 똑똑한 알고리즘을 책임지고 있습니다.<br/> 
+      Leo는 모바일 환경에서도 최고의 사용자 경험을 구현합니다.
+    </div>
+  </div>
+</body>
+</html>
