@@ -249,4 +249,4 @@ index.lock 파일을 지우고 해결 완료
 - [Git 공식 문서](https://git-scm.com/doc)  
 - [Markdown 가이드](https://www.markdownguide.org/basic-syntax/)  
 - [VS Code 공식 사이트](https://code.visualstudio.com/)  
-- [AI 프롬프트 작성 팁]( https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/prompt-engineering?tabs=chat)
+- [AI 프롬프트 작성 팁](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/prompt-engineering?tabs=chat)

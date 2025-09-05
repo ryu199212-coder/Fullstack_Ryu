@@ -81,6 +81,6 @@ Java 기반 백엔드 개발자로 취업을 준비하며 직접 설계하고 �
 ---
 
 ## 참고문헌
-- [생활코팅](https://opentutorials.org/course/1223)
+- [생활코딩](https://opentutorials.org/course/1223)
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Baeldung](https://www.baeldung.com/)

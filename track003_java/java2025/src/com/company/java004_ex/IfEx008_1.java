@@ -23,15 +23,15 @@ Scanner scanner = new Scanner(System.in);
 	total = kor+mat+eng;
 	avg = total/3.0;
 	
-	pass = (avg>=60 && kor>=40 && mat>=40 && eng>=40) ? "합격":"불합격";
+	//pass = (avg>=60 && kor>=40 && mat>=40 && eng>=40) ? "합격":"불합격";
+	pass = avg<60 ? "불합격" : avg>=60 && kor>=40 && mat>=40 && eng>=40 ? "합격" : "";
+	level = avg>=90 ? "수": 
+	        avg>=80 ? "우":
+	        avg>=70 ? "미" :
+	        avg>=60 ? "양" : "가";
 	
-	level = (avg>=90) ? "수": 
-	        (avg>=80) ? "우":
-	        (avg>=70) ? "미" :
-	        (avg>=60) ? "양" : "가";
 	
-	
-	sch = (avg>=95) ? "장학생": "";
+	sch = avg>=95 ? "장학생": "";
 	
 	
 
