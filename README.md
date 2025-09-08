@@ -140,7 +140,7 @@ JAVA, HTML+CSS+JS/JQUERY-->
 ---
 <!-- 정리해놓은 내용-->
 ## ✔ 트러블슈팅
-#### 문제코드(1)
+### 문제발생(1)
 ```bash
  TJ-BU-703-P03@DESKTOP-5CVIKGS MINGW64 /c/KIMYOUNGMIN/workspace (master)
 $ git commit -m "git 수정 후 다시올리기"
@@ -152,7 +152,7 @@ Changes not staged for commit:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
-#### 해결방안(1)
+### 문제해결(1)
 ```bash
 아래 명령어를 입력해서 수정된 파일을 스테이지에 올린 후 커밋하세요:
 
@@ -176,8 +176,9 @@ git commit -m "git 수정 후 다시올리기"
 
 결론 : ★★★저장하는 습관을 들여야함★★★
 ```
+---
 
-#### 문제코드(2)
+### 문제발생(2)
 ```bash
 $ git pull origin master
 remote: Enumerating objects: 5, done.
@@ -194,12 +195,13 @@ error: Your local changes to the following files would be overwritten by merge:
 Please commit your changes or stash them before you merge.
 Aborting
 ```
-#### 해결방안(2) : 두개파일 비교해서 local파일 수정
+### 문제해결(2) : 두개파일 비교해서 local파일 수정
 ```bash
 결론 : 웹과 로컬의 내용이 같은지 다른지를 체크하고 pull을 먼저 해준 후에 
 그 다음 과정을 이어가야함
 ```
-#### 트러블슈팅(3)
+---
+### 문제발생(3)
 ```bash
 TJ-BU-703-013PC@DESKTOP-3AIRPJC MINGW64 /c/Ryuheejae/workspace (master)
 $ git add .
@@ -211,7 +213,7 @@ are terminated then try again. If it still fails, a git process
 may have crashed in this repository earlier:
 remove the file manually to continue.
 ```
-#### 해결 방안(3)
+### 문제해결()
 ```bash
 Git 관련 프로세스가 실행 중인지 확인
 
