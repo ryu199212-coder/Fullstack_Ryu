@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+< lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,10 +46,14 @@
         .p1 .me{position: absolute; right:0; bottom: 0;} /*자식(absolute)*/
 
         .p2 .me{position: fixed; bottom: 100px; right: 0; background-color: aquamarine;} /*브라우저 기준*/
-    
+         
+        /*Q8. display*/
+        .d1 li{display: inline;}
+        .d2 li{display: inline-block; width: 100px; padding: 10px; background-color: gold;
+            text-align: center;}
     </style>
 </head>
-<body>
+<hr>
     <div class="container">
         <h3>1. block vs inline</h3>
         <P><strong>block</strong> 그릇 width/height O, 줄바꿈 O</P>
@@ -70,12 +74,24 @@
     </div>
 
     <div class="container p2">
-        <h3>3. 배치 (2) position</h3>
-        <p class="me">WHERE I AM?</p>
-    
+
+    <div class="containerd d1">
+        <h3>4. display 요소 속성 변경</h3>
+        <ul>
+            <li>Apple</li><li>Melon</li><li>Mango</li>
+        </ul>
+        <hr/>
+        <ul>
+            <li>Apple</li><li>Melon</li><li>Mango</li>
+        </ul>
+        <hr/></div>
+    <div class="containerd d2">
+        <ul>
+            <li>Apple</li><li>Melon</li><li>Mango</li></div>
+        </ul>
     
     
     </div>
-    
+</div>
 </body>
 </html>

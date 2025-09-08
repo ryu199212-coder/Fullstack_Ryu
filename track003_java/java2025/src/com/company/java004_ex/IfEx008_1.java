@@ -20,6 +20,7 @@ Scanner scanner = new Scanner(System.in);
 	System.out.print("수학점수"); mat=scanner.nextInt();
 	System.out.print("영어점수"); eng=scanner.nextInt();
 	
+	
 	total = kor+mat+eng;
 	avg = total/3.0;
 	
