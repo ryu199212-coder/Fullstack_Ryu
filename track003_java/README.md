@@ -79,6 +79,85 @@ Java 기반 백엔드 개발자로 취업을 준비하며 직접 설계하고 �
 - **코드 품질**: 가독성, 네이밍, 주석, 리팩토링 적용
 
 ---
+## 트러블 슈팅
+
+### 문제발생(1)
+```bash
+package com.company.java004_ex;
+
+import java.util.Scanner;
+
+public class IfEx004 {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		char ch='\u0000';
+		
+		System.out.print("문자를 입력>"); ch=scanner.nextInt();
+		
+		if(ch>='A' && ch<='Z') {System.out.println("대문자");}
+		else if(ch>='a'  &&  ch<='z'){System.out.println("소문자");}
+	  //else if(ch>=97  &&  ch<=122){System.out.println("소문자");}
+		}
+
+}
+/*연습문제4)
+패키지명 : com.company.java004_ex
+클래스명 :  IfEx004
+출력내용 : 문자한개를 입력받아 
+   대문자인지,  소문자인지 판별하는 프로그램을 작성하시오.
+   ※  대문자  ch>='A' && ch<='Z' / 소문자  ch>='a'  &&  ch<='z'  */
+   ```
+   ### 문제해결(1)
+   ```bash
+   주요 문제는 scanner.nextInt()로 문자를 입력받으려는.nextInt()는 정수 입력을 받는 메서드인데,
+   여기에 문자를 입력하면 예외가 발생하거나 의도한 대로 작동하지 않는다.
+   
+   ★scanner.nextInt() → scanner.next().charAt(); 로 변경 하면 해결
+```
+---
+### 문제발생(2)
+```bash
+package com.company.java004_ex;
+
+import java.util.Scanner;
+
+public class Repeat011 {
+	public static void main(String[] args) {
+		
+		int num1, num2;
+		result;
+		char ch = 0;
+		
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.print("정수 입력 >"); num1=scanner.nextInt();
+		System.out.println("정수 입력 >"); num2=scanner.nextInt();
+		System.out.println("연산자 입력 >"); ch=(char) scanner.next().charAt(0);
+		
+		result = (""+num1+ch+num2+"=");
+		
+		if(ch=='+') {result += (num1+num2);}
+		else if(ch=='-') {result += (num1-num2);}
+		else if(ch=='*') {result += (num1*num2);}
+		else if(ch=='/') {result += String. format("%.2f, (double)num1/num2");}
+		
+		System.out.println(result);
+		
+	
+		
+		
+	}
+}
+```
+### 문제해결(2)
+```bash
+자료형이 빠져 있어서 컴파일 오류가 난다. result는 문자열을 담고 있으므로
+변수 파트에 'String'을 추가해서 'String result'로 변경 해야한다
+```
+---
+
+
+---
 
 ## 참고문헌
 - [생활코딩](https://opentutorials.org/course/1223)

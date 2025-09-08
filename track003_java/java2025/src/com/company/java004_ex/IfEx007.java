@@ -8,7 +8,7 @@ public class IfEx007 {
 		
 		int num1;
 		int num2;
-		char ch='\u0000';
+		char ch;
 		
 		
 		System.out.println("정수를 하나 입력해주세요>"); num1=scanner.nextInt();

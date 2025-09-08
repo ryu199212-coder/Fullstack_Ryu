@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class InputEx002 {
 	public static void main(String[] args) {
 		//변수
-		int num=0;
+		int num;
 		Scanner scanner = new Scanner(System.in);
 		
 		//입력
