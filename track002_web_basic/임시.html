@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>display:flex</title>
+    <style>
+         /* Q1. 모든 요소의 기본 여백 제거   */ 
+         *{ margin:0; padding:0;  }
+
+         /* Q2. h3 왼쪽테두리 배경색, 패딩  */
+        h3{  border-left:10px solid burlywood;  background-color:beige; padding:2%; }
+
+         /* Q3. .container  가로 80%, 페이지 중앙에 배치  */
+        .container{ width:80%;  margin:2% auto;  background-color:#ccc; padding:2%; }
+
+         /* Q4. .item  배경, 글자색, 안쪽여백 */
+         .item{  background-color:darkturquoise; color:white;  padding:2%; }
+
+         /* Q5. .i1, .i2 ,.i3 좋아하는 배경색상 */
+         .i2{ background-color:deepskyblue;  }
+         .i3{ background-color:blueviolet;  }
+
+         /* [c1] display:block  - 기본 html 흐름 */
+         .c1{ display: block; }
+
+        /* [c2] display:flex - 자식요소들을 가로로 정렬하고, 유연한 레이아웃 */
+         .c2{ display: flex; }
+
+        /* [c3] flex 방향 : row - 생략해도 기본row */
+         .c3{  display: flex;   flex-direction: row;  }
+
+        /* [c4] flex 방향 : column - 세로방향  */
+         .c4{  display: flex;   flex-direction: column-reverse;  }
+
+        /* [c5] flex 방향 : 네비게이션 + 오른쪽정렬  */
+        .c5{  display: flex; }  /*  네이게이션메뉴 가로배치 - 줄바꿈 방지 */
+        .c5 .item{  flex : none;   } /* 항목들 사이즈-크기를 한번에 설정 (none)  */
+        .c5 .item.i2{  margin-left:auto;  }  /* 마지막항목을 오른쪽 끝으로 정렬 */
+
+    </style>
+</head>
+<body>
+    <div>
+        <h3>001. display:flex / block 비교</h3>
+        <div class="container c1">
+            <div class="item i1">AAA</div>
+            <div class="item i2">BBB</div>
+            <div class="item i3">CCC</div>
+        </div>
+        <div class="container c2">
+            <div class="item i1">AAA</div>
+            <div class="item i2">BBB</div>
+            <div class="item i3">CCC</div>
+        </div>        
+    </div>  <!-- end 001 -->
+
+    <div>
+        <h3>002. flex 방향설정</h3>
+        <div class="container c3">
+            <div class="item i1">AAA</div>
+            <div class="item i2">BBB</div>
+            <div class="item i3">CCC</div>
+        </div>
+        <div class="container c4">
+            <div class="item i1">AAA</div>
+            <div class="item i2">BBB</div>
+            <div class="item i3">CCC</div>
+        </div>        
+    </div>  <!-- end 002 -->
+
+    <div>
+        <h3>003. 네비게이션</h3>
+        <div class="container c5">
+            <div class="item i1">HOME</div>
+            <div class="item i2">ABOUT</div>
+            <div class="item i3">CONTACT</div>
+        </div>    
+    </div>  <!-- end 003 -->
+
+</body>
+</html>
+<!-- web005_5.html  -->

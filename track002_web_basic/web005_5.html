@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>display:flex</title>
+    <style>
+        /* Q1. 모든 요소의 기본 여백 제거 */
+        *{margin:0; padding: 0;}
+
+        /* Q2. h3 왼쪽테두리 배경색, 패딩 */
+        h3{border-left: 10px solid crimson; background-color: bisque; padding:2%;}
+
+        /* Q3. .container 가로80%, 페이지 중앙 */
+        .container{width:80%; margin: 2% auto; background-color: darkgray; padding:2%}
+
+        /* Q4. .item 배경, 글자색, 안쪽여백*/
+        .item{background-color: brown; padding: 2%;}
+
+        /* Q5. .i1, .i2, .i3, 좋아하는 배경색상 */
+        .i1{background-color: rgb(202, 191, 90);}
+        .i2{background-color: rgb(54, 205, 224);}
+        .i3{background-color: rgb(37, 134, 50);}
+
+
+        /* [c1] diplay:block - 기본 html 흐름 */
+        .c1{display:block;}
+
+        /* [c2] diplay:flex - 자식요소들을 가로로 정렬하고, 유연한 레이아웃*/
+        .c2{display:flex;}
+
+        /* [c3] flex 방향 : row */
+        .c3{display: flex; flex-direction: row;}
+
+        /* [c4] flex 방향 : column */
+        .c4{display: flex; flex-direction: column-reverse;}
+
+        /* [c5] flex 방향 : 네비게이션 + 오른쪽정렬 */
+        .c5{display: flex;} /* 네비게이션 메뉴 가로배치 - 줄바꿈 방지*/
+        .c5 .item{flex:none;}/* 항목들 사이즈 크기를 한번에 설정 (none바꾸지마)*/
+        .c5 .item.i2{margin-left: auto;}
+
+        /* [c6] footer 아래방향 */
+        /* footer 배치, 방향은 세로방량, 전체박스 높이값 지정 */
+        .c6{display: flex; flex-direction: column; height: 300px;}
+        .c6 .i1{margin-top: auto;}
+
+        
+        /* [c7] 좌우 정렬 */
+        /* 아이템들을 좌우 끝에 배치 -가운데 여백 자동생성 */
+        .c7{display: flex; justify-content : space-between; }
+    
+         /* [c8] 가운데 정렬 */
+         /* 감싸는 박스에 flex, */
+         .c8{display: flex; height: 100px;}
+         .c8 .i1{margin: auto;}
+         
+    </style>
+</head>
+<body>
+    <div>
+        <h3>001. display:flex / block 비교</h3>
+        <div class="container c1">
+            <div class="item i1">AAA</div>
+            <div class="item i2">BBB</div>
+            <div class="item i3">CCC</div>
+        </div>
+
+        <div class="container c2">
+            <div class="item i1">AAA</div>
+            <div class="item i2">BBB</div>
+            <div class="item i3">CCC</div>
+        </div>
+    </div><!--end 001-->
+
+    <div>
+        <h3>002. flex 방향설정</h3>
+        <div class="container c3">
+            <div class="item i1">AAA</div>
+            <div class="item i2">BBB</div>
+            <div class="item i3">CCC</div>
+        </div>
+
+        <div class="container c4">
+            <div class="item i1">AAA</div>
+            <div class="item i2">BBB</div>
+            <div class="item i3">CCC</div>
+        </div>
+    </div><!--end 002-->
+    
+    <div>
+     <h3>003. 네비게이션</h3>
+     <div class="container c5">
+        <div class="item i1">HOME</div>
+        <div class="item i2">ABOUT</div>
+        <div class="item i3">CONTACT</div>
+     </div>
+
+    </div><!--end 003-->
+
+        
+    <div>
+     <h3>004. footer 아래 정렬</h3>
+     <div class="container c6">
+        <div class="item i1">Copyrigth 2025</div>
+ 
+     </div>
+
+    </div><!--end 004-->
+
+     <div>
+     <h3>005. 좌우 정렬</h3>
+     <div class="container c7">
+        <div class="item i1">LEFT</div>
+        <div class="item i2">CENTER1</div>
+        <div class="item i2">CENTER2</div>
+        <div class="item i3">RIGHT</div>
+     </div>
+
+    </div><!--end 005-->
+
+    <div>
+     <h3>006. 가운데 정렬</h3>
+     <div class="container c8">
+        <div class="item i1">CENTER CENTER CENTER</div>
+     </div>
+
+    </div><!--end 006-->
+
+    
+    
+</body>
+</html>
