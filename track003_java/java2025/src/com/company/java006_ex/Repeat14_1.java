@@ -13,7 +13,7 @@ public class Repeat14_1 {
 		
 		if (ch=='x') {System.out.println("x-ray");}
 		else if(ch=='y') {System.out.println("yogurt");}
-		else if(ch=='z') {System.out.println("zezbra");}
+		else if(ch=='z') {System.out.println("zebra");}
 		else {System.out.println("x, y, z가 아니다");}
 		
 		

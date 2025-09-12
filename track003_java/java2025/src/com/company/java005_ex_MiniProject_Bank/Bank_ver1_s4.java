@@ -1,11 +1,11 @@
-package com.company.java005_ex;
+package com.company.java005_ex_MiniProject_Bank;
 
 import java.util.Scanner;
 
 public class Bank_ver1_s4 {
 	public static void main(String[] args) {
 
-		// 변수
+		
 		Scanner scanner = new Scanner(System.in);
 		int num = -1;
 		String id = "", pass = "";
@@ -14,16 +14,7 @@ public class Bank_ver1_s4 {
 		String tempid = "";
 		String temppass = "";
 
-		// 입력+처리+출력
-		// 1-1
-		/*
-		 * for(;;){ if(9라면){빠져나올조건} else if(1이라면){ 사용자에게 정보 입력받기 } else if(2이라면,3,4,5){
-		 * 
-		 * 1. 사용자 정보조회 2. 각파트별 처리 if(2라면){해야할처리 } else if(3라면){해야할처리 } else
-		 * if(4라면){해야할처리 } else if(5라면){해야할처리 }
-		 * 
-		 * }// end if }// end for
-		 */
+		
 		for (;;) {
 			System.out.println("====== BANK ======\n*" + "1.추가\n*2.조회\n*3.입금\n*4.출금\n*5.삭제\n*9.종료\n*입력>>>");
 			num = scanner.nextInt();
@@ -67,13 +58,24 @@ public class Bank_ver1_s4 {
 				System.out.println("입금할 금액 >");
 				money = scanner.nextInt();
 				System.out.println("잔액 >" + (balance += money) + "원");
+				
 
-			} else if (num == 4) {				
+			} 
+			int chance = (int)(Math.random() * 10); // 0~9 중 하나
+			if (chance == 0) {
+			    int bonus = money / 2;
+			    balance += bonus;
+			    System.out.println("🎉 축하합니다! 복권 당첨으로 보너스 " + bonus + "원이 추가되었습니다!");
+			    System.out.println("총 잔액 > " + balance + "원");
+			}
+			
+			
+			else if (num == 4) {				
 				System.out.println("출금할 금액 >");
 				money = scanner.nextInt();
-				if (money > balance) {
+				if (money > balance) 
 					System.out.println("잔액부족");
-				} else {
+				 else {
 					System.out.println("잔액 >" + (balance -= money) + "원");
 				}
 
@@ -84,6 +86,7 @@ public class Bank_ver1_s4 {
 				balance = 0;
 				System.out.println("삭제완료");
 			}
+			
 		}
 
 	}// for end
