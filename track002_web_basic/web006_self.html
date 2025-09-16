@@ -22,13 +22,20 @@
 .KeyWord li{list-style-type:none; margin-right: 10px;}
 /*h3태그에 중앙배치 밑줄*/
 .info h3{text-decoration-line:underline; font-size: 2.2em;}
+.hidden{position: absolute; left:-9999px;
+   width: 1px; height: 1px; overflow: hidden;
+   clip:rect(0,0,0,0);/*요소를 잘라서 시각적으로 완전히 숨김 - 구형브라우저용*/
+   border: 0px;
+   white-space: nowrap;}/*줄바꿈 방지-텍스트 한줄*/
   </style>
 </head>
 <body>
   <div>
   <!-- header -->
   <header class="header">
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <h1 class="hidden">유희재 포트폴리오</h1>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <h2 class="hidden">주메뉴</h2>
   <div class="container-fluid">
     <a class="navbar-brand" href="javascript:void(0)">Ryu hee jae</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
@@ -99,20 +106,20 @@
     <div class="container">
         <h3 class="p-5 text-center">About Me</h3>
         <div class="row">
-            <div class="col-sm-4"> <!-- w-25 w-50 w-75 w-100 -->
+            <div class="col-sm-4 text-center"> <!-- w-25 w-50 w-75 w-100 -->
             <p><img src="./img/1.png" class="w-50" alt=""></p>
                 <h4>Ryu Hee Jae</h4>
             <ul>
-                <li>ryu199212@gmail.com</li>
-                <li><a href="https://github.com/ryu199212-coder/Fullstack_Ryu">
+                <li class="text-start">ryu199212@gmail.com</li>
+                <li class="text-start"><a href="https://github.com/ryu199212-coder/Fullstack_Ryu">
                     깃허브 포트폴리오
                 </a></li>
             </ul>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 text-center">
                 <h4>Education</h4>
                 <ul>
-                    <li>MSA기반 플러터(Dart)활용 자바(JAVA)프론트엔드 백엔드 풀스택 웹(앱)개발
+                    <li class="text-start">MSA기반 플러터(Dart)활용 자바(JAVA)프론트엔드 백엔드 풀스택 웹(앱)개발
                         (25.08.25 ~ 26.02.27)
                     </li>
                 </ul>
@@ -127,7 +134,7 @@
 
             </div>
             <div class="col-sm-4">
-                <h4 class="skills">SKILLS</h4>
+                <h4 class="skills text-center">SKILLS</h4>
 <!-- Green -->
 <div class="progress m-3">
   <div class="progress-bar bg-success" style="width:20%">Green</div>
@@ -163,8 +170,48 @@
 
   <!-- portfolio -->
   <section class="portfolio">
-    <div>
-    <h5> Gallery </h5>
+    <h3 class="text-center"> Portfolio </h3>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <!-- <img src="./web004_3/portfolio1.jpg" alt="포트폴리오 이미지"> -->
+          <iframe class="w-100 no border" src=https://youtu.be/WAa1vEBteT0></iframe>
+          <p class="text-center m-3"><a href="#" class="btn btn-danger"> 포트폴리오 더보기 </a></p>
+        </div><!-- end col-sm-4 -->
+
+        <div class="col-sm-4 text-center">
+          <h4> spring boot + jpa + react portfolio</h4>
+          <p><a href="#" class="btn btn-danger">more</a></p>
+        <ul>
+          <li><strong>Spring Boot</strong>를 기반으로 백엔드 서버를 구축하여 RESTful API를 제공합니다.</li>
+          <li><strong>JPA</strong>를 활용해 데이터베이스와 객체 간의 매핑을 처리하며, CRUD 기능을 효율적으로 구현했습니다.</li>
+          <li><strong>React</strong>를 사용해 사용자 친화적인 프론트엔드 UI를 구성하고, Axios를 통해 백엔드와 비동기 통신을 수행합니다.</li>
+          <li>회원가입, 로그인, 게시글 작성 및 조회 등 핵심 기능을 포함한 <strong>풀스택 웹 애플리케이션</strong>입니다.</li>
+          <li>프론트엔드와 백엔드를 <strong>분리된 구조</strong>로 개발하여 유지보수성과 확장성을 고려했습니다.</li>
+          <li>GitHub Actions를 활용한 <strong>CI/CD 자동 배포</strong> 환경을 구성하여 개발 효율을 높였습니다.</li>
+          <li>JWT 기반 인증/인가 로직을 구현하여 <strong>보안성 강화</strong>에 집중했습니다.</li>
+          <li>React Router를 통해 <strong>SPA(Single Page Application)</strong> 구조를 구현했습니다.</li>
+          <li>Oracle을 사용한 <strong>관계형 데이터베이스 설계</strong>와 JPA를 통한 쿼리 최적화 경험을 담았습니다.</li>
+        </ul>
+        </div><!-- end col-sm-4 -->
+        <div class="col-sm-4">
+          <h4 class="text-center"> 기술 스택 </h4>
+        <ul>
+          <li><strong>Spring Boot 2.7.14</strong>: 안정적인 백엔드 프레임워크로, RESTful API 서버를 빠르게 구축하고 의존성 관리를 자동화합니다.</li>
+          <li><strong>Spring Security 5.7.x</strong>: JWT 기반 인증 및 인가 구현을 위한 보안 프레임워크입니다.</li>
+          <li><strong>Spring Data JPA 2.7.x</strong>: 객체와 관계형 데이터베이스 간의 매핑을 처리하며, CRUD 기능을 효율적으로 구현합니다.</li>
+          <li><strong>Hibernate 5.6.x</strong>: JPA 구현체로, 복잡한 쿼리와 엔티티 관리를 지원합니다.</li>
+          <li><strong>Oracle 11</strong>: 안정적인 관계형 데이터베이스로, 사용자 정보 및 게시글 데이터를 저장합니다.</li>
+          <li><strong>React 18.x</strong>: 컴포넌트 기반의 프론트엔드 라이브러리로, 사용자 친화적인 UI와 SPA(Single Page Application)를 구현합니다.</li>
+          <li><strong>Axios 1.x</strong>: 프론트엔드에서 백엔드 API와 비동기 통신을 수행하는 HTTP 클라이언트입니다.</li>
+          <li><strong>React Router v6</strong>: 페이지 간 라우팅을 처리하여 동적인 화면 전환을 가능하게 합니다.</li>
+          <li><strong>JWT (JSON Web Token)</strong>: 사용자 인증 및 권한 관리를 위한 토큰 기반 인증 방식입니다.</li>
+          <li><strong>Git & GitHub</strong>: 버전 관리 및 협업을 위한 도구로, 프로젝트의 변경 이력을 관리하고 배포 준비를 합니다.</li>
+          <li><strong>GitHub Actions</strong>: CI/CD 자동화 도구로, 코드 변경 시 자동 테스트 및 배포 파이프라인을 구성합니다.</li>
+        </ul>
+
+        </div>
+      </div>
     </div>
   </section>
 
@@ -172,7 +219,7 @@
   <!-- contect -->
   <section class="contect m-5">
     <div>
-      <h6 class="text-center"> Contact Me </h6>
+      <h3 class="text-center"> Contact Me </h3>
       <p class="text-center">열정적인 개발자에게 문의주세요!</p>
       <form action="/action_page.php">
   <div class="mb-3 mt-3">
