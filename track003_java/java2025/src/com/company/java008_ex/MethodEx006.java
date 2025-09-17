@@ -13,7 +13,7 @@ public class MethodEx006{
 		if (avg >= 90) {return "S";}
 		else if (avg >= 80) {return "A";}
 		else if (avg >= 70) {return "B";}
-		else if (avg >= 60) {return "c";}
+		else if (avg >= 60) {return "C";}
 		else {return "D";}
 	}
 	public static String process_star(float avg) {
@@ -34,7 +34,7 @@ public class MethodEx006{
 		if (attack > defense && attack > speed) {return "전사형";}
 		else if (defense > attack && defense > speed) {return "수비형";}
 		else if (speed > attack && speed > defense) {return "도적형";}
-		else {return "";}
+		else {return "망한 캐릭터";}
 	
 	}
 	
@@ -69,6 +69,7 @@ public class MethodEx006{
 		type=process_type(attack, defense, speed);
 		
 		process_show(name, attack, defense, speed, total, avg, grade, star, quest, type);
+		
 	///////////////////////////////////////////////////////////////////////////////////////////	
 	    }// end main
 	public static void process_show(String name, int attack, int defense, int speed, int total, float avg, String grade,
