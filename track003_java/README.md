@@ -136,7 +136,12 @@ Java 콘솔 환경에서 작동하는 **여행 일정 및 예산 관리 도구**
 
 ### 📺 시연 영상
 
-[YouTube 영상 보기](https://youtu.be/WAa1vEBteT0)
+[YouTube 영상 보기](https://youtu.be/kHIn7gc9PsA)
+
+### 📺 기능 개선된 영상(Ver-2)
+- 다중 사용자 지원 및 파일 저장 기능 추가 
+
+[YouTube 영상 보기](https://youtu.be/0TatHLp_XRY)
 
 ---
 

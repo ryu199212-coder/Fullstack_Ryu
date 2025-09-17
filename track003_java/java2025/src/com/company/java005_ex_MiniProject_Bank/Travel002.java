@@ -22,22 +22,23 @@ public class Travel002 {
             {"1일차: 동성로 쇼핑", "2일차: 팔공산 케이블카", "3일차: 서문시장 야시장"},
             {"1일차: 국립아시아문화전당 관람", "2일차: 양림동 역사마을 탐방", "3일차: 무등산 등산"}
         };
-        int[] dailyCosts = {70000, 80000, 65000, 60000, 75000}; // 하루 평균 비용
+        int[] dailyCosts = {70000, 80000, 65000, 60000, 75000};
 
         while (true) {
-            // 📌 간단한 여행자 목록 상단 출력
+            // 여행자 목록 간단 출력
             System.out.println("\n📌 현재 등록된 여행자 목록:");
-            boolean hasTraveler = false;
+            int count = 0;
             for (int i = 0; i < travelerId.length; i++) {
                 if (travelerId[i] != null) {
-                    hasTraveler = true;
-                    System.out.println(" - " + travelerId[i] + " (" + selectedDestination[i] + ")");
+                    System.out.printf(" - %s (%s)\n", travelerId[i], selectedDestination[i]);
+                    count++;
                 }
             }
-            if (!hasTraveler) {
+            if (count == 0) {
                 System.out.println(" - 등록된 여행자가 없습니다.");
             }
 
+            // 메뉴 출력
             System.out.println("\n====== TRAVEL RESERVATION SYSTEM(Ver-2) ======");
             System.out.println("* 1. 여행자 등록");
             System.out.println("* 2. 정보 조회");
@@ -52,10 +53,7 @@ public class Travel002 {
             if (num == 9) {
                 System.out.println("여행 예약 시스템 종료");
                 break;
-            }
-
-            // 여행자 등록
-            if (num == 1) {
+            } else if (num == 1) {
                 int index = -1;
                 for (int i = 0; i < travelerId.length; i++) {
                     if (travelerId[i] == null) {
@@ -90,11 +88,11 @@ public class Travel002 {
 
                     // 일정 출력
                     System.out.println("📅 추천 일정:");
-                    for (String dayPlan : schedules[destChoice - 1]) {
-                        System.out.println(dayPlan);
+                    for (int i = 0; i < schedules[destChoice - 1].length; i++) {
+                        System.out.println(schedules[destChoice - 1][i]);
                     }
 
-                    // 예산 자동 계산
+                    // 예산 계산
                     int estimatedCost = dailyCosts[destChoice - 1] * 3;
                     System.out.println("💰 예상 여행 경비 (3일 기준): " + estimatedCost + "원");
                     if (travelBudget[index] >= estimatedCost) {
@@ -106,10 +104,8 @@ public class Travel002 {
                     System.out.println("잘못된 선택입니다. 기본값 '서울'로 설정됩니다.");
                     selectedDestination[index] = "서울";
                 }
-            }
 
-            // 인증 및 기능 수행
-            else if (num == 2 || num == 3 || num == 4 || num == 5) {
+            } else if (num == 2 || num == 3 || num == 4 || num == 5) {
                 System.out.print("ID 입력 > ");
                 String tempId = scanner.next();
                 System.out.print("비밀번호 입력 > ");
@@ -134,16 +130,12 @@ public class Travel002 {
                     System.out.println("비밀번호 > " + travelerPass[index]);
                     System.out.println("여행 예산 > " + travelBudget[index] + "원");
                     System.out.println("여행지 > " + selectedDestination[index]);
-                }
-
-                if (num == 3) {
+                } else if (num == 3) {
                     System.out.print("추가할 예산 > ");
                     int amount = scanner.nextInt();
                     travelBudget[index] += amount;
                     System.out.println("예산 > " + travelBudget[index] + "원");
-                }
-
-                if (num == 4) {
+                } else if (num == 4) {
                     System.out.print("취소로 차감할 금액 > ");
                     int amount = scanner.nextInt();
                     if (amount > travelBudget[index]) {
@@ -152,34 +144,29 @@ public class Travel002 {
                         travelBudget[index] -= amount;
                         System.out.println("예산 > " + travelBudget[index] + "원");
                     }
-                }
-
-                if (num == 5) {
+                } else if (num == 5) {
                     travelerId[index] = null;
                     travelerPass[index] = null;
                     travelBudget[index] = 0;
                     selectedDestination[index] = null;
                     System.out.println("🗑️ 여행자 정보 삭제 완료");
                 }
-            }
 
-            // 여행자 목록 전체 보기
-            else if (num == 6) {
+            } else if (num == 6) {
                 System.out.println("📋 여행자 목록");
-                boolean hasTraveler1 = false;
+                int countList = 0;
                 for (int i = 0; i < travelerId.length; i++) {
                     if (travelerId[i] != null) {
-                        hasTraveler1 = true;
-                        System.out.println("[" + (i + 1) + "번째 여행자]");
-                        System.out.println("ID > " + travelerId[i]);
-                        System.out.println("여행지 > " + selectedDestination[i]);
-                        System.out.println("예산 > " + travelBudget[i] + "원");
-                        System.out.println("-------------------------");
+                        System.out.printf("[%d번째 여행자]\nID > %s\n여행지 > %s\n예산 > %d원\n-------------------------\n",
+                                i + 1, travelerId[i], selectedDestination[i], travelBudget[i]);
+                        countList++;
                     }
                 }
-                if (!hasTraveler1) {
+                if (countList == 0) {
                     System.out.println("⚠️ 등록된 여행자가 없습니다.");
                 }
+            } else {
+                System.out.println("⚠️ 잘못된 메뉴 번호입니다. 다시 선택해주세요.");
             }
         }
 
