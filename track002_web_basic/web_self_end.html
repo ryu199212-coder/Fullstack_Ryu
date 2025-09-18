@@ -16,6 +16,53 @@
       color: #3A3A3A;
       font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
     }
+    /* 다크모드 버튼 */
+    #darkModeToggle {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: none;
+      color: inherit;
+      margin-left: 10px;
+      border: none;
+    }
+
+    body.dark-mode #darkModeToggle {
+      color: #F0F0F0;
+    }
+
+    /* 다크모드 전체 스타일 */
+    body.dark-mode {
+      background-color: #1E1E1E;
+      color: #F0F0F0;
+    }
+
+    body.dark-mode .navbar {
+      background-color: #333 !important;
+    }
+
+    body.dark-mode .navbar .nav-link,
+    body.dark-mode .navbar-brand {
+      color: #F0F0F0 !important;
+    }
+
+    body.dark-mode .info,
+    body.dark-mode .portfolio,
+    body.dark-mode .contect,
+    body.dark-mode .footer {
+      background-color: #2A2A2A;
+      color: #F0F0F0;
+    }
+
+    body.dark-mode a {
+      color: #90CAF9;
+    }
+
+    body.dark-mode a:hover {
+      color: #FFB74D;
+    }
 
     /* 숨김 텍스트 접근성 */
     .hidden {
@@ -160,7 +207,8 @@
   </style>
 </head>
 <body>
-
+  <!-- 다크모드 토글 버튼 -->
+  <button id="darkModeToggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
   <!-- Header -->
   <header class="header">
     <h1 class="hidden">유희재 포트폴리오</h1>
@@ -173,10 +221,10 @@
         </button>
         <div class="collapse navbar-collapse" id="mynavbar">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="#">Portfolio</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">About Me</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="#a">Portfolio</a></li>
+            <li class="nav-item"><a class="nav-link" href="#b">About Me</a></li>
+            <li class="nav-item"><a class="nav-link" href="#c">Gallery</a></li>
+            <li class="nav-item"><a class="nav-link" href="#d">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -184,7 +232,7 @@
   </header>
 
   <!-- Visual Carousel -->
-  <div class="visual">
+  <div class="visual" id="c">
     <div id="demo" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active circle-btn"></button>
@@ -206,7 +254,7 @@
   </div>
 
   <!-- About Me -->
-  <section class="info">
+  <section class="info" id="b">
     <div class="container">
       <h3 class="text-center">About Me</h3>
       <div class="row mt-5">
@@ -256,7 +304,7 @@
   </section>
 
   <!-- Portfolio -->
-  <section class="portfolio">
+  <section class="portfolio" id="a">
     <div class="container">
       <h3 class="text-center">Portfolio</h3>
       <div class="row">
@@ -294,7 +342,7 @@
   </section>
 
   <!-- Contact -->
-  <section class="contect my-5">
+  <section class="contect my-5" id="d">
     <div class="container">
       <h3 class="text-center">Contact Me</h3>
       <p class="text-center">열정적인 개발자에게 문의주세요!</p>
@@ -318,5 +366,14 @@
   <footer class="footer text-center p-5">
     &copy; copyrights company 2025 all rights reserved
   </footer>
+  <script>
+    function toggleDarkMode() {
+      const body = document.body;
+      const button = document.getElementById("darkModeToggle");
+      body.classList.toggle("dark-mode");
+      button.textContent = body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
+    }
+  </script>
+  
 </body>
 </html>
