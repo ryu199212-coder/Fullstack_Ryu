@@ -364,17 +364,24 @@ footer {
     <section id="gallery">
       <h2>Gallery</h2>
       <div class="gallery-grid">
-        <div class="gallery-item" onclick="openModal('봄날 포트폴리오', 'React 기반으로 제작한 개인 포트폴리오. 민트톤과 피치핑크를 활용한 테마로, 다크모드와 라이트모드 자동 전환 기능 포함.')">
-          <img src="https://via.placeholder.com/300x200?text=Project+1" alt="Project 1">
-          <p>🌸 봄날 포트폴리오</p>
+        <div class="gallery-item" onclick="openModal('Bank프로젝트', '어쩌구 저쩌구 기능을 넣은겁니다 저쩌구 어쩌구 기능 추가 했습니다. 개선버전 = https://youtu.be/0TatHLp_XRY')">
+          <img src="./img/1.jpg" alt="Project 1"class="video-thumbnail" onclick="openVideoModal('https://www.youtube.com/embed/0TatHLp_XRY')">
+          <div id="videoModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeVideoModal()">&times;</span>
+    <iframe id="videoFrame" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+          <p>영상</p>
+            <a href=https://youtu.be/kHIn7gc9PsA target="_blank">ver1</a>
         </div>
         <div class="gallery-item" onclick="openModal('꽃집 랜딩페이지', 'Figma로 디자인하고 HTML/CSS로 구현한 꽃집 소개 페이지. 스크롤 애니메이션과 부드러운 전환 효과로 사용자 몰입도 향상.')">
-          <img src="https://via.placeholder.com/300x200?text=Project+2" alt="Project 2">
-          <p>🌷 꽃집 랜딩페이지</p>
+          <img src="./img/2.jpg" alt="Project 2">
+          <p>프로젝트2</p>
         </div>
         <div class="gallery-item" onclick="openModal('감성 블로그 템플릿', 'Markdown 기반 블로그 템플릿. 글쓰기 공간을 따뜻하게 표현하기 위해 크림톤 배경과 손글씨 느낌의 폰트 사용.')">
-          <img src="https://via.placeholder.com/300x200?text=Project+3" alt="Project 3">
-          <p>📘 감성 블로그 템플릿</p>
+          <img src="./img/3.jpg" alt="Project 3">
+          <p>프로젝트3</p>
         </div>
       </div>
     </section>
@@ -433,6 +440,20 @@ footer {
     window.addEventListener('click', function(e) {
       if (e.target === document.getElementById('modal')) closeModal();
     });
+
+    function openVideoModal(videoUrl) {
+  const modal = document.getElementById("videoModal");
+  const frame = document.getElementById("videoFrame");
+  frame.src = videoUrl;
+  modal.style.display = "block";
+}
+
+function closeVideoModal() {
+  const modal = document.getElementById("videoModal");
+  const frame = document.getElementById("videoFrame");
+  frame.src = ""; // 영상 정지
+  modal.style.display = "none";
+}
   </script>
 </body>
 </html>
