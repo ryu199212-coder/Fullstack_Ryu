@@ -222,14 +222,56 @@
     <div>
       <h3 class="text-center"> Contact Me </h3>
       <p class="text-center">열정적인 개발자에게 문의주세요!</p>
-      <form action="/action_page.php">
+      <!-- 컨텍 -->
+    <script type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+      </script>
+      <script type="text/javascript">
+      (function(){
+          emailjs.init({
+            publicKey: "ama_xJjTBVdKn46Y-",
+          });
+      })();
+      /////////////////////////////////////////
+      function sendEmail(e){
+        e.preventDefault(); // 무조건 전송기능 막기
+        var templateParams = {
+          name: document.getElementById("name").value,
+          title: document.getElementById("title").value,
+          email: document.getElementById("email").value,
+          message: document.getElementById("message").value,
+        };
+
+        emailjs.send('ryu199212', 'template_qjmps0m', templateParams).then(
+          (response) => {
+            alert("✔메일이 성공적으로 전송되었습니다.")
+            console.log('SUCCESS!', response.status, response.text);
+          },
+          (error) => {
+            alert("⚠️메일 전송이 실패하였습니다.")
+            console.log('FAILED...', error);
+          },
+        );
+      }
+    </script>
+
+      <form onsubmit="sendEmail(event)"><!-- 수정-->
+     <!-- 컨텍 end --> 
+  <div class="mb-3 mt-3">
+    <label for="name" class="form-label">이름:</label>
+    <input type="email" class="form-control" id="name" placeholder="이름을 적어주세요." name="title">
+  </div>   
+  <div class="mb-3 mt-3">
+    <label for="email" class="form-label">email:</label>
+    <input type="email" class="form-control" id="email" placeholder="이메일을 적어주세요." name="title">
+  </div>
   <div class="mb-3 mt-3">
     <label for="title" class="form-label">제목</label>
     <input type="text" class="form-control" id="title" placeholder="제목을 적어주세요." name="title">
   </div>
   <div class="mb-3">
-    <label class="form-label">내용</label>
-    <textarea class="form-control" rows="5" id="comment" placeholder="내용을 적어주세요."></textarea>
+    <label class="message">내용</label>
+    <textarea class="form-control" rows="5" id="message" placeholder="내용을 적어주세요."></textarea>
   </div>
   <div class="form-check text-end">   
   <button type="submit" class="btn btn-primary">메일 보내기</button>
@@ -250,3 +292,5 @@
   
 </body>
 </html>
+
+ama_xJjTBVdKn46Y-
