@@ -1,4 +1,4 @@
-package com.company.java008_ex;
+/*package com.company.java008_ex;
 
 public class Repeat026 {
 	public static int add() {
@@ -17,7 +17,7 @@ public class Repeat026 {
 	
 	
 
-
+*/
 	
 
 
