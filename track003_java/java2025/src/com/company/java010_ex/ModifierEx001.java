@@ -12,7 +12,7 @@ public class ModifierEx001 {
         System.out.println(box.sharedToy);
         System.out.println(box.secretToy);
         System.out.println(box.getFamilytoy());
-	}
+	}w
 }
 /*		연습문제1)   
 	패키지명 : com.company.java010_ex
