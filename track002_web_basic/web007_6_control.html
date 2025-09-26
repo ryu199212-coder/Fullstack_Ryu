@@ -34,6 +34,9 @@
       <script>
        // if(조건){조건이 true }
        // else    {조건이 false}
+       let data = 1;
+       if(data==1){console.log("1이다");}
+       else{console.log("1이 아니다");}
  
       </script>
   </div>
@@ -48,7 +51,13 @@
     </pre>
     <input type="button" value="ex1"  id="ex1"  title="버튼을 클릭하세요" class="btn btn-success"      />
     <script>
- 
+      window.addEventListener("load", function(){
+      document.getElementById("ex1").onclick = function(){
+      let ex1 = prompt("평균입력")
+      if(ex1>=60){alert("합격")}
+      else{alert("불합격")}
+      }
+      });
     </script>
   </div>
 </div>
@@ -70,7 +79,15 @@
           case 대상의상태:    처리;  break;
           default : 기본처리
       } */
- 
+     
+     let data2=2;
+     switch(data2){
+      case 1 : console.log("1이다"); break;
+      case 2 : console.log("2이다"); break;
+      case 3 : console.log("3이다"); break;
+      default : console.log("1,2,3이 아니다"); break
+     }
+     
       </script>
   </div>
   <!--     -->
@@ -84,7 +101,17 @@
     </pre>
     <input type="button" value="switch1"  id="switch1"  title="버튼을 클릭하세요" class="btn btn-success"      />
     <script>
-      
+      window.addEventListener("load", function(){
+      document.getElementById("switch1").onclick = function(){
+      let switch1 = prompt("무슨 아이스크림?")
+      switch(switch1){
+        case "4": alert("월드콘"); break;
+        case "5": alert("구구콘"); break;
+        case "6": alert("설레임"); break;
+        default : alert("다시골라라"); break;
+      }
+      }
+      });
     </script>
   </div>
 </div>
@@ -113,6 +140,23 @@
 
         STEP4 향상된 for
         for( index  in 객체 ){   }*/
+        console.log("step-for");
+        for(let i=1; i<4; i++){console.log(i);}
+
+        console.log("step-while");
+        let i=1; while(i<4){console.log(i);i++};
+
+        console.log("step-do while");
+        let i2=1; do{console.log(i2);i2++}while(i2<4);
+
+        console.log("step-향상된 for");
+        const list = ['a','b','c']
+        for(let i in list){console.log(i+ "/" + list[i]);}
+
+        console.log("step-향상된 for2");
+        list.forEach((ele, index, list)=>{
+          console.log(ele + "/" + index + "/" + list);
+        });
 
  
       </script>
@@ -131,24 +175,39 @@
     Q5)		const list1 = [1	2	3	4	5];
     </pre>
     <script>
-      // for, while, do while
-      //A1)		1	2	3	4	5
-     
+    // for, while, do while
+    //A1)      1   2   3   4   5
+    console.log("A1");
+    for (let i=1; i<=5;i++){console.log(i);}
+    console.log("A1");
+    let i3=1 
+    while(i3<=5){console.log(i3);i3++}
+    console.log("A1");
+    let i4=1 
+    {console.log(i4);i4++}while(i4<=5)l;
+    
+    //A2)      5   4   3   2   1
+    let j =5;
+    console.log("A2");
+    while(j>=1){console.log(j); j--;}
 
-      //A2)		5	4	3	2	1
+    //A3)      2   4   6
+    console.log("A3");
+    let j2 = 1;
+    do{console.log(j*2);j2++;}while(j2>=3)
         
+    //A4)      hello1      hello2      hello3
+    console.log("A4");
+    for(let j3=1;j3<=3;j3++){console.log("hello" + j3);}
 
-      //A3)		2	4	6
-        
+    // 향상된 for , forEach
+    //A5)      const list1 = [1   2   3   4   5];
+    console.log("A5 FOR");
+    const list1 = ['1','2','3','4','5'];
+    for(let i in list1){console.log(list1[i]);}
 
-      //A4)		hello1		hello2		hello3
-        
-
-
-      // 향상된 for , forEach
-      //A5)		const list1 = [1	2	3	4	5];
-       
-
+    console.log("A5 EACH");
+    list1.forEach((list1) => {console.log( list1);});
     </script>
   </div>
 </div>
