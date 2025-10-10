@@ -14,8 +14,9 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Noto Sans KR', sans-serif;
-  background-color: #f1f8f6;
-  color: #444;
+  background-color: #104965;
+  color: 
+#CED3CC;
   line-height: 1.6;
 }
 
@@ -32,12 +33,14 @@ header {
 
 header h1 {
   font-size: 2.5rem;
-  color: #333;
+  color: 
+#CED3CC;
 }
 
 header p {
   font-size: 1rem;
-  color: #666;
+  color: 
+#CED3CC;
 }
 
 nav {
@@ -49,7 +52,8 @@ nav {
 
 nav a {
   text-decoration: none;
-  color: #555;
+  color: 
+#CED3CC;
   font-weight: 500;
   position: relative;
 }
@@ -61,7 +65,8 @@ nav a::after {
   left: 0;
   width: 0%;
   height: 2px;
-  background-color: #ffa69e;
+  background-color: 
+#CED3CC;
   transition: width 0.3s ease;
 }
 
@@ -92,8 +97,10 @@ footer,
 .skill-chart {
   flex: 1;
   min-width: 280px;
-  background-color: #fff7f2; /* 크림톤 배경 */
-  border: 2px solid #ffc8b2; /* 피치핑크 테두리 */
+  background-color: 
+#4F3C1B; 
+  border: 2px solid 
+#110E05; 
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   padding: 30px;
@@ -106,8 +113,9 @@ footer,
 .skill-chart:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-  background-color: #ffece3; /* 호버 시 색 변경*/
-  border-color: #ffb199; /* 호버 시 테두리 강조 */
+  background-color: 
+#83622F; /* 호버 시 색 변경*/
+  border-color: #110E05; /* 호버 시 테두리 강조 */
 }
 
 .profile-card img {
@@ -122,7 +130,8 @@ footer,
 .traits h3 {
   margin-top: 0;
   font-size: 1.4rem;
-  color: #333;
+  color: 
+#CED3CC;
   margin-bottom: 15px;
 }
 
@@ -134,7 +143,8 @@ footer,
 
 .traits li {
   font-size: 1rem;
-  color: #555;
+  color: 
+#CED3CC;
   margin-bottom: 10px;
   padding-left: 0.5em;
 }
@@ -142,8 +152,13 @@ footer,
 .skill-chart h3 {
   margin-bottom: 20px;
   font-size: 1.4rem;
-  color: #333;
+  color: 
+#CED3CC;
 }
+
+.projects-h3{
+  color: 
+#CED3CC;}
 
 .skill {
   margin-bottom: 15px;
@@ -153,7 +168,8 @@ footer,
   display: block;
   margin-bottom: 5px;
   font-weight: 500;
-  color: #555;
+  color: 
+#CED3CC;
 }
 
 .bar {
@@ -166,7 +182,7 @@ footer,
 .fill {
   height: 100%;
   border-radius: 5px;
-  background-color: #ffa69e;
+  background-color: #DFD192;
   animation: grow 1.2s ease forwards;
 }
 
@@ -182,7 +198,8 @@ section {
 
 section h2 {
   font-size: 1.8rem;
-  color: #333;
+  color: 
+#CED3CC;
   margin-bottom: 20px;
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
@@ -190,12 +207,13 @@ section h2 {
 
 section p {
   font-size: 1rem;
-  color: #444;
+  color: 
+#CED3CC;
 }
-
 .card {
-  background-color: #fff;
+  background-color: #4F3C1B;
   padding: 20px;
+  border: 2px solid #110E05; 
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
@@ -221,7 +239,7 @@ section p {
 }
 
 .gallery-item img {
-  width: 100%;
+  width: 101%;
   display: block;
 }
 
@@ -235,6 +253,8 @@ section p {
   transform: translateY(-5px);
 }
 
+.modal-title{color: #555;}
+
 footer {
   text-align: center;
   font-size: 0.9rem;
@@ -242,10 +262,50 @@ footer {
   padding-top: 40px;
   border-top: 1px solid #ddd;
 }
+ .top-banner {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    display: block;
+  }
+
+  .image-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .transparent-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 150px;
+    background-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+    display: block;
+  }
+</style>
 </style>
 </head>
 <body>
-  <div class="container">
+  <div id="top-image">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      $('#top-image').html(`
+        <div class="image-wrapper">
+          <img src="./img/2.jpg" alt="상단 이미지" class="top-banner">
+          <a href="#main-container" class="transparent-button"></a>
+        </div>
+      `);
+    });
+    </script>
+  </div>
+
+  <div class="container" id="main-container">
     <header>
       <h1>Ryu hee jae</h1>
       <p>디자인과 개발 사이에서 균형을 찾는 사람</p>
@@ -272,9 +332,10 @@ footer {
         <ul>
           <li>🌱 감성적인 시선과 섬세한 손길</li>
           <li>🤝 협업을 즐기는 커뮤니케이터</li>
-          <li>🚀 빠르게 배우고 꾸준히 성장하는 개발자</li>
+          <li>🚀 꾸준히 성장하는 개발자</li>
         </ul>
       </div>
+
       <div class="skill-chart">
         <h3>Skills</h3>
         <div class="skill"><span>HTML</span><div class="bar"><div class="fill html"></div></div></div>
@@ -283,27 +344,28 @@ footer {
         <div class="skill"><span>React</span><div class="bar"><div class="fill react"></div></div></div>
         <div class="skill"><span>Figma</span><div class="bar"><div class="fill figma"></div></div></div>
       </div>
+
     </div>
 
     <section id="about">
       <h2>About Me</h2>
       <p>안녕하세요. 저는 감성적인 UI와 직관적인 UX를 추구합니다.  
-      부드러운 사용자 경험을 만드는 걸 좋아해요.  
+      부드러운 사용자 경험을 만드는 걸 좋아합니다.  
       HTML, CSS, JavaScript는 물론 Figma와 Adobe XD도 능숙하게 다뤄볼라고요ㅋㅋ</p>
     </section>
 
     <section id="projects">
       <h2>Projects</h2>
       <div class="card">
-        <h3>Dark/Right mode</h3>
+        <h3 class="projects-h3">Dark/Right mode</h3>
         <p>React 기반으로 제작한 개인 포트폴리오. 다크모드와 라이트모드 자동 전환 기능 포함.</p>
       </div>
       <div class="card">
-        <h3>Team Project1</h3>
+        <h3 class="projects-h3">Team Project1</h3>
         <p>예정</p>
       </div>
       <div class="card">
-        <h3>Team Project1</h3>
+        <h3 class="projects-h3">Team Project1</h3>
         <p>예정</p>
       </div>
     </section>
@@ -313,7 +375,7 @@ footer {
       <div class="gallery-grid">
         <!-- <div class="gallery-item" onclick="openModal('Bank프로젝트', '어쩌구 저쩌구 기능을 넣은겁니다 저쩌구 어쩌구 기능 추가 했습니다. 개선버전 = https://youtu.be/0TatHLp_XRY')"> -->
         <div class="gallery-item"  data-bs-toggle="modal" data-bs-target="#myModal1">          
-          <img src="./img/2.jpg" alt="Project 1" class="video-thumbnail" style="display: block; margin: 0 auto;">
+          <img src="./img/포트폴리오1.jpg" alt="Project 1" class="video-thumbnail" style="display: block; margin: 0 auto;">
             <div id="videoModal" class="modal">
             <div class="modal-content">
               <span class="close" onclick="closeVideoModal()">&times;</span>
@@ -324,7 +386,7 @@ footer {
 
         </div>
           <div class="gallery-item"  data-bs-toggle="modal" data-bs-target="#myModal2">
-          <img src="./img/2.jpg" alt="Project 2" class="video-thumbnail" style="display: block; margin: 0 auto;">
+          <img src="./img/포트폴리오1.jpg" alt="Project 2" class="video-thumbnail" style="display: block; margin: 0 auto;">
             <div id="videoModal" class="modal">
             <div class="modal-content">
               <span class="close" onclick="closeVideoModal()">&times;</span>
@@ -335,14 +397,14 @@ footer {
         </div>
 
           <div class="gallery-item"  data-bs-toggle="modal" data-bs-target="#myModal3">
-          <img src="./img/2.jpg" alt="Project 3" class="video-thumbnail" style="display: block; margin: 0 auto;">
+          <img src="./img/포트폴리오1.jpg" alt="Project 3" class="video-thumbnail" style="display: block; margin: 0 auto;">
             <div id="videoModal" class="modal">
             <div class="modal-content">
               <span class="close" onclick="closeVideoModal()">&times;</span>
               <iframe id="videoFrame" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
             </div>
           </div>
-            <p>Bank Project 3 - interface</p>
+            <p>Bank Project 3 - Interface</p>
         </div>
       </div>
     </section>
@@ -350,7 +412,7 @@ footer {
    <section id="contact" class="contact m-5">
     <div>
       <h3 class="text-center"> Contact Me </h3>
-      <p class="text-center">열정적인 개발자에게 문의주세요!</p>
+      <p id="contact-p" class="text-center">열정적인 개발자에게 문의주세요!</p>
       <!-- 컨텍 -->
     <script type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
@@ -452,7 +514,7 @@ footer {
 
       <!-- Modal Header -->
     <div class="modal-header">
-        <h4 class="modal-title">Bank프로젝트</h4>
+        <h4 class="modal-title">Bank프로젝트2</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
     </div>
 
@@ -483,7 +545,7 @@ footer {
 
       <!-- Modal Header -->
     <div class="modal-header">
-        <h4 class="modal-title">Bank프로젝트</h4>
+        <h4 class="modal-title">Bank프로젝트3</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
     </div>
 
