@@ -379,6 +379,31 @@ footer {
     #projects p {
   color: #CED3CC;
 }
+.floating-nav {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: rgba(255, 255, 255, 0.8); /* 반투명 배경 */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.floating-nav a {
+  text-decoration: none;
+  color: #2F3E2E;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.floating-nav a:hover {
+  color: #83622F;
+}
 </style>
 </head>
 <body>
@@ -432,12 +457,12 @@ footer {
       <p>디자인과 개발 사이에서 균형을 찾는 사람</p>
     </header>
 
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <nav class="floating-nav">
+    <a href="#main-container">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
     <div class="profile-row" class="fade-in">
       <div class="profile-card">
@@ -566,28 +591,28 @@ footer {
       }
     </script>
 
-      <form onsubmit="sendEmail(event)"><!-- 수정-->
-     <!-- 컨텍 end --> 
-      <div class="mb-3 mt-3">
-        <label for="name" class="form-label">이름:</label>
-        <input type="text" class="form-control" id="name" placeholder="이름을 적어주세요." name="title">
-      </div>   
-      <div class="mb-3 mt-3">
-        <label for="email" class="form-label">email:</label>
-        <input type="email" class="form-control" id="email" placeholder="이메일을 적어주세요." name="title">
-      </div>
-      <div class="mb-3 mt-3">
-        <label for="title" class="form-label">제목</label>
-        <input type="text" class="form-control" id="title" placeholder="제목을 적어주세요." name="title">
-      </div>
-      <div class="mb-3">
-        <label class="message">내용</label>
-        <textarea class="form-control" rows="5" id="message" placeholder="내용을 적어주세요."></textarea>
-      </div>
-      <div class="form-check text-end">   
+    <form onsubmit="sendEmail(event)">
+    <div class="mb-3 mt-3">
+      <label for="name" class="form-label">이름:</label>
+      <input type="text" class="form-control" id="name" placeholder="이름을 적어주세요." name="name" required>
+    </div>   
+    <div class="mb-3 mt-3">
+      <label for="email" class="form-label">email:</label>
+      <input type="email" class="form-control" id="email" placeholder="이메일을 적어주세요." name="email" required>
+    </div>
+    <div class="mb-3 mt-3">
+      <label for="title" class="form-label">제목</label>
+      <input type="text" class="form-control" id="title" placeholder="제목을 적어주세요." name="title" required>
+    </div>
+    <div class="mb-3">
+      <label class="message">내용</label>
+      <textarea class="form-control" rows="5" id="message" placeholder="내용을 적어주세요." name="message" required></textarea>
+    </div>
+    <div class="form-check text-end">   
       <button type="submit" class="btn btn-primary">메일 보내기</button>
-      </div>
-    </form>
+  </div>
+  </form>
+
       
     </div>
   </section>
