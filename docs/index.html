@@ -7,6 +7,7 @@
    <!-- Latest compiled and minified CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+
   <!-- Latest compiled JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <style>
@@ -14,9 +15,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Noto Sans KR', sans-serif;
-  background-color: #104965;
-  color: 
-#CED3CC;
+  background-color: #E8DCC3;
+  color: #2F3E2E;
   line-height: 1.6;
 }
 
@@ -34,13 +34,13 @@ header {
 header h1 {
   font-size: 2.5rem;
   color: 
-#CED3CC;
+#2F3E2E;
 }
 
 header p {
   font-size: 1rem;
   color: 
-#CED3CC;
+#2F3E2E;
 }
 
 nav {
@@ -53,9 +53,16 @@ nav {
 nav a {
   text-decoration: none;
   color: 
-#CED3CC;
+#2F3E2E;
   font-weight: 500;
   position: relative;
+}
+.pic.pic {
+  color: #CED3CC;
+}
+
+.profile-card p {
+  color: #CED3CC;
 }
 
 nav a::after {
@@ -66,7 +73,7 @@ nav a::after {
   width: 0%;
   height: 2px;
   background-color: 
-#CED3CC;
+#2F3E2E;
   transition: width 0.3s ease;
 }
 
@@ -83,6 +90,16 @@ footer,
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.btn-primary {
+  background-color: #4F3C1B;
+  border-color: #4F3C1B;
+}
+
+.btn-primary:hover {
+  background-color: #3E2F14;
+  border-color: #3E2F14;
 }
 
 .profile-row {
@@ -119,12 +136,18 @@ footer,
 }
 
 .profile-card img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  border: 3px solid #CED3CC;
   object-fit: cover;
-  display: block;
-  margin: 0 auto;
+  border-radius: 50%;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .traits h3 {
@@ -160,6 +183,9 @@ footer,
   color: 
 #CED3CC;}
 
+.projects-h3 p {
+  color: #CED3CC;
+}
 .skill {
   margin-bottom: 15px;
 }
@@ -199,17 +225,12 @@ section {
 section h2 {
   font-size: 1.8rem;
   color: 
-#CED3CC;
+#2F3E2E;
   margin-bottom: 20px;
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
 }
 
-section p {
-  font-size: 1rem;
-  color: 
-#CED3CC;
-}
 .card {
   background-color: #4F3C1B;
   padding: 20px;
@@ -287,23 +308,139 @@ footer {
     cursor: pointer;
     display: block;
   }
-</style>
+
+  /* 🌟 페이지 로딩 애니메이션 */
+    #loading-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: #0f2027;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease;
+    }
+
+    #loading-overlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 6px solid rgba(255, 255, 255, 0.2);
+      border-top-color: #DFD192;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* 초기 상태: 숨겨진 요소 */
+    .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    /* 등장 상태: 보이는 요소 */
+    .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+    }
+
+    .image-wrapper {
+  position: relative;
+  display: inline-block;
+    }
+
+    .top-banner {
+    width: 100%;
+    height: auto;
+    display: block;
+    }
+
+    .transparent-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent; /* 완전 투명 */
+    padding: 30px 60px;
+    border-radius: 12px;
+    text-decoration: none;
+    cursor: pointer; /* 클릭 가능한 느낌 */
+    }
+
+    .typing-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid white;
+    animation: blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: white }
+    }
+
+    #projects p {
+  color: #CED3CC;
+}
 </style>
 </head>
 <body>
-  <div id="top-image">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    $(document).ready(function() {
-      $('#top-image').html(`
-        <div class="image-wrapper">
-          <img src="./img/2.jpg" alt="상단 이미지" class="top-banner">
-          <a href="#main-container" class="transparent-button"></a>
-        </div>
-      `);
-    });
-    </script>
+    <!-- 🌟 로딩 오버레이 -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
   </div>
+  
+  <div id="top-image">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+  $('#top-image').html(`
+    <div class="image-wrapper">
+      <img src="./img/4.jpg" alt="상단 이미지" class="top-banner">
+      <a href="#main-container" class="transparent-button">
+        <span class="typing-text"></span>
+      </a>
+    </div>
+  `);
+
+  const text = "START...";
+  let i = 0;
+
+  function typeWriter() {
+    if (i < text.length) {
+      $('.typing-text').append(text.charAt(i));
+      i++;
+      setTimeout(typeWriter, 150);
+    } else {
+      setTimeout(() => {
+        $('.typing-text').html(""); // 텍스트 초기화
+        i = 0;
+        typeWriter(); // 반복 시작
+      }, 1000); // 반복 간격
+    }
+  }
+
+  typeWriter();
+});
+  </script>
+</div>
+  </script>
+</div>
+</div>
 
   <div class="container" id="main-container">
     <header>
@@ -318,16 +455,16 @@ footer {
       <a href="#contact">Contact</a>
     </nav>
 
-    <div class="profile-row">
+    <div class="profile-row" class="fade-in">
       <div class="profile-card">
-        <img src="./img/1.png" alt="Profile Image">
+        <img src="./img/이력서.jpg" alt="Profile Image">
         <h2 class="pic text-center">유희재</h2>
         <p>프론트엔드 개발자 & UI 디자이너
           <br>
           감성적인 인터페이스를 선호.</p>
       </div>
 
-      <div class="traits">
+      <div class="traits" class="fade-in">
         <h3>My Traits</h3>
         <ul>
           <li>🌱 감성적인 시선과 섬세한 손길</li>
@@ -336,7 +473,7 @@ footer {
         </ul>
       </div>
 
-      <div class="skill-chart">
+      <div class="skill-chart" class="fade-in">
         <h3>Skills</h3>
         <div class="skill"><span>HTML</span><div class="bar"><div class="fill html"></div></div></div>
         <div class="skill"><span>CSS</span><div class="bar"><div class="fill css"></div></div></div>
@@ -347,14 +484,14 @@ footer {
 
     </div>
 
-    <section id="about">
+    <section id="about" class="fade-in">
       <h2>About Me</h2>
       <p>안녕하세요. 저는 감성적인 UI와 직관적인 UX를 추구합니다.  
       부드러운 사용자 경험을 만드는 걸 좋아합니다.  
       HTML, CSS, JavaScript는 물론 Figma와 Adobe XD도 능숙하게 다뤄볼라고요ㅋㅋ</p>
     </section>
 
-    <section id="projects">
+    <section id="projects" class="fade-in">
       <h2>Projects</h2>
       <div class="card">
         <h3 class="projects-h3">Dark/Right mode</h3>
@@ -362,7 +499,7 @@ footer {
       </div>
       <div class="card">
         <h3 class="projects-h3">Team Project1</h3>
-        <p>예정</p>
+        <p>자연에서 영감을 받은 색상과 미니멀리즘의 결합</p>
       </div>
       <div class="card">
         <h3 class="projects-h3">Team Project1</h3>
@@ -370,10 +507,9 @@ footer {
       </div>
     </section>
 
-    <section id="gallery">
+    <section id="gallery" class="fade-in">
       <h2>Gallery</h2>
       <div class="gallery-grid">
-        <!-- <div class="gallery-item" onclick="openModal('Bank프로젝트', '어쩌구 저쩌구 기능을 넣은겁니다 저쩌구 어쩌구 기능 추가 했습니다. 개선버전 = https://youtu.be/0TatHLp_XRY')"> -->
         <div class="gallery-item"  data-bs-toggle="modal" data-bs-target="#myModal1">          
           <img src="./img/포트폴리오1.jpg" alt="Project 1" class="video-thumbnail" style="display: block; margin: 0 auto;">
             <div id="videoModal" class="modal">
@@ -562,10 +698,37 @@ footer {
     <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
     </div>
-
-
     </div>
   </div>
 </div><!-- 모달 팝업 3 end-->
+
+
+ <script>
+// 🌟 로딩 애니메이션 제거
+    window.addEventListener('load', () => {
+      const overlay = document.getElementById('loading-overlay');
+      overlay.classList.add('fade-out');
+      setTimeout(() => overlay.remove(), 1000);
+    });
+</script>
+
+<script>
+  // fade-in 대상 요소를 모두 찾기
+  const fadeEls = document.querySelectorAll('.fade-in');
+
+  const onScroll = () => {
+    fadeEls.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight - 100;
+      if (isVisible) {
+        el.classList.add('visible');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', onScroll);
+  window.addEventListener('load', onScroll); // 초기 로딩 시도
+</script>
+
 </body>
 </html>

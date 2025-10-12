@@ -3,37 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <title>유희재 포트폴리오</title>
- <!-- Noto Sans KR 폰트 -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-
-  <!-- Bootstrap CSS -->
+   <!-- Latest compiled and minified CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Tailwind CSS with prefix 설정 -->
-  <script>
-    tailwind.config = {
-      prefix: 'tw-',
-    }
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Bootstrap JS -->
+  <!-- Latest compiled JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <style>
 body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Noto Sans KR', sans-serif;
-      background-color: #104965;
-      color: #CED3CC;
-      line-height: 1.6;
-    }
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #E8DCC3;
+  color: #2F3E2E;
+  line-height: 1.6;
+}
 
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
 
 header {
   text-align: center;
@@ -43,13 +34,13 @@ header {
 header h1 {
   font-size: 2.5rem;
   color: 
-#CED3CC;
+#2F3E2E;
 }
 
 header p {
   font-size: 1rem;
   color: 
-#CED3CC;
+#2F3E2E;
 }
 
 nav {
@@ -62,9 +53,16 @@ nav {
 nav a {
   text-decoration: none;
   color: 
-#CED3CC;
+#2F3E2E;
   font-weight: 500;
   position: relative;
+}
+.pic.pic {
+  color: #CED3CC;
+}
+
+.profile-card p {
+  color: #CED3CC;
 }
 
 nav a::after {
@@ -75,7 +73,7 @@ nav a::after {
   width: 0%;
   height: 2px;
   background-color: 
-#CED3CC;
+#2F3E2E;
   transition: width 0.3s ease;
 }
 
@@ -169,6 +167,9 @@ footer,
   color: 
 #CED3CC;}
 
+.projects-h3 p {
+  color: #CED3CC;
+}
 .skill {
   margin-bottom: 15px;
 }
@@ -208,17 +209,12 @@ section {
 section h2 {
   font-size: 1.8rem;
   color: 
-#CED3CC;
+#2F3E2E;
   margin-bottom: 20px;
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
 }
 
-section p {
-  font-size: 1rem;
-  color: 
-#CED3CC;
-}
 .card {
   background-color: #4F3C1B;
   padding: 20px;
@@ -297,59 +293,138 @@ footer {
     display: block;
   }
 
-   #custom-cursor {
-      transition: transform 0.1s ease-out;
+  /* 🌟 페이지 로딩 애니메이션 */
+    #loading-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: #0f2027;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease;
     }
 
-    .aurora-cursor {
-      background: radial-gradient(circle at center, rgba(255,255,255,0.2), rgba(0,255,255,0.1), rgba(255,0,255,0.1));
-      box-shadow: 0 0 20px rgba(0,255,255,0.3), 0 0 40px rgba(255,0,255,0.2);
-      animation: auroraPulse 3s infinite ease-in-out;
+    #loading-overlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
     }
 
-    @keyframes auroraPulse {
-      0% { box-shadow: 0 0 20px rgba(0,255,255,0.3), 0 0 40px rgba(255,0,255,0.2); }
-      50% { box-shadow: 0 0 30px rgba(0,255,255,0.5), 0 0 60px rgba(255,0,255,0.4); }
-      100% { box-shadow: 0 0 20px rgba(0,255,255,0.3), 0 0 40px rgba(255,0,255,0.2); }
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 6px solid rgba(255, 255, 255, 0.2);
+      border-top-color: #DFD192;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
     }
 
-    .haze-layer {
-      background: radial-gradient(circle, rgba(255,255,255,0.1), rgba(0,255,255,0.05), rgba(255,0,255,0.05));
-      animation: hazeFloat 6s infinite ease-in-out;
-      filter: blur(20px);
-      opacity: 0.4;
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
-    @keyframes hazeFloat {
-      0% { transform: scale(1) translate(0, 0); }
-      50% { transform: scale(1.2) translate(5px, -5px); }
-      100% { transform: scale(1) translate(0, 0); }
+    /* 초기 상태: 숨겨진 요소 */
+    .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
+
+    /* 등장 상태: 보이는 요소 */
+    .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+    }
+
+    .image-wrapper {
+  position: relative;
+  display: inline-block;
+    }
+
+    .top-banner {
+    width: 100%;
+    height: auto;
+    display: block;
+    }
+
+    .transparent-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent; /* 완전 투명 */
+    padding: 30px 60px;
+    border-radius: 12px;
+    text-decoration: none;
+    cursor: pointer; /* 클릭 가능한 느낌 */
+    }
+
+    .typing-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid white;
+    animation: blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: white }
+    }
+
+    #projects p {
+  color: #CED3CC;
+}
 </style>
 </head>
 <body>
-
-  <!-- 커스텀 커서 -->
-  <div id="custom-cursor"
-    class="tw-pointer-events-none tw-fixed tw-top-0 tw-left-0 tw-isolate tw-z-[60] tw-flex tw-w-fit -tw-translate-x-1/2 -tw-translate-y-1/2 tw-items-center tw-justify-center tw-overflow-visible tw-rounded-full aurora-cursor"
-    style="width: 40px; height: 40px;">
-    <div class="haze-layer tw-absolute tw-w-[80px] tw-h-[80px] tw-rounded-full"></div>
-    <span style="opacity: 0;"></span>
+    <!-- 🌟 로딩 오버레이 -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
   </div>
   
   <div id="top-image">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    $(document).ready(function() {
-      $('#top-image').html(`
-        <div class="image-wrapper">
-          <img src="./img/2.jpg" alt="상단 이미지" class="top-banner">
-          <a href="#main-container" class="transparent-button"></a>
-        </div>
-      `);
-    });
-    </script>
-  </div>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+  $('#top-image').html(`
+    <div class="image-wrapper">
+      <img src="./img/2.jpg" alt="상단 이미지" class="top-banner">
+      <a href="#main-container" class="transparent-button">
+        <span class="typing-text"></span>
+      </a>
+    </div>
+  `);
+
+  const text = "START...";
+  let i = 0;
+
+  function typeWriter() {
+    if (i < text.length) {
+      $('.typing-text').append(text.charAt(i));
+      i++;
+      setTimeout(typeWriter, 150);
+    } else {
+      setTimeout(() => {
+        $('.typing-text').html(""); // 텍스트 초기화
+        i = 0;
+        typeWriter(); // 반복 시작
+      }, 1000); // 반복 간격
+    }
+  }
+
+  typeWriter();
+});
+  </script>
+</div>
+  </script>
+</div>
+</div>
 
   <div class="container" id="main-container">
     <header>
@@ -364,7 +439,7 @@ footer {
       <a href="#contact">Contact</a>
     </nav>
 
-    <div class="profile-row">
+    <div class="profile-row" class="fade-in">
       <div class="profile-card">
         <img src="./img/1.png" alt="Profile Image">
         <h2 class="pic text-center">유희재</h2>
@@ -373,7 +448,7 @@ footer {
           감성적인 인터페이스를 선호.</p>
       </div>
 
-      <div class="traits">
+      <div class="traits" class="fade-in">
         <h3>My Traits</h3>
         <ul>
           <li>🌱 감성적인 시선과 섬세한 손길</li>
@@ -382,7 +457,7 @@ footer {
         </ul>
       </div>
 
-      <div class="skill-chart">
+      <div class="skill-chart" class="fade-in">
         <h3>Skills</h3>
         <div class="skill"><span>HTML</span><div class="bar"><div class="fill html"></div></div></div>
         <div class="skill"><span>CSS</span><div class="bar"><div class="fill css"></div></div></div>
@@ -393,14 +468,14 @@ footer {
 
     </div>
 
-    <section id="about">
+    <section id="about" class="fade-in">
       <h2>About Me</h2>
       <p>안녕하세요. 저는 감성적인 UI와 직관적인 UX를 추구합니다.  
       부드러운 사용자 경험을 만드는 걸 좋아합니다.  
       HTML, CSS, JavaScript는 물론 Figma와 Adobe XD도 능숙하게 다뤄볼라고요ㅋㅋ</p>
     </section>
 
-    <section id="projects">
+    <section id="projects" class="fade-in">
       <h2>Projects</h2>
       <div class="card">
         <h3 class="projects-h3">Dark/Right mode</h3>
@@ -416,10 +491,9 @@ footer {
       </div>
     </section>
 
-    <section id="gallery">
+    <section id="gallery" class="fade-in">
       <h2>Gallery</h2>
       <div class="gallery-grid">
-        <!-- <div class="gallery-item" onclick="openModal('Bank프로젝트', '어쩌구 저쩌구 기능을 넣은겁니다 저쩌구 어쩌구 기능 추가 했습니다. 개선버전 = https://youtu.be/0TatHLp_XRY')"> -->
         <div class="gallery-item"  data-bs-toggle="modal" data-bs-target="#myModal1">          
           <img src="./img/포트폴리오1.jpg" alt="Project 1" class="video-thumbnail" style="display: block; margin: 0 auto;">
             <div id="videoModal" class="modal">
@@ -608,21 +682,37 @@ footer {
     <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
     </div>
-
-
     </div>
   </div>
 </div><!-- 모달 팝업 3 end-->
 
-<script>
-  const cursor = document.getElementById('custom-cursor');
 
-  document.addEventListener('mousemove', (e) => {
-    const x = e.clientX;
-    const y = e.clientY;
-
-    cursor.style.transform = `translateX(${x}px) translateY(${y}px)`;
-  });
+ <script>
+// 🌟 로딩 애니메이션 제거
+    window.addEventListener('load', () => {
+      const overlay = document.getElementById('loading-overlay');
+      overlay.classList.add('fade-out');
+      setTimeout(() => overlay.remove(), 1000);
+    });
 </script>
+
+<script>
+  // fade-in 대상 요소를 모두 찾기
+  const fadeEls = document.querySelectorAll('.fade-in');
+
+  const onScroll = () => {
+    fadeEls.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight - 100;
+      if (isVisible) {
+        el.classList.add('visible');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', onScroll);
+  window.addEventListener('load', onScroll); // 초기 로딩 시도
+</script>
+
 </body>
 </html>
