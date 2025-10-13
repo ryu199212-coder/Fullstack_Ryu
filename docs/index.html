@@ -17,11 +17,12 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
   color: #2F3E2E;
   line-height: 1.6;
-  
-background-image: url(./img/4.jpeg);
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-attachment: fixed;
+
+  background-image: url(./img/4.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .container {
@@ -56,8 +57,7 @@ nav {
 
 nav a {
   text-decoration: none;
-  color: 
-#2F3E2E;
+  color: #2F3E2E;
   font-weight: 500;
   position: relative;
 }
@@ -76,8 +76,7 @@ nav a::after {
   left: 0;
   width: 0%;
   height: 2px;
-  background-color: 
-#2F3E2E;
+  background-color: #2F3E2E;
   transition: width 0.3s ease;
 }
 
@@ -85,12 +84,12 @@ nav a:hover::after {
   width: 100%;
 }
 
-.profile-row,
-section,
-.card,
-footer,
-.gallery-grid,
-.traits {
+  .profile-row,
+  section,
+  .card,
+  footer,
+  .gallery-grid,
+  .traits {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -288,11 +287,15 @@ footer {
 }
  .top-banner {
   width: 100vw;
-  height: 100vh; /* 또는 cover */
-    display: block;
-    background-image: url('./img/4.jpeg');
-    background-size: contain;
-    }
+  height: 100vh;
+  display: block;
+  background-image: url('./img/4.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
 
  
   
@@ -354,7 +357,7 @@ footer {
     font-family: 'Poppins', sans-serif;
     font-size: 3rem;
     font-weight: 700;
-    color: #ac7e2f;
+    color: #4F3C1B;
     white-space: nowrap;
     overflow: hidden;
     border-right: 3px solid white;
@@ -369,31 +372,32 @@ footer {
     #projects p {
   color: #CED3CC;
 }
-  .floating-nav {
-    position: fixed;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* 반투명 배경 */
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-  }
+.floating-nav {
+  position: fixed;              /* 화면에 고정 */
+  top: 50%;                     /* 화면 세로 중앙 */
+  right: 20px;                  /* 오른쪽 여백 */
+  transform: translateY(-50%);  /* 정확한 중앙 정렬 */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 9999;                /* 다른 요소 위에 표시 */
+}
 
-  .floating-nav a {
-    text-decoration: none;
-    color: #2F3E2E;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
+.floating-nav a {
+  text-decoration: none;
+  color: #2F3E2E;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
 
-  .floating-nav a:hover {
-    color: #83622F;
-  }
+.floating-nav a:hover {
+  color: #83622F;
+}
+
   #about {
       background: #E8DCC3;
   }
@@ -403,7 +407,7 @@ footer {
   }
 
   section#projects {
-    background-color: #ddd;
+    background-color: #E6B673;
 }
 .myform {
     background-color: #333;
@@ -415,6 +419,12 @@ footer {
 </style>
 </head>
 <body>
+  <nav class="floating-nav">
+      <a href="#main-container">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
     <!-- 🌟 로딩 오버레이 -->
   <div id="loading-overlay">
     <div class="spinner"></div>
@@ -434,7 +444,7 @@ footer {
     </div>
   `);
 
-  const text = "Ryu hee jae 포트폴리오 ";
+  const text = "Grow & Glow : 유희재의 개발 여정";
   let i = 0;
 
   function typeWriter() {
@@ -466,16 +476,11 @@ footer {
       <h1  class="text-center">Ryu hee jae</h1>
       <p class="text-center">디자인과 개발 사이에서 균형을 찾는 사람</p>
       <p class="text-start">안녕하세요. 저는 감성적인 UI와 직관적인 UX를 추구합니다.  
-      부드러운 사용자 경험을 만드는 걸 좋아합니다.  
-      HTML, CSS, JavaScript는 물론 Figma와 Adobe XD도 능숙하게 다뤄볼라고요ㅋㅋ</p>
+      부드러운 사용자 경험을 만드는 걸 좋아합니다.
+      <br>  
+      HTML, CSS, JavaScript는 물론 Figma와 Adobe XD도 능숙하게 다룹니다</p>
+      <br>
     </div>
-
-    <nav class="floating-nav">
-      <a href="#main-container">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#contact">Contact</a>
-    </nav>
 
     <div class="profile-row" class="fade-in">
       <div class="profile-card">
