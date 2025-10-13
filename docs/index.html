@@ -15,9 +15,13 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Noto Sans KR', sans-serif;
-  background-color: #E8DCC3;
   color: #2F3E2E;
   line-height: 1.6;
+  
+background-image: url(./img/4.jpeg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-attachment: fixed;
 }
 
 .container {
@@ -218,9 +222,6 @@ footer,
 .fill.react { width: 80%; }
 .fill.figma { width: 75%; }
 
-section {
-  margin-bottom: 60px;
-}
 
 section h2 {
   font-size: 1.8rem;
@@ -277,38 +278,24 @@ section h2 {
 .modal-title{color: #555;}
 
 footer {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #999;
-  padding-top: 40px;
-  border-top: 1px solid #ddd;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #999;
+    padding-top: 40px;
+    /* border-top: 1px solid #ddd; */
+    background-color: black;
+    padding-bottom: 40px;
 }
  .top-banner {
-    width: 100%;
-    height: 100%;
+  width: 100vw;
+  height: 100vh; /* 또는 cover */
     display: block;
+    background-image: url('./img/4.jpeg');
+    background-size: contain;
     }
 
-  .image-wrapper {
-  width: 100vw;
-  height: 100vh;
-  background-image: url('./img/4.jpg');
-  background-size: contain; /* 또는 cover */
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-  .transparent-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    height: 150px;
-    background-color: rgba(255, 255, 255, 0);
-    cursor: pointer;
-    display: block;
-  }
+ 
+  
 
   /* 🌟 페이지 로딩 애니메이션 */
     #loading-overlay {
@@ -367,7 +354,7 @@ footer {
     font-family: 'Poppins', sans-serif;
     font-size: 3rem;
     font-weight: 700;
-    color: white;
+    color: #ac7e2f;
     white-space: nowrap;
     overflow: hidden;
     border-right: 3px solid white;
@@ -407,6 +394,24 @@ footer {
   .floating-nav a:hover {
     color: #83622F;
   }
+  #about {
+      background: #E8DCC3;
+  }
+
+  section#gallery {
+      background: transparent;
+  }
+
+  section#projects {
+    background-color: #ddd;
+}
+.myform {
+    background-color: #333;
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.5);
+}
+
 </style>
 </head>
 <body>
@@ -422,14 +427,14 @@ footer {
     $(document).ready(function () {
   $('#top-image').html(`
     <div class="image-wrapper">
-      <img src="./img/4.jpeg" alt="상단 이미지" class="top-banner">
+      <div class="top-banner"></div>
       <a href="#main-container" class="transparent-button">
         <span class="typing-text"></span>
       </a>
     </div>
   `);
 
-  const text = "START...";
+  const text = "Ryu hee jae 포트폴리오 ";
   let i = 0;
 
   function typeWriter() {
@@ -454,11 +459,16 @@ footer {
 </div>
 </div>
 
-  <div class="container" id="main-container">
-    <header>
-      <h1>Ryu hee jae</h1>
-      <p>디자인과 개발 사이에서 균형을 찾는 사람</p>
-    </header>
+  <div  id="main-container"> 
+    <section id="about">
+    <div class="container">
+    <div>
+      <h1  class="text-center">Ryu hee jae</h1>
+      <p class="text-center">디자인과 개발 사이에서 균형을 찾는 사람</p>
+      <p class="text-start">안녕하세요. 저는 감성적인 UI와 직관적인 UX를 추구합니다.  
+      부드러운 사용자 경험을 만드는 걸 좋아합니다.  
+      HTML, CSS, JavaScript는 물론 Figma와 Adobe XD도 능숙하게 다뤄볼라고요ㅋㅋ</p>
+    </div>
 
     <nav class="floating-nav">
       <a href="#main-container">About</a>
@@ -493,33 +503,34 @@ footer {
         <div class="skill"><span>React</span><div class="bar"><div class="fill react"></div></div></div>
         <div class="skill"><span>Figma</span><div class="bar"><div class="fill figma"></div></div></div>
       </div>
-
+     </div> 
     </div>
-
-    <section id="about" class="fade-in">
-      <h2>About Me</h2>
-      <p>안녕하세요. 저는 감성적인 UI와 직관적인 UX를 추구합니다.  
-      부드러운 사용자 경험을 만드는 걸 좋아합니다.  
-      HTML, CSS, JavaScript는 물론 Figma와 Adobe XD도 능숙하게 다뤄볼라고요ㅋㅋ</p>
     </section>
 
     <section id="projects" class="fade-in">
+      <div class="container">
       <h2>Projects</h2>
       <div class="card">
-        <h3 class="projects-h3">Dark/Light mode</h3>
-        <p>React 기반으로 제작한 개인 포트폴리오. 다크모드와 라이트모드 자동 전환 기능 포함.</p>
-      </div>
-      <div class="card">
-        <h3 class="projects-h3">색상코드</h3>
-        <p>자연에서 영감을 받은 색상과 미니멀리즘의 결합</p>
-      </div>
-      <div class="card">
-        <h3 class="projects-h3">Team Project1</h3>
+        <h3 class="projects-h3">spring + mybatis + jstl </h3>
         <p>예정</p>
+      </div>
+      <div class="card">
+        <h3 class="projects-h3">spring boot + thymeleaf + jpa + mybatis + react  </h3>
+        <p>예정</p>
+      </div>
+      <div class="card">
+        <h3 class="projects-h3">node + react</h3>
+        <p>예정</p>
+      </div>
+      <div class="card">
+        <h3 class="projects-h3">flutter + spring boot + jpa + mybatis + react</h3>
+        <p>예정</p>
+      </div>
       </div>
     </section>
 
     <section id="gallery" class="fade-in">
+    <div class="container">
       <h2>Gallery</h2>
       <div class="gallery-grid">
         <div class="gallery-item"  data-bs-toggle="modal" data-bs-target="#myModal1">          
@@ -555,10 +566,11 @@ footer {
             <p>Bank Project 3 - Interface</p>
         </div>
       </div>
+     </div> 
     </section>
    
    <section id="contact" class="contact m-5">
-    <div>
+    <div class="container myform">
       <h3 class="text-center"> Contact Me </h3>
       <p id="contact-p" class="text-center">열정적인 개발자에게 문의주세요!</p>
       <!-- 컨텍 -->
