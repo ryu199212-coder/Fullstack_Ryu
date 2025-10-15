@@ -1,248 +1,231 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>포트폴리오</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚀강서현 포트폴리오🚀</title>
 
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <style>
-    /* 기본 배경 및 글씨 색상 */
-    body {
-      background-color: #FFF8F0;
-      color: #3A3A3A;
-      font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
-    }
-    /* 다크모드 버튼 */
-    #darkModeToggle {
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      background: none;
-      color: inherit;
-      margin-left: 10px;
-      border: none;
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+ <style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0d1117;
+    color: #ffffff;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4 {
+    color: #00d1b2;
+  }
+
+  nav.navbar {
+    background-color: #161b22 !important;
+  }
+
+  .navbar-brand, .nav-link {
+    color: #ffffff !important;
+  }
+
+  .nav-link:hover {
+    color: #00d1b2 !important;
+  }
+
+  .section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: auto;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease-out;
+  }
+
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .progress-bar {
+    background-color: #00d1b2 !important;
+  }
+
+  .btn-danger,
+  .btn-warning,
+  .btn-info {
+    border: none;
+    color: #fff;
+  }
+
+  .btn-danger {
+    background-color: #e63946;
+  }
+
+  .btn-warning {
+    background-color: #f4a261;
+  }
+
+  .btn-info {
+    background-color: #00b89c;
+  }
+
+  input, textarea {
+    background-color: #161b22;
+    color: #fff;
+    border: 1px solid #30363d;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: #00d1b2;
+    box-shadow: 0 0 0 2px rgba(0, 209, 178, 0.25);
+  }
+
+  footer {
+    background-color: #161b22;
+    color: #999;
+    padding: 30px 0;
+    font-size: 14px;
+  }
+
+     .carousel-item img {
+      height: 80vh;
+      object-fit: cover;
+      filter: brightness(75%);
     }
 
-    body.dark-mode #darkModeToggle {
-      color: #F0F0F0;
-    }
-
-    /* 다크모드 전체 스타일 */
-    body.dark-mode {
-      background-color: #1E1E1E;
-      color: #F0F0F0;
-    }
-
-    body.dark-mode .navbar {
-      background-color: #333 !important;
-    }
-
-    body.dark-mode .navbar .nav-link,
-    body.dark-mode .navbar-brand {
-      color: #F0F0F0 !important;
-    }
-
-    body.dark-mode .info,
-    body.dark-mode .portfolio,
-    body.dark-mode .contect,
-    body.dark-mode .footer {
-      background-color: #2A2A2A;
-      color: #F0F0F0;
-    }
-
-    body.dark-mode a {
-      color: #90CAF9;
-    }
-
-    body.dark-mode a:hover {
-      color: #FFB74D;
-    }
-
-    /* 숨김 텍스트 접근성 */
-    .hidden {
+    .carousel-caption {
       position: absolute;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
-      white-space: nowrap;
+      bottom: 20%;
+      left: 10%;
+      text-align: left;
     }
 
-    /* Navbar */
-    .navbar {
-      background-color: #E9C46A !important;
+    .carousel-caption h2 {
+      color: #fff;
+      font-size: 3rem;
+      font-weight: 700;
+      animation: fadeInUp 1.2s ease-out;
     }
 
-    .navbar .nav-link,
-    .navbar-brand {
-      color: #3A3A3A !important;
-      font-weight: 600;
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    .navbar .nav-link:hover {
-      color: #E76F51 !important;
-    }
-
-    /* Carousel 높이 제한 */
-    #demo {
-      height: 300px;
-      overflow: hidden;
-    }
-
-    /* Carousel 버튼 스타일 */
-    .circle-btn.active {
-      opacity: 1;
-      background-color: #fff;
-    }
-
-    /* About me */
-    .info {
-      background-color: #FAF3E0;
-      padding: 5rem 0;
-    }
-
-    .info h3 {
-      text-decoration-line: underline;
-      font-size: 2.2em;
-      color: #2A9D8F;
-    }
-
-    .info h4 {
-      margin: 5% 0;
-    }
-
-    /* 키워드 버튼 */
-    .KeyWord li {
-      list-style-type: none;
-      margin-right: 10px;
-    }
-
-    .KeyWord input {
-      border: none;
-      padding: 5px 10px;
-      margin: 5px;
-      border-radius: 10px;
-      color: white;
-      font-weight: bold;
-    }
-
-    .btn-danger {
-      background-color: #E76F51;
+   .contact form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .btn-primary {
-      background-color: #2A9D8F;
+      background: #0288d1;
+      border: none;
+      transition: 0.3s;
     }
 
-    .btn-dark {
-      background-color: #264653;
+    .btn-primary:hover {
+      background: #0277bd;
+      transform: scale(1.05);
+    }
+   .portfolio iframe {
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
-    /* Skills progress bar 색상 조정 */
-    .progress-bar.bg-success {
-      background-color: #A8DADC;
+    .portfolio h4 {
+      margin-top: 15px;
+      font-weight: 600;
+      color: #0277bd;
     }
 
-    .progress-bar.bg-warning {
-      background-color: #F4A261;
+    .portfolio ul {
+      line-height: 1.8;
+    }
+    #about .col-sm-4 {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: 0.3s;
     }
 
-    .progress-bar.bg-danger {
-      background-color: #E76F51;
+    #about .col-sm-4:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
     }
 
-    .progress-bar.bg-secondary {
-      background-color: #BDB2A7;
+    .keyWord input {
+      margin: 5px;
+      border-radius: 20px;
+      font-weight: bold;
     }
 
-    .progress-bar.bg-dark {
-      background-color: #6D6875;
+    /* Progress bar 애니메이션 */
+    .progress-bar {
+      transition: width 1.2s ease-in-out;
     }
+</style>
 
-    /* Portfolio 영역 */
-    .portfolio {
-      background-color: #FFF8F0;
-      padding: 4rem 0;
-    }
-
-    .portfolio h3 {
-      margin-bottom: 3rem;
-      color: #264653;
-    }
-
-    /* Contact */
-    .contect {
-      background-color: #FFF4E6;
-      padding: 3rem;
-      border-radius: 10px;
-    }
-
-    .contect h3 {
-      color: #E76F51;
-    }
-
-    /* Footer */
-    .footer {
-      background-color: #E9C46A;
-      color: #3A3A3A;
-    }
-
-    /* 링크 색상 */
-    a {
-      color: #2A9D8F;
-      text-decoration: none;
-    }
-
-    a:hover {
-      color: #E76F51;
-    }
-  </style>
 </head>
 <body>
-  <!-- 다크모드 토글 버튼 -->
-  <button id="darkModeToggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
-  <!-- Header -->
-  <header class="header">
-    <h1 class="hidden">유희재 포트폴리오</h1>
-    <nav class="navbar navbar-expand-sm navbar-dark">
-      <h2 class="hidden">주메뉴</h2>
-      <div class="container-fluid">
-        <a class="navbar-brand" href="javascript:void(0)">Ryu hee jae</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mynavbar">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="#a">Portfolio</a></li>
-            <li class="nav-item"><a class="nav-link" href="#b">About Me</a></li>
-            <li class="nav-item"><a class="nav-link" href="#c">Gallery</a></li>
-            <li class="nav-item"><a class="nav-link" href="#d">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
 
-  <!-- Visual Carousel -->
-  <div class="visual" id="c">
+  <!-- Header -->
+   <nav class="navbar navbar-expand-sm navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Kang Seo Hyun</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About Me</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Carousel -->
+  <section class="visual">
     <div id="demo" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active circle-btn"></button>
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="1" class="circle-btn"></button>
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="2" class="circle-btn"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
       </div>
       <div class="carousel-inner">
-        <div class="carousel-item active"><img src="./img/1.jpg" alt="이미지1" class="d-block w-100" /></div>
-        <div class="carousel-item"><img src="./img/2.jpg" alt="이미지2" class="d-block w-100" /></div>
-        <div class="carousel-item"><img src="./img/3.jpg" alt="이미지3" class="d-block w-100" /></div>
+        <div class="carousel-item active">
+          <img src="./img/code-1839406_1280.jpg" class="d-block w-100" alt="">
+          <div class="carousel-caption">
+            <h2>Passion & Creativity</h2>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="./img/corona-5243198_1280.jpg" class="d-block w-100" alt="">
+          <div class="carousel-caption">
+            <h2>Grow as a Fullstack Developer</h2>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="./img/laptop-1512838_1280.png" class="d-block w-100" alt="">
+          <div class="carousel-caption">
+            <h2>Building Modern Web Solutions</h2>
+          </div>
+        </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
@@ -251,90 +234,70 @@
         <span class="carousel-control-next-icon"></span>
       </button>
     </div>
-  </div>
+  </section>
 
-  <!-- About Me -->
-  <section class="info" id="b">
+  <!-- About -->
+  <section id="about">
     <div class="container">
-      <h3 class="text-center">About Me</h3>
-      <div class="row mt-5">
+      <h3 class="text-center mb-5 fw-bold">About Me</h3>
+      <div class="row g-4">
         <div class="col-sm-4 text-center">
-          <p><img src="./img/1.png" class="w-50" alt="프로필 이미지" /></p>
-          <h4>Ryu Hee Jae</h4>
-          <ul>
-            <li class="text-start">ryu199212@gmail.com</li>
-            <li class="text-start"><a href="https://github.com/ryu199212-coder/Fullstack_Ryu" target="_blank">깃허브 포트폴리오</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-4 text-center">
-          <h4>Education</h4>
-          <ul>
-            <li class="text-start">
-              MSA기반 플러터(Dart) 활용 자바(JAVA) 프론트엔드 백엔드 풀스택 웹(앱) 개발<br />
-              (25.08.25 ~ 26.02.27)
-            </li>
-          </ul>
-          <h4>KeyWord</h4>
-          <ul class="d-flex KeyWord justify-content-center">
-            <li><input type="button" value="열정" class="btn btn-danger" /></li>
-            <li><input type="button" value="성실" class="btn btn-primary" /></li>
-            <li><input type="button" value="끈기" class="btn btn-dark" /></li>
+          <img src="./img/one.png" class="w-50 rounded-circle mb-3" alt="프로필 이미지">
+          <h4>Kang Seo Hyun</h4>
+          <ul class="list-unstyled mt-3">
+            <li>📧 ksgkey567@gmail.com</li>
+            <li><a href="https://github.com/kangseoyun-s/fullstack_seohyun" target="_blank">GitHub 포트폴리오</a></li>
           </ul>
         </div>
         <div class="col-sm-4">
-          <h4 class="skills text-center">SKILLS</h4>
-          <div class="progress m-3">
-            <div class="progress-bar bg-success" style="width:20%">HTML</div>
-          </div>
-          <div class="progress m-3">
-            <div class="progress-bar bg-warning" style="width:40%">CSS</div>
-          </div>
-          <div class="progress m-3">
-            <div class="progress-bar bg-danger" style="width:50%">JavaScript</div>
-          </div>
-          <div class="progress m-3">
-            <div class="progress-bar bg-secondary" style="width:70%">Java</div>
-          </div>
-          <div class="progress m-3">
-            <div class="progress-bar bg-dark" style="width:90%">Spring Boot</div>
-          </div>
+          <h4>Education</h4>
+          <ul>
+            <li>MSA 기반 풀스택 웹(앱) 개발 교육<br>(2025.08.25 ~ 2026.02.27)</li>
+          </ul>
+          <h4 class="mt-3">KeyWords</h4>
+          <ul class="d-flex keyWord list-unstyled">
+            <li><input type="button" value="열정" class="btn btn-danger" /></li>
+            <li><input type="button" value="성실" class="btn btn-warning" /></li>
+            <li><input type="button" value="끈기" class="btn btn-info" /></li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <h4>Skills</h4>
+          <div class="progress my-2"><div class="progress-bar bg-info" style="width:80%">JAVA 80%</div></div>
+          <div class="progress my-2"><div class="progress-bar bg-warning" style="width:90%">SPRING 90%</div></div>
+          <div class="progress my-2"><div class="progress-bar bg-danger" style="width:90%">ORACLE 90%</div></div>
+          <div class="progress my-2"><div class="progress-bar bg-primary" style="width:85%">REACT 85%</div></div>
+          <div class="progress my-2"><div class="progress-bar bg-success" style="width:85%">AWS 85%</div></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Portfolio -->
-  <section class="portfolio" id="a">
+  <section class="portfolio" id="portfolio">
     <div class="container">
-      <h3 class="text-center">Portfolio</h3>
-      <div class="row">
+      <h3 class="text-center mb-5 fw-bold">Portfolio</h3>
+      <div class="row align-items-center">
         <div class="col-sm-4">
-          <iframe class="w-100" height="200" src="https://www.youtube.com/embed/WAa1vEBteT0" allowfullscreen></iframe>
-          <p class="text-center m-3">
-            <a href="#" class="btn btn-danger">포트폴리오 더보기</a>
-          </p>
+          <iframe class="w-100" height="250" src="https://www.youtube.com/embed/jvIa20UCgMs" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+          <p class="text-center mt-3"><a href="#" class="btn btn-primary">포트폴리오 더보기</a></p>
         </div>
-        <div class="col-sm-4 text-center">
-          <h4>Spring Boot + JPA + React 포트폴리오</h4>
-          <p><a href="#" class="btn btn-danger">More</a></p>
-          <ul class="text-start">
-            <li><strong>Spring Boot</strong> 기반 RESTful API 서버 구축</li>
-            <li><strong>JPA</strong>로 DB 연동 및 CRUD 구현</li>
-            <li><strong>React</strong> 프론트엔드 SPA 구현</li>
-            <li><strong>JWT</strong> 인증 및 권한 관리</li>
-            <li><strong>CI/CD</strong> 자동 배포 (GitHub Actions)</li>
+        <div class="col-sm-4">
+          <h4>Spring Boot + React Portfolio</h4>
+          <ul>
+            <li>Spring Boot + JPA 기반 백엔드 개발</li>
+            <li>React 프론트엔드 UI 구성</li>
+            <li>JWT 인증 및 CI/CD 배포 자동화</li>
           </ul>
         </div>
         <div class="col-sm-4">
-          <h4 class="text-center">기술 스택</h4>
-          <ul class="text-start">
-            <li><strong>Spring Boot 2.7</strong></li>
-            <li><strong>JPA / Hibernate</strong></li>
-            <li><strong>React 18 / Router</strong></li>
-            <li><strong>Axios / SPA 구조</strong></li>
-            <li><strong>JWT 인증 / 보안 처리</strong></li>
-            <li><strong>Oracle</strong></li>
-            <li><strong>GitHub & Actions</strong></li>
+          <h4>기술 스택</h4>
+          <ul>
+            <li>Spring Boot 2.7.14</li>
+            <li>React 18</li>
+            <li>Oracle 11g</li>
+            <li>JWT, Axios, React Router v6</li>
+            <li>GitHub Actions, AWS EC2</li>
           </ul>
         </div>
       </div>
@@ -342,38 +305,85 @@
   </section>
 
   <!-- Contact -->
-  <section class="contect my-5" id="d">
+  <section class="contact" id="contact">
     <div class="container">
-      <h3 class="text-center">Contact Me</h3>
-      <p class="text-center">열정적인 개발자에게 문의주세요!</p>
-      <form action="/action_page.php">
-        <div class="mb-3 mt-3">
-          <label for="title" class="form-label">제목</label>
-          <input type="text" class="form-control" id="title" placeholder="제목을 적어주세요." name="title" />
+      <h3 class="text-center mb-4 fw-bold">Contact Me</h3>
+      <p class="text-center mb-5 text-muted">열정적인 개발자에게 문의 주세요!</p>
+      <form onsubmit="sendEmail(event)">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name:</label>
+          <input type="text" class="form-control" id="name" required>
         </div>
         <div class="mb-3">
-          <label class="form-label">내용</label>
-          <textarea class="form-control" rows="5" id="comment" placeholder="내용을 적어주세요."></textarea>
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" class="form-control" id="email" required>
         </div>
-        <div class="form-check text-end">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title:</label>
+          <input type="text" class="form-control" id="title" required>
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message:</label>
+          <textarea class="form-control" id="message" rows="5" required></textarea>
+        </div>
+        <div class="text-end">
           <button type="submit" class="btn btn-primary">메일 보내기</button>
         </div>
       </form>
     </div>
   </section>
 
+
   <!-- Footer -->
-  <footer class="footer text-center p-5">
-    &copy; copyrights company 2025 all rights reserved
+  <footer class="footer text-center bg-secondary text-white p-5">
+    &copy; 2025 강서현. All rights reserved.
   </footer>
+
+  <!-- JS for section animation -->
   <script>
-    function toggleDarkMode() {
-      const body = document.body;
-      const button = document.getElementById("darkModeToggle");
-      body.classList.toggle("dark-mode");
-      button.textContent = body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('.section');
+      const trigger = window.innerHeight * 0.8;
+      sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top < trigger) {
+          section.classList.add('visible');
+        }
+      });
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const firstSection = document.querySelector('.section');
+      if (firstSection) firstSection.classList.add('visible');
+    });
+  </script>
+
+  <!-- EmailJS 설정 -->
+  <script>
+    (function () {
+      emailjs.init({
+        publicKey: "Oj1LcLK6Q5_YSR6wR",
+      });
+    })();
+
+    function sendEmail(e) {
+      e.preventDefault();
+      const templateParams = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        title: document.getElementById("title").value,
+        message: document.getElementById("message").value,
+      };
+
+      emailjs.send('seohyun', 'template_0al5es5', templateParams)
+        .then((response) => {
+          alert("📧 메일이 성공적으로 전송되었습니다.");
+          document.querySelector('form').reset();
+        }, (error) => {
+          alert("❌ 메일 전송에 실패했습니다.");
+          console.error('FAILED...', error);
+        });
     }
   </script>
-  
 </body>
 </html>

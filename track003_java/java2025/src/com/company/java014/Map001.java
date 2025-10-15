@@ -24,9 +24,11 @@ public class Map001 {
 		System.out.println("4 : " + map.remove("two"));
 		System.out.println("1 : " + map.containsKey("one"));
 		System.out.println(map.entrySet()); // key : value 한묶음, 한쌍 - [one=1, three=3]
+		System.out.println("--------------------------------------------------------------------");
 		
 		for(Entry < String, Integer > one : map.entrySet()) 
 		{System.out.println(one.getKey() + "/" + one.getValue());}
+		System.out.println("--------------------------------------------------------------------");
 		
 		Iterator<Entry<String, Integer>> iter = map.entrySet().iterator(); // 1) iter →[one=1, three=3]
 		while(iter.hasNext()) {// 2) 처리대상 확인 [iter → one=1, three=3]

@@ -41,6 +41,7 @@ public class Set001 {
 		set1.add(3);			   // int → Integer, float → Float (auto 박싱)
 		System.out.println(set1);  // [1, 2, 3]
 		
+
 		Set<Candy> set2 = new HashSet<>();
 		set2.add(new Candy("츄파츕스", 300));
 		set2.add(new Candy("츄파츕스", 300));
