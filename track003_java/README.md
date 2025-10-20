@@ -415,6 +415,87 @@ if(tempid.equals(id) && temppass.equals(pass)){
 * `.equals()`는 두 문자열의 **실제 값(value)** 을 비교하기 때문에, 내용이 동일할 경우만 true를 반환함
 ---
 
+### 문제발생(6) - 메서드의 반환 타입 오류
+```bash
+      public void moodScore() {this.moodScore = this.walkTime + (this.snackCount * 10) + (this.cuddleCount * 5);}
+      
+      public void snackStars() { 
+           if(this.moodScore>= 90) {return "★★★★★";}
+       else if(this.moodScore >= 70) {return "★★★★";}
+        else if(this.moodScore >= 50) {return "★★★";}
+        else if(this.moodScore >= 30) {return "★★";}
+         else{return "★";}
+         }
+```
+ **문제점**
+
+ * void로 선언했는데 String을 return하고 있음
+
+ * 컴파일 에러 발생합니다: “incompatible return type”
+
+ <br/>
+
+### 문제해결(6)
+ * 점수를 확인하고 싶다면 System.out.println(this.moodScore);를 추가
+
+ * getMoodScore() 메서드를 만들어서 외부에서 접근 가능하게 변경
+
+### 문제발생(7) - private 멤버 접근 및 getter/setter 미구현 문제
+
+```java
+class LunchTray {
+    private String owner;   // private 멤버
+}
+
+public class MemberVarEx003 {
+    public static void main(String[] args) {
+        LunchTray tray1 = new LunchTray();
+        tray1.owner = "std-1";   // 오류 발생
+    }
+}
+```
+
+<br/>
+
+1. **문제점**
+
+* `LunchTray` 클래스의 `owner` 변수를 `private`으로 선언하자,
+  외부 클래스에서 `tray1.owner = "std-1";` 과 같이 접근할 때 **컴파일 오류 발생**
+* 현재는 단순 예제라 직접 접근만 하면 될 것 같지만, 실제 프로젝트에서는 **캡슐화 원칙을 지키지 않으면 유지보수 시 큰 문제**가 발생할 수 있음
+* 이를 해결하기 위해서는 반드시 **getter/setter 메서드**를 통해 값을 읽거나 수정해야 함
+* 문제는, **getter/setter를 미리 만들어두지 않으면 이후 요구사항 변경 시 모든 코드를 수정해야 하는 불편**이 발생함
+
+<br/>
+
+### 문제해결(7)
+
+* 지금 당장은 사용하지 않더라도, **getter/setter 메서드를 미리 정의**해 두는 것이 바람직
+* 이렇게 하면 후에 새로운 기능이 추가되거나 외부 클래스에서 해당 변수를 사용해야 할 때, 코드를 대규모로 수정하지 않고도 쉽게 대응 가능
+
+```java
+class LunchTray {
+    private String owner;   
+
+    // Getter
+    public String getOwner() {
+        return owner;
+    }
+
+    // Setter
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+}
+
+public class MemberVarEx003 {
+    public static void main(String[] args) {
+        LunchTray tray1 = new LunchTray();
+        tray1.setOwner("std-1");   // setter로 값 설정
+        System.out.println(tray1.getOwner()); // getter로 값 출력
+    }
+}
+```
+---
 ## 참고문헌
 - [생활코딩](https://opentutorials.org/course/1223)
 - [Spring Boot](https://spring.io/projects/spring-boot)

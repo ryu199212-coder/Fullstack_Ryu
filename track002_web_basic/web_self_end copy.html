@@ -2,28 +2,38 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>김포터 포트폴리오</title>
+  <title>유희재 포트폴리오</title>
+ <!-- Noto Sans KR 폰트 -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-   <!-- Latest compiled and minified CSS -->
+  
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Latest compiled JavaScript -->
+  <!-- Tailwind CSS with prefix 설정 -->
+  <script>
+    tailwind.config = {
+      prefix: 'tw-',
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <style>
-    body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Noto Sans KR', sans-serif;
-  background-color: #f1f8f6;
-  color: #444;
-  line-height: 1.6;
-}
+body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #104965;
+      color: #CED3CC;
+      line-height: 1.6;
+    }
 
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
 
 header {
   text-align: center;
@@ -32,12 +42,14 @@ header {
 
 header h1 {
   font-size: 2.5rem;
-  color: #333;
+  color: 
+#CED3CC;
 }
 
 header p {
   font-size: 1rem;
-  color: #666;
+  color: 
+#CED3CC;
 }
 
 nav {
@@ -49,7 +61,8 @@ nav {
 
 nav a {
   text-decoration: none;
-  color: #555;
+  color: 
+#CED3CC;
   font-weight: 500;
   position: relative;
 }
@@ -61,15 +74,14 @@ nav a::after {
   left: 0;
   width: 0%;
   height: 2px;
-  background-color: #ffa69e;
+  background-color: 
+#CED3CC;
   transition: width 0.3s ease;
 }
 
 nav a:hover::after {
   width: 100%;
 }
-
-
 
 .profile-row,
 section,
@@ -89,14 +101,15 @@ footer,
   margin-bottom: 60px;
   justify-content: space-between;
 }
-
 .profile-card,
 .traits,
 .skill-chart {
   flex: 1;
   min-width: 280px;
-  background-color: #fff7f2; /* 크림톤 배경 */
-  border: 2px solid #ffc8b2; /* 피치핑크 테두리 */
+  background-color: 
+#4F3C1B; 
+  border: 2px solid 
+#110E05; 
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   padding: 30px;
@@ -109,8 +122,9 @@ footer,
 .skill-chart:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-  background-color: #ffece3; /* 호버 시 색 변경*/
-  border-color: #ffb199; /* 호버 시 테두리 강조 */
+  background-color: 
+#83622F; /* 호버 시 색 변경*/
+  border-color: #110E05; /* 호버 시 테두리 강조 */
 }
 
 .profile-card img {
@@ -118,13 +132,15 @@ footer,
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 15px;
+  display: block;
+  margin: 0 auto;
 }
 
 .traits h3 {
   margin-top: 0;
   font-size: 1.4rem;
-  color: #333;
+  color: 
+#CED3CC;
   margin-bottom: 15px;
 }
 
@@ -136,7 +152,8 @@ footer,
 
 .traits li {
   font-size: 1rem;
-  color: #555;
+  color: 
+#CED3CC;
   margin-bottom: 10px;
   padding-left: 0.5em;
 }
@@ -144,8 +161,13 @@ footer,
 .skill-chart h3 {
   margin-bottom: 20px;
   font-size: 1.4rem;
-  color: #333;
+  color: 
+#CED3CC;
 }
+
+.projects-h3{
+  color: 
+#CED3CC;}
 
 .skill {
   margin-bottom: 15px;
@@ -155,7 +177,8 @@ footer,
   display: block;
   margin-bottom: 5px;
   font-weight: 500;
-  color: #555;
+  color: 
+#CED3CC;
 }
 
 .bar {
@@ -168,7 +191,7 @@ footer,
 .fill {
   height: 100%;
   border-radius: 5px;
-  background-color: #ffa69e;
+  background-color: #DFD192;
   animation: grow 1.2s ease forwards;
 }
 
@@ -178,18 +201,14 @@ footer,
 .fill.react { width: 80%; }
 .fill.figma { width: 75%; }
 
-@keyframes grow {
-  from { width: 0; }
-  to { width: var(--target-width); }
-}
-
 section {
   margin-bottom: 60px;
 }
 
 section h2 {
   font-size: 1.8rem;
-  color: #333;
+  color: 
+#CED3CC;
   margin-bottom: 20px;
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
@@ -197,12 +216,13 @@ section h2 {
 
 section p {
   font-size: 1rem;
-  color: #444;
+  color: 
+#CED3CC;
 }
-
 .card {
-  background-color: #fff;
+  background-color: #4F3C1B;
   padding: 20px;
+  border: 2px solid #110E05; 
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
@@ -228,7 +248,7 @@ section p {
 }
 
 .gallery-item img {
-  width: 100%;
+  width: 101%;
   display: block;
 }
 
@@ -242,6 +262,8 @@ section p {
   transform: translateY(-5px);
 }
 
+.modal-title{color: #555;}
+
 footer {
   text-align: center;
   font-size: 0.9rem;
@@ -249,61 +271,89 @@ footer {
   padding-top: 40px;
   border-top: 1px solid #ddd;
 }
+ .top-banner {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    display: block;
+  }
 
-/* 모달 스타일 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-}
+  .image-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
 
-.modal-content {
-  background-color: #fff;
-  margin: 10% auto;
-  padding: 30px;
-  border-radius: 12px;
-  width: 80%;
-  max-width: 500px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  animation: fadeIn 0.3s ease;
-}
+  .transparent-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 150px;
+    background-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+    display: block;
+  }
 
-.modal-content h3 {
-  margin-top: 0;
-  color: #333;
-}
+   #custom-cursor {
+      transition: transform 0.1s ease-out;
+    }
 
-.modal-content p {
-  color: #555;
-}
+    .aurora-cursor {
+      background: radial-gradient(circle at center, rgba(255,255,255,0.2), rgba(0,255,255,0.1), rgba(255,0,255,0.1));
+      box-shadow: 0 0 20px rgba(0,255,255,0.3), 0 0 40px rgba(255,0,255,0.2);
+      animation: auroraPulse 3s infinite ease-in-out;
+    }
 
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
+    @keyframes auroraPulse {
+      0% { box-shadow: 0 0 20px rgba(0,255,255,0.3), 0 0 40px rgba(255,0,255,0.2); }
+      50% { box-shadow: 0 0 30px rgba(0,255,255,0.5), 0 0 60px rgba(255,0,255,0.4); }
+      100% { box-shadow: 0 0 20px rgba(0,255,255,0.3), 0 0 40px rgba(255,0,255,0.2); }
+    }
 
-.close:hover {
-  color: #ff6b6b;
-}
-*/
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
+    .haze-layer {
+      background: radial-gradient(circle, rgba(255,255,255,0.1), rgba(0,255,255,0.05), rgba(255,0,255,0.05));
+      animation: hazeFloat 6s infinite ease-in-out;
+      filter: blur(20px);
+      opacity: 0.4;
+    }
+
+    @keyframes hazeFloat {
+      0% { transform: scale(1) translate(0, 0); }
+      50% { transform: scale(1.2) translate(5px, -5px); }
+      100% { transform: scale(1) translate(0, 0); }
+    }
 </style>
 </head>
 <body>
-  <div class="container">
+
+  <!-- 커스텀 커서 -->
+  <div id="custom-cursor"
+    class="tw-pointer-events-none tw-fixed tw-top-0 tw-left-0 tw-isolate tw-z-[60] tw-flex tw-w-fit -tw-translate-x-1/2 -tw-translate-y-1/2 tw-items-center tw-justify-center tw-overflow-visible tw-rounded-full aurora-cursor"
+    style="width: 40px; height: 40px;">
+    <div class="haze-layer tw-absolute tw-w-[80px] tw-h-[80px] tw-rounded-full"></div>
+    <span style="opacity: 0;"></span>
+  </div>
+  
+  <div id="top-image">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      $('#top-image').html(`
+        <div class="image-wrapper">
+          <img src="./img/2.jpg" alt="상단 이미지" class="top-banner">
+          <a href="#main-container" class="transparent-button"></a>
+        </div>
+      `);
+    });
+    </script>
+  </div>
+
+  <div class="container" id="main-container">
     <header>
-      <h1>김포터</h1>
+      <h1>Ryu hee jae</h1>
       <p>디자인과 개발 사이에서 균형을 찾는 사람</p>
     </header>
 
@@ -316,9 +366,11 @@ footer {
 
     <div class="profile-row">
       <div class="profile-card">
-        <img src="https://via.placeholder.com/100" alt="Profile Image">
-        <h2>김포터</h2>
-        <p>프론트엔드 개발자 & UI 디자이너<br>감성적인 인터페이스를 사랑합니다.</p>
+        <img src="./img/1.png" alt="Profile Image">
+        <h2 class="pic text-center">유희재</h2>
+        <p>프론트엔드 개발자 & UI 디자이너
+          <br>
+          감성적인 인터페이스를 선호.</p>
       </div>
 
       <div class="traits visible">
@@ -326,7 +378,7 @@ footer {
         <ul>
           <li>🌱 감성적인 시선과 섬세한 손길</li>
           <li>🤝 협업을 즐기는 커뮤니케이터</li>
-          <li>🚀 빠르게 배우고 꾸준히 성장하는 개발자</li>
+          <li>🚀 꾸준히 성장하는 개발자</li>
         </ul>
       </div>
       <div class="skill-chart">
@@ -337,28 +389,29 @@ footer {
         <div class="skill"><span>React</span><div class="bar"><div class="fill react"></div></div></div>
         <div class="skill"><span>Figma</span><div class="bar"><div class="fill figma"></div></div></div>
       </div>
+
     </div>
 
     <section id="about">
       <h2>About Me</h2>
-      <p>안녕하세요. 저는 감성적인 UI와 직관적인 UX를 추구하는 프론트엔드 디자이너입니다.  
-      봄처럼 따뜻하고 부드러운 사용자 경험을 만드는 걸 좋아해요.  
-      HTML, CSS, JavaScript는 물론 Figma와 Adobe XD도 능숙하게 다룹니다.</p>
+      <p>안녕하세요. 저는 감성적인 UI와 직관적인 UX를 추구합니다.  
+      부드러운 사용자 경험을 만드는 걸 좋아합니다.  
+      HTML, CSS, JavaScript는 물론 Figma와 Adobe XD도 능숙하게 다뤄볼라고요ㅋㅋ</p>
     </section>
 
     <section id="projects">
       <h2>Projects</h2>
       <div class="card">
-        <h3>봄날 포트폴리오</h3>
-        <p>React 기반으로 제작한 개인 포트폴리오. 민트톤과 피치핑크를 활용한 테마로, 다크모드와 라이트모드 자동 전환 기능 포함.</p>
+        <h3 class="projects-h3">Dark/Right mode</h3>
+        <p>React 기반으로 제작한 개인 포트폴리오. 다크모드와 라이트모드 자동 전환 기능 포함.</p>
       </div>
       <div class="card">
-        <h3>꽃집 랜딩페이지</h3>
-        <p>Figma로 디자인하고 HTML/CSS로 구현한 꽃집 소개 페이지. 스크롤 애니메이션과 부드러운 전환 효과로 사용자 몰입도 향상.</p>
+        <h3 class="projects-h3">Team Project1</h3>
+        <p>예정</p>
       </div>
       <div class="card">
-        <h3>감성 블로그 템플릿</h3>
-        <p>Markdown 기반 블로그 템플릿. 글쓰기 공간을 따뜻하게 표현하기 위해 크림톤 배경과 손글씨 느낌의 폰트 사용.</p>
+        <h3 class="projects-h3">Team Project1</h3>
+        <p>예정</p>
       </div>
     </section>
 
@@ -366,34 +419,45 @@ footer {
       <h2>Gallery</h2>
       <div class="gallery-grid">
         <!-- <div class="gallery-item" onclick="openModal('Bank프로젝트', '어쩌구 저쩌구 기능을 넣은겁니다 저쩌구 어쩌구 기능 추가 했습니다. 개선버전 = https://youtu.be/0TatHLp_XRY')"> -->
-        <div class="gallery-item">          
-          <img src="./img/1.jpg" alt="Project 1"class="video-thumbnail" >
-          <div id="videoModal" class="modal">
+        <div class="gallery-item"  data-bs-toggle="modal" data-bs-target="#myModal1">          
+          <img src="./img/포트폴리오1.jpg" alt="Project 1" class="video-thumbnail" style="display: block; margin: 0 auto;">
+            <div id="videoModal" class="modal">
             <div class="modal-content">
               <span class="close" onclick="closeVideoModal()">&times;</span>
               <iframe id="videoFrame" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
             </div>
           </div>
-          <p>영상</p>  
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal1">
-              VER1
-            </button>
+          <p>Bank Project - Control</p>  
+
         </div>
-        <div class="gallery-item" onclick="openModal('꽃집 랜딩페이지', 'Figma로 디자인하고 HTML/CSS로 구현한 꽃집 소개 페이지. 스크롤 애니메이션과 부드러운 전환 효과로 사용자 몰입도 향상.')">
-          <img src="./img/2.jpg" alt="Project 2">
-          <p>프로젝트2</p>
+          <div class="gallery-item"  data-bs-toggle="modal" data-bs-target="#myModal2">
+          <img src="./img/포트폴리오1.jpg" alt="Project 2" class="video-thumbnail" style="display: block; margin: 0 auto;">
+            <div id="videoModal" class="modal">
+            <div class="modal-content">
+              <span class="close" onclick="closeVideoModal()">&times;</span>
+              <iframe id="videoFrame" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+          <p>Bank Project 2 - Array</p>
         </div>
-        <div class="gallery-item" onclick="openModal('감성 블로그 템플릿', 'Markdown 기반 블로그 템플릿. 글쓰기 공간을 따뜻하게 표현하기 위해 크림톤 배경과 손글씨 느낌의 폰트 사용.')">
-          <img src="./img/3.jpg" alt="Project 3">
-          <p>프로젝트3</p>
+
+          <div class="gallery-item"  data-bs-toggle="modal" data-bs-target="#myModal3">
+          <img src="./img/포트폴리오1.jpg" alt="Project 3" class="video-thumbnail" style="display: block; margin: 0 auto;">
+            <div id="videoModal" class="modal">
+            <div class="modal-content">
+              <span class="close" onclick="closeVideoModal()">&times;</span>
+              <iframe id="videoFrame" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+            <p>Bank Project 3 - Interface</p>
         </div>
       </div>
     </section>
-
-   <section class="contect m-5">
+   
+   <section id="contact" class="contact m-5">
     <div>
       <h3 class="text-center"> Contact Me </h3>
-      <p class="text-center">열정적인 개발자에게 문의주세요!</p>
+      <p id="contact-p" class="text-center">열정적인 개발자에게 문의주세요!</p>
       <!-- 컨텍 -->
     <script type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
@@ -454,69 +518,110 @@ footer {
   </section>
 
     <footer>
-      &copy; 2025 김포터. All rights reserved.
+      &copy; 2025 Ryu hee jae. All rights reserved.
     </footer>
   </div>
 
-  <!-- 🌟 모달 팝업 -->
-  <div id="myModal1" class="modal">
+  <!-- 모달 팝업 1 -->
+    <div class="modal" id="myModal1">
+    <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h3 id="modal-title"></h3>
-      <div id="modal-description">
-        <iframe width="100%"   src="https://www.youtube.com/embed/kHIn7gc9PsA?si=N0iEXPg3s8wFDezr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
+
+      <!-- Modal Header -->
+    <div class="modal-header">
+        <h4 class="modal-title">Bank프로젝트</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    </div>
+
+      <!-- Modal body -->
+    <div class="modal-body">   
+        <iframe width="100%"   src="https://www.youtube.com/embed/kHIn7gc9PsA?si=N0iEXPg3s8wFDezr" 
+        title="YouTube video player" 
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allowfullscreen></iframe>
+    </div>
+
+      <!-- Modal footer -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+    </div>
+
+
     </div>
   </div>
+</div><!-- 모달 팝업1 end-->
 
-<!--  
-  <script>
-    // ✨ JavaScript 기능
-    // 스크롤 등장 애니메이션
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    });
+  <!-- 모달 팝업 2 -->
+    <div class="modal" id="myModal2">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
 
-    document.querySelectorAll(
-      '.profile-row, .traits, section, .card, footer, .gallery-grid'
-    ).forEach(el => observer.observe(el));
+      <!-- Modal Header -->
+    <div class="modal-header">
+        <h4 class="modal-title">Bank프로젝트2</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    </div>
 
-    // 모달 팝업 기능
-    function openModal(title, description) {
-      document.getElementById('modal-title').textContent = title;
-      document.getElementById('modal-description').textContent = description;
-      document.getElementById('modal').style.display = 'block';
-    }
+      <!-- Modal body -->
+    <div class="modal-body">
+      <iframe width="100%" src="https://www.youtube.com/embed/0TatHLp_XRY?si=8kMX91rbRbW8-lqb"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allowfullscreen></iframe>
+    </div>
+    
 
-    function closeModal() {
-      document.getElementById('modal').style.display = 'none';
-    }
+      <!-- Modal footer -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+    </div>
 
-    window.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeModal();
-    });
 
-    window.addEventListener('click', function(e) {
-      if (e.target === document.getElementById('modal')) closeModal();
-    });
+    </div>
+  </div>
+</div><!-- 모달 팝업2 end-->
 
-    function openVideoModal(videoUrl) {
-  const modal = document.getElementById("videoModal");
-  const frame = document.getElementById("videoFrame");
-  frame.src = videoUrl;
-  modal.style.display = "block";
-}
+<!-- 모달 팝업 3 -->
+    <div class="modal" id="myModal3">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
 
-function closeVideoModal() {
-  const modal = document.getElementById("videoModal");
-  const frame = document.getElementById("videoFrame");
-  frame.src = ""; // 영상 정지
-  modal.style.display = "none";
-}
-  </script> -->
+      <!-- Modal Header -->
+    <div class="modal-header">
+        <h4 class="modal-title">Bank프로젝트3</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    </div>
+
+      <!-- Modal body -->
+    <div class="modal-body">
+        <iframe width="100%"   src="" 
+        title="YouTube video player" 
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allowfullscreen></iframe>
+    </div>
+
+      <!-- Modal footer -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+    </div>
+
+
+    </div>
+  </div>
+</div><!-- 모달 팝업 3 end-->
+
+<script>
+  const cursor = document.getElementById('custom-cursor');
+
+  document.addEventListener('mousemove', (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
+
+    cursor.style.transform = `translateX(${x}px) translateY(${y}px)`;
+  });
+</script>
 </body>
 </html>

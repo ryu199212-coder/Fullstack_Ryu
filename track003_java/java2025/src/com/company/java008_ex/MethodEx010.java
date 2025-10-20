@@ -29,7 +29,7 @@ public class MethodEx010 {
 
 		}
 
-	public static void main(String[] args) {
+	    public static void main(String[] args) {
 		String[][] pets = { { "콩이", "010-1234-5678", "예방접종" }, 
 				            { "초코", "010-2345-6789", "건강검진" },
 				            { "보리", "010-3456-7890", "치아관리" } };
