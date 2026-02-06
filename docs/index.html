@@ -416,6 +416,33 @@ footer {
     box-shadow: 0 0 14px rgba(0, 0, 0, 0.5);
 }
 
+/* 버튼을 오른쪽으로 정렬하기 위한 컨테이너 */
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.btn-link {
+  display: inline-block;
+  padding: 5px 12px;           /* 크기 축소 */
+  background-color: #E6B673;   /* 기존 색상 유지 */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px;         /* 둥글게 깎아 세련되게 변경 */
+  font-size: 0.85rem;          /* 글자 크기 살짝 축소 */
+  font-weight: bold;
+  transition: all 0.3s ease;   /* 부드러운 효과 추가 */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* 은은한 그림자 */
+}
+
+.btn-link:hover {
+  background-color: #E6B673;   /* 색상 유지 */
+  transform: translateY(-2px); /* 살짝 떠오르는 효과 */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* 호버 시 그림자 강조 */
+  opacity: 0.9;                /* 살짝 투명해지며 피드백 제공 */
+}
+
 </style>
 </head>
 <body>
@@ -512,24 +539,30 @@ footer {
     </div>
     </section>
 
-    <section id="projects" class="fade-in">
-      <div class="container">
-      <h2>Projects</h2>
-      <div class="card">
-        <h3 class="projects-h3">spring + mybatis + jstl </h3>
-        <p>https://youtu.be/gJM6H_sX4IY</p>
-      </div>
-      <div class="card">
-        <h3 class="projects-h3">spring boot + thymeleaf + jpa + mybatis</h3>
-        <p>https://youtu.be/be4n-MgmQe8?si=-Tqc_EjiljPB1GmM</p>
-      </div>
+<section id="projects" class="fade-in">
+  <div class="container">
+    <h2>Projects</h2>
     
+    <div class="card">
+      <h3 class="projects-h3">spring + mybatis + jstl </h3>
+      <div class="btn-container">
+        <a href="https://youtu.be/gJM6H_sX4IY" target="_blank" class="btn-link">영상 보기</a>
       </div>
-    </section>
+    </div>
+
+    <div class="card">
+      <h3 class="projects-h3">spring boot + thymeleaf + jpa + mybatis</h3>
+      <div class="btn-container">
+        <a href="https://youtu.be/be4n-MgmQe8?si=-Tqc_EjiljPB1GmM" target="_blank" class="btn-link">영상 보기</a>
+      </div>
+    </div>
+    
+  </div>
+</section>
 
     <section id="gallery" class="fade-in">
     <div class="container">
-      <h2>Gallery</h2>
+      <h2>Mini project</h2>
       <div class="gallery-grid">
         <div class="gallery-item"  data-bs-toggle="modal" data-bs-target="#myModal1">          
           <img src="./img/포트폴리오1.jpg" alt="Project 1" class="video-thumbnail" style="display: block; margin: 0 auto;">

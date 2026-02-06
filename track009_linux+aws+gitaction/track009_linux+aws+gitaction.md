@@ -1,223 +1,673 @@
-## Ubuntu 24.04 컨테이너 실행 방법
-1. **이미지 다운로드**
-   ```bash
-   docker pull ubuntu:24.04
+## Part002. aws
+■1. aws 회원가입
+: https://ap-southeast-2.signin.aws.amazon.com/
+
+■2. 콘솔로그인 
+: 수업시작하기전에 콘솔로그인~!
+
+■3. EC2 인스턴스 생성
+**실행 항목**
+- [x] EC2 인스턴스 생성  
+- [x] OS 선택 (Ubuntu 권장)  
+- [x] 보안 그룹 설정 (22, 80, 443)  
+- [x] 키페어 다운로드 및 저장  
+- [ ] SSH 접속 테스트 완료  
+
+   1. 퍼블릭 IPv4 주소  / ssh
+      54.180.142.97 
+
+      ssh -i "thejoa703.pem" ubuntu@ec2-13-124-236-156.ap-northeast-2.compute.amazonaws.com
+
+   ```접속오류 
+   PS D:\cicd> ssh -i "thejoa703.pem" ubuntu@ec2-54-206-106-20.ap-southeast-2.compute.amazonaws.com
+   Bad permissions. Try removing permissions for user: NT AUTHORITY\\Authenticated Users (S-1-5-11) on file D:/cicd/thejoa703.pem.
+   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+   @         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+   Permissions for 'thejoa703.pem' are too open.
+   It is required that your private key files are NOT accessible by others.
+   This private key will be ignored.
+   Load key "thejoa703.pem": bad permissions
+   ubuntu@ec2-54-206-106-20.ap-southeast-2.compute.amazonaws.com: Permission denied (publickey).
+   PS D:\cicd> 
+
+   ```
+   > vs code에서 powershell 접속
+   ```
+   icacls "C:\Users\TJ-BU-703-강사PC\Desktop\cicd\thejoa703.pem" /reset
+   icacls "C:\Users\TJ-BU-703-강사PC\Desktop\cicd\thejoa703.pem" /inheritance:r
+   echo $env:USERNAME
+   icacls "C:\Users\TJ-BU-703-강사PC\Desktop\cicd\thejoa703.pem" /grant:r "$env:TJ-BU-703-강사PC":R
    ```
 
-2. **컨테이너 실행**
+■4. EC2에서 nginx
+- 웹서버연결
+- back와 front 연결설정
+
+1. nginx 설치
+```
+sudo apt update
+sudo apt install  nginx  -y
+``` 
+
+2. nginx 설정파일 수정
+2-1.
+```
+sudo vi   /etc/nginx/sites-available/default
+```
+
+2-2. esc 눌러서 명령모드로 전환 
+2-3. :%d 입력한뒤에 enter → 전체삭제
+2-4. i 눌러서 입력모드전환  →  붙여넣기
+2-5. esc   →  :wq!  저장후 종료
+```
+
+
+server {
+    listen 80;
+    server_name 54.180.142.97;
+
+    # 프론트엔드 (Next.js SSR 서버)
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header Cookie $http_cookie; 
+    }
+
+    # 백엔드 - 유저 인증 (/auth)
+    location /auth {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Cookie $http_cookie;
+    }
+
+    # 백엔드 - 일반 API (/api)
+    location /api {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Cookie $http_cookie;
+    }
+
+    # 백엔드 - 소셜 로그인 (/oauth2)
+    location /oauth2 {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Cookie $http_cookie;
+    }
+
+    # 백엔드 - 카카오/구글 리다이렉트 처리
+    location /login/oauth2/ {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # 프론트엔드에서 처리해야 하는 콜백
+    location /oauth2/callback {
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Cookie $http_cookie;
+    }
+
+    # 정적 파일 경로
+    location /uploads/ {
+        alias /home/ubuntu/app/back/build/libs/uploads/;
+        autoindex off;
+    }
+}
+```
+설명)
+   location / {    ←  /여기경로로
+        proxy_pass http://localhost:3000;   ←   포트번호 3000번호
+        proxy_http_version 1.1;    ←  통신시 http 
+        proxy_set_header Upgrade $http_upgrade;  ←  헤더 그대로  전달
+        proxy_set_header Connection "upgrade";  ←  헤더 강제 설정
+        proxy_set_header Host $host;  ← host 백엔드로 전송
+        proxy_cache_bypass $http_upgrade;  ←  연결시 캐시 사용안함.
+        proxy_set_header Cookie $http_cookie; ←  쿠키백엔드 서버로 전달
+    }
+
+3. nginx 실행 및 테스트
+```
+sudo nginx -t
+sudo systemctl restart nginx
+```
+
+
+■5.  ECR 리포지토리
+- 애플리케이션을 docker이미지로 빌드해서 
+  ecr에 올려두면 어디서든지 가져다가 사용할수 있게
+
+※ AWS콘솔창에서 검색 ECR - 생성
+
+1. **리포지토리 이름 입력 : `thejoa703`**  
+   - 예: `my-app-repo`  
+   - 규칙:  
+     - 소문자로 시작해야 함  
+     - 소문자, 숫자, 특수문자(`._-/`)만 사용 가능  
+     - 최소 2자, 최대 256자  
+   - `734910190986.dkr.ecr.ap-northeast-2.amazonaws.com/` 이건 **리포지토리 URI의 기본 형식**이고, 뒤에 붙는 이름을 직접 정해야 합니다.  
+     → 즉, `734910190986.dkr.ecr.ap-northeast-2.amazonaws.com/my-app-repo` 이런 식으로 완성됩니다.  
+<br/>
+
+2. **이미지 태그 설정 (Mutable vs Immutable) : `Mutable`**  
+   - **Mutable**: 같은 태그(`latest` 등)를 덮어쓸 수 있음 → 개발/연습용에 적합  
+   - **Immutable**: 태그를 덮어쓸 수 없음 → 운영 환경에서 안정성 확보용  
+   → 연습용이라면 **Mutable**로 두시면 됩니다.  
+<br/>
+
+3. **암호화 설정**  
+   - 기본값(KMS 관리형 키) 그대로 두셔도 무방합니다.  
+<br/>
+
+4. **생성 버튼 클릭**  
+   - 그러면 새 리포지토리가 만들어지고, 목록에 `my-app-repo`가 나타납니다.  
+
+677035504456.dkr.ecr.ap-northeast-2.amazonaws.com/thejoa703
+
+■6. 필수 패키지 설치 / 애플리케이션 디렉토리 생성
+
+1. EC2접속 후 시스템 업데이트  
+   ```bash
+   sudo apt update && sudo apt upgrade -y
+   ```
+2. Java 17 설치  
+   ```bash
+   sudo apt install openjdk-17-jdk -y
+   java -version
+   ```
+3. Git 설치  
+   ```bash
+   sudo apt install git -y
+   ```
+4. Docker 설치  
+   ```bash
+   sudo apt install docker.io -y
+   sudo systemctl enable docker && sudo systemctl start docker
+   sudo usermod -aG docker $USER
+   ```
+5. Node.js & NPM 설치  
+   ```bash
+   curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+
+   sudo apt install -y nodejs
+   ```
+6. PM2 설치  
+   ```bash
+   sudo npm install -g pm2
+   ```
+
+7. Nginx 설치  (위에서 설치완료)
+   ```bash
+   sudo apt install nginx -y
+   ```
+8. 실행 디렉토리 생성 확인
    ```bash 
-   docker run -it --name myubuntu ubuntu:24.04 bash
+   ubuntu@ip-172-31-43-195:~/app/back/build/libs$ ls 
+   BOOT-INF  app.jar  app.tar.gz  back  back-0.0.1-SNAPSHOT.jar  uploads
    ```
-   → 실행하면 컨테이너 내부의 쉘(`bash`) 
-
-3. **컨테이너 내부에서 패키지 업데이트**
    ```bash
-   apt update && apt upgrade -y
+   mkdir  /home/ubuntu/app/back/build/libs/uploads/
+   mkdir -p /home/ubuntu/app/back/build/libs/uploads/
+
+   sudo chmod 755 /home/ubuntu
+   sudo chmod 755 /home/ubuntu/app
+   sudo chmod 644 /home/ubuntu/app/back/build/libs/uploads
+   sudo chmod 644 /home/ubuntu/app/back/build/libs/uploads/* 
    ```
+   user(r:4 w:2 x:1) group(r:4 w:- x:1) other(r:4 w:- x:1)
 
-4. **컨테이너 종료 후 다시 실행하기**
-   - 실행 중인 컨테이너 확인:
-     ```bash
-     docker ps -a
-     ```
-   - 컨테이너 재실행:
-     ```bash
-     docker start -ai <컨테이너_ID>
-     docker start -ai myubuntu 
-     ```
-    - 실행 중인 컨테이너에 접속:
-     ```bash
-    docker exec -it myubuntu bash
-    ```
 
-## 2. linux 사용자
-    - # root 사용자
-    - $ 일반 사용자
+ 
+9. Oracle XE 컨테이너 실행
+   ```bash
+   sudo docker run -d --name oracle-xe  -p 1521:1521 -p 5500:5500   -e ORACLE_PASSWORD=oracle  gvenzl/oracle-xe:11
+   ```
+10. 접속확인
+   ```bash    
+   sudo docker logs -f oracle-xe | grep "DATABASE IS READY TO USE"
+   sudo docker exec -it oracle-xe  sqlplus system/oracle@XE
 
-## 3. 기본명령어
-```bash
-# 날짜
-date
-# 출력
-echo hello
-# 명령어 위치 확인
-which date
-# 명령어 설명서
-man
+   CREATE USER scott IDENTIFIED BY tiger;
+   GRANT CONNECT, RESOURCE TO scott;
+   exit;
+
+   sudo docker exec -it oracle-xe sqlplus scott/tiger@XE
+   ```
+  
+11. Docker Redis
+  ```bash 
+  sudo docker run -d --name redis   -p 6379:6379   --restart=always   redis:7
+  ```
+12. 컨테이너 상태 확인
+   ```bash
+   sudo docker ps
+   ```
+   → `redis` 컨테이너가 `Up` 상태인지, `PORTS`에 `0.0.0.0:6379->6379/tcp`가 표시되는지 확인하세요.
+
+13. 컨테이너 내부 접속 후 ping 테스트
+   ```bash
+   sudo docker exec -it redis redis-cli ping
+   ```
+   → `PONG` 이 나오면 정상 실행 중입니다.
+
+ 14. EC2 자체에서 자동 실행 설정
+ ```bash
+ sudo docker update --restart=always oracle-xe 
+ sudo docker update --restart=always redis
 ```
 
-```bash
-apt upate
-apt install man-db
-unminimize
-```
+ 15. oracle 11은 화면에 뜨기까지 2~3분 , 최대 5분까지 걸림
+ ```bash
+ sudo docker logs -f oracle-xe
+ ```
 
-```bash
-help echo → 쉘 내장명령어
-man  date → 실행파일
-q → 빠져나오기
-type echo →
-type date →
-```
+ 16. swap
+ ```bash
+  sudo fallocate -l 2G /swapfile
+  sudo chmod 600 /swapfile
+  sudo mkswap /swapfile
+  sudo swapon /swapfile
+  echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+  free -h
+ ```
 
-```
-Q1. hi 출력
-- echo hi
-Q2. date 사용방법 확인
-- type date
-- man date
-- esc q
-```
+  sudo fallocate -l 2G /swapfile  ← 2GB 파일생성
+  sudo chmod 600 /swapfile   ← 권한 유저(r:읽기 , w: 쓰기 , x: 실행)
+  sudo mkswap /swapfile  ← 스왑초기화
+  sudo swapon /swapfile ← 스왑활성화
+  echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab   ← 설정파일 끝에 추가
+  free -h  ← 메모리 확인
 
-## 4.파일
-### 파일 및 디렉토리 생성
-- touch 파일명 : 빈 파일 생성
-- mkdir 디렉토리명 : 새 디렉토리 생성
-- mkdir -p 경로/하위디렉토리 : 중첩 디렉토리 생성
 
-### 파일 확인 및 경로 이동
-- ls : 현재 디렉토리 목록 보기
-- ls -l : 상세 정보 포함 목록
-- pwd : 현재 경로 출력
-- cd 디렉토리명 : 디렉토리 이동
-- cd .. : 상위 디렉토리로 이동
 
-### 삭제 및 복사
-- rm 파일명 : 파일 삭제
-- rm -r 디렉토리명 : 디렉토리 삭제
-- cp 원본 대상 : 파일 복사
-- mv 원본 대상 : 파일 이동 또는 이름 변경
-
-Q1. testdir 폴더만들기
-Q2. 폴더안에 file1.txt파일만들기
-Q3. 파일 확인 - 디렉토리인지 폴더인지
-
-### 파일에 적기(1) >덮어쓰기, >>이어쓰기
-- echo "하고싶은말" > 파일명
-- cat 파일명
-- echo "하고싶은말" >> 파일명
-
-### 파일에 적기(2) 여러줄 쓰기, 파일편집
-### 여러줄
-- cat > file2.txt 
-- 첫 번째 줄 
-- 두 번째 줄 
-- Ctrl+D # 입력 종료
-
-### vi 에디터
-1. sudo vi 파일명 실행  
-2. vi 안에서 Esc 눌러 명령 모드로 전환   
-3. i 눌러 입력 모드로 전환 → 새 설정 붙여넣기  
-4. Esc → :wq → 저장 후 종료   
 
 ```
-apt update
-apt install vim
+
+
+
+■9. Git Actions 워크플로우 연결
+
+**구조확인**
 ```
-Q1.file1.txt에 입력
-    apple
-    banana
-    coconut
-
-root@53f78cda83a8:~/testdir# echo "apple" > file1.txt
-root@53f78cda83a8:~/testdir# echo "banana" >> file1.txt
-root@53f78cda83a8:~/testdir# echo "coconut" >> file1.txt
-root@53f78cda83a8:~/testdir# cat file1.txt
-apple
-banana
-coconut
-
-Q1. 파일만들기   mylinux.txt
-Q2. 파일안에 답채우기
--    출력 echo
--    사용서 man
--    파일생성 touch
--    디렉토리만들기 mkdir
--    목록보기 ls -al
--    상위이동 cd.
--    파일,폴더삭제 rm -r
--    file1.txt 을 back.txt으로 파일복사 cp
--    back.txt를 test.txt로 이름변경 mv
-Q3. vi이용해서 맨위에 작성자본인이름 추가
-Q5. mylinux.txt 백업해서 ubuntu에 backup.txt로 
-Q6. 상위로 이동 testdir 삭제
-
->> linux에서 한글화 설정
-```
-apt update
-apt install locales
-locale-gen ko_KR.UTF-8
-update-locale LANG=ko_KR.UTF-8
+thejoa703/                ← 깃허브 저장소 루트
+├── .git                  ← Git 저장소 메타데이터
+├── .gitignore            ← 불필요한 파일 제외 설정
+├── BACK/                 ← 백엔드 (Spring Boot)
+│   ├── src/              ← 소스 코드
+│   ├── build.gradle      ← Gradle 빌드 설정
+│   └── ...               ← 기타 설정/리소스
+├── FRONT/                ← 프론트엔드 (React + Next.js)
+│   ├── src/              ← 소스 코드
+│   ├── package.json      ← npm 의존성 관리
+│   └── ...               ← 기타 설정/리소스
+└── .github/
+    └── workflows/
+        └── deploy.yml    ← GitHub Actions 워크플로우 파일
 ```
 
-# 사용자 정보 확인
-whoami
-id
-who
-users
-groups
-
-# 사용자 추가 및 삭제
-sudo adduser sally
-sudo passwd sally
-sudo deluser sally
-
+0. back/front 코드 수정  
 ```
-apt update
-apt install adduser
-adduser sally
+54.180.92.192
+ssh -i "thejoa703.pem" ubuntu@ec2-54-180-92-192.ap-northeast-2.compute.amazonaws.com
+```
+```
+깃허브: secret 
+EC2_HOST , NEXT_PUBLIC_API_BASE_URL
 ```
 
-# 권한 구조 및 변경
-ls -l
-sudo chown sally:sally hello.txt
-chmod 755 hello.txt
-umask
+```
+```
+sudo vi   /etc/nginx/sites-available/default
+
+2-2. esc 눌러서 명령모드로 전환 
+2-3. :%d 입력한뒤에 enter → 전체삭제
+2-4. i 눌러서 입력모드전환  →  붙여넣기
+2-5. esc   →  :wq!  저장후 종료 
+
+ 
+server {
+    listen 80;
+    server_name 54.180.92.192;
+
+    # 프론트엔드 (Next.js SSR 서버)
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header Cookie $http_cookie; 
+    }
+
+    # 백엔드 - 유저 인증 (/auth)
+    location /auth {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Cookie $http_cookie;
+    }
+
+    # 백엔드 - 일반 API (/api)
+    location /api {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Cookie $http_cookie;
+    }
+
+    # 백엔드 - 소셜 로그인 (/oauth2)
+    location /oauth2 {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Cookie $http_cookie;
+    }
+
+    # 백엔드 - 카카오/구글 리다이렉트 처리
+    location /login/oauth2/ {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # 프론트엔드에서 처리해야 하는 콜백
+    location /oauth2/callback {
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Cookie $http_cookie;
+    }
+
+    # 정적 파일 경로
+    location /uploads/ {
+        alias /home/ubuntu/app/back/build/libs/uploads/;
+        autoindex off;
+    }
+}
 
 ```
-root@53f78cda83a8:~/home# chmod 755 /home/sally
-root@53f78cda83a8:~/home# su - alpha
-alpha@53f78cda83a8:~$ cd /home/sally
-alpha@53f78cda83a8:/home/sally$ logout
-root@53f78cda83a8:~/home# chomd 750 /home/sally
-bash: chomd: command not found
+
+
+1. .github/workflows/deploy.yml
+```
+name: Deploy Fullstack App
+
+on:
+  push:
+    branches:
+      - main   # main 브랜치에 push 될 때만 실행    
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+        working-directory: back
+
+      - name: Build Spring Boot App
+        run: ./gradlew clean build -x test
+        working-directory: back
+
+      - name: Debug Backend Files
+        run: |
+          echo "=== back 디렉터리 ==="
+          ls -al back
+          echo "=== build/libs 디렉터리 ==="
+          ls -al back/build/libs
+
+      - name: Find JAR file (fat jar만 선택)
+        run: echo "JAR_FILE=$(ls back/build/libs/*SNAPSHOT.jar | grep -v plain | head -n 1)" >> $GITHUB_ENV
+        # plain.jar 제외하고 실행 가능한 fat JAR만 선택
+
+      - name: Debug JAR_FILE
+        run: echo "선택된 JAR_FILE=${{ env.JAR_FILE }}"
+
+      - name: Ensure JAR exists
+        run: |
+          if [ ! -f "${{ env.JAR_FILE }}" ]; then
+            echo "❌ JAR file not found: ${{ env.JAR_FILE }}"
+            ls -al back/build/libs
+            exit 1
+          fi
+          echo "✅ JAR file found: ${{ env.JAR_FILE }}"
+
+      - name: Create Backend .env from Secrets
+        run: |
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> back/.env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> back/.env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> back/.env
+          echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" >> back/.env
+          echo "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}" >> back/.env
+          echo "KAKAO_CLIENT_ID=${{ secrets.KAKAO_CLIENT_ID }}" >> back/.env
+          echo "NAVER_CLIENT_ID=${{ secrets.NAVER_CLIENT_ID }}" >> back/.env
+          echo "NAVER_CLIENT_SECRET=${{ secrets.NAVER_CLIENT_SECRET }}" >> back/.env
+
+      - name: Ensure app directory exists on EC2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: mkdir -p /home/ubuntu/app
+
+      - name: Copy Backend build/libs to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "back/build/libs/*"
+          target: "/home/ubuntu/app/back/build/libs"
+        # 🔧 build/libs 전체를 복사해서 EC2에서 직접 실행
+
+      - name: Debug EC2 app directory
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: ls -lh /home/ubuntu/app/back/build/libs
+
+      - name: Copy Backend .env to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "back/.env"
+          target: "/home/ubuntu/app"
+
+      - name: Wait for Oracle & Redis readiness on EC2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "⏳ Waiting for Oracle DB (1521) and Redis (6379)..."
+            for i in {1..30}; do
+              nc -z localhost 1521 && nc -z localhost 6379
+              if [ $? -eq 0 ]; then
+                echo "✅ Oracle & Redis are ready"
+                break
+              fi
+              echo "Not ready yet... retry in 10s ($i/30)"
+              sleep 10
+            done
+
+      - name: Run Backend on EC2 with pm2 (build/libs에서 실행)
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/app/back/build/libs
+            pm2 delete backend || true
+            export $(cat /home/ubuntu/app/.env | xargs)
+            pm2 start java --name backend -- -jar ${{ env.JAR_FILE }}
+
+
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # 🔑 Secrets 기반으로 .env.production 먼저 생성
+      - name: Create Frontend .env.production
+        run: |
+          echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }}" > front/.env.production
+
+      # 빌드 전에 .env.production이 반영되도록 순서 조정   
+      - name: Build Frontend
+        run: |
+          npm install
+          npm run build -- --no-lint
+        working-directory: front
+
+      - name: Debug Frontend Files
+        run: |
+          ls -al front
+          ls -al front/.next || true
+          ls -al front/public || true
+
+      - name: Ensure front directory exists on EC2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: mkdir -p /home/ubuntu/front
+
+      # 빌드 결과물(.next, public, package.json,   .env.production)을 압축     
+      - name: Archive frontend build
+        run: |
+          cd front
+          tar -czf ../frontend-build.tar.gz .next public package.json .env.production
+
+      - name: Copy frontend archive to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "frontend-build.tar.gz"
+          target: "/home/ubuntu/front"
+
+      - name: Extract archive on EC2 (기존 빌드 정리 후)
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/front
+            rm -rf .next public
+            tar -xzf frontend-build.tar.gz
+
+      - name: Run Frontend on EC2 with pm2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/front
+            npm install --production
+            pm2 delete frontend || true
+            pm2 start npm --name "frontend" -- run start
+
 ```
 
-## 6. 쉘스크립트
-1. 프로세스 상태확인
+2. 빌드
 ```
-ps -ef
-```
--e : 모든 프로세스
--f : 출력정보 자세히
-
-2. 실시간 모니터링
-```
-top
+git add .
+git commit -m "test deploy"
+git push origin main
 ```
 
-3. ip주소 확인
+3.  ec2접속해서 확인
 ```
-ifconfig
-```
-```
-apt install net-tools
+pm2 list
+pm2 logs backend
 ```
 
-4. Hello world 쉘스크립트 작성
-```
-vi hello.sh
 
-#!/bin/bash
-echo "Hello world"
-```
--rw-r--r-- 1 root   root     32 Feb  3 16:36 hello.sh
+4. 외부테스트 :  http://54.180.142.97
+
 
 ```
-ls -al 권한보기
-chomd +x hello.sh 권한주기
+Run ./gradlew clean build -x test
+  ./gradlew clean build -x test
+  shell: /usr/bin/bash -e {0}
+  env:
+    JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.18-8/x64
+    JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.18-8/x64
+Error: Unable to access jarfile /home/runner/work/thejoa703-iam/thejoa703-iam/back/gradle/wrapper/gradle-wrapper.jar
+Error: Process completed with exit code 1.
+````
+
 ```
-5. 쉘스크립트 실행
+sudo  rm -rf  app
+sudo  rm -rf  front
 ```
-./hello.sh
-```     
+
+ 
+■10. Social
+
+> kakao  / naver 주소 바꾸기
