@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <!-- 여기에 콘텐츠를 추가하세요 -->
+    <!-- 여기에 콘텐츠를 추가하세요 -->
+    <!-- 배경 원하는색, 글자색 white, 안쪽여백3 -->
+   <div class="bg-primary text-white p-3">
+     <h1>001. 출력</h1>
+    <ul>
+        <li>document.wright(문자열)</li>
+        <li>console.log(문자열)</li>
+    </ul>
+   </div><!-- div end -->
+
+   <div class="container card my-3">
+    <h3 class="card-header">출력</h3>
+    <div class="card-body">
+        <script>
+            document.write("<p> Hello JS! </p>");
+            console.log("안녕 javascript!");
+            // 브라우저-개발자모드(F12)-console 탭
+        </script>
+    </div>
+   </div><!-- end 실습-->
+    <!-- 여기에 콘텐츠를 추가하세요 -->
+    <!-- 여기에 콘텐츠를 추가하세요 -->
+    <!-- 배경 원하는색, 글자색 white, 안쪽여백3 -->
+   <div class="bg-primary text-white p-3">
+     <h1>002. 변수 : var, let, const</h1>
+    <ul>
+        <li>var 전역변수</li>
+        <li>let 지역변수</li>
+        <li>const 상수</li>
+    </ul>
+   </div><!-- div end -->
+   <div class="container card my-3">
+    <h2 class="card-header">step1 : var 사용법</h2>
+    <div class="card-body">
+        <script>
+            //1. 전역변수 - 재선언시 덮어씀
+            var global; // 선언 - 자바스크립트 엔진 변수명 알려주기
+            console.log(global); // undifined
+            global=123; // 사용
+            document.write(global);
+        </script>
+    </div>
+    <h2 class="card-header">step2 : var, let, const</h2>
+    <div class="card-body">
+        <script>
+        //1.Var
+            var global=10; console.log(glodbal);
+            var global=20; console.log(glodbal);
+        //2. Let - 변수 중복선언 불가능
+            let local1=10; console.log(local1);
+                local1=20; console.log(local1);
+        //3. Const - 상수
+            const const1=30; console.log(const1);
+                  const1=40;
+        //web007_1_js.html:61:40
+        </script>
+    </div><!-- div end -->
+   
+   </div><!-- div end -->
+    </div>
+     <!-- 여기에 콘텐츠를 추가하세요 -->
+    <!-- 여기에 콘텐츠를 추가하세요 -->
+    <!-- 배경 원하는색, 글자색 white, 안쪽여백3 -->
+   <div class="bg-primary text-white p-3">
+     <h1>003. 자료형, 자료형 확인</h1>
+    <ul>
+        <li>자료형</li>
+        <li>자료형 확인(typeof)</li>
+   </div><!-- div end -->
+   <div class="container card my-3">
+    <h2 class="card-header">자료형 실습</h2>
+    <div class="card-body">
+        <script>
+            let data1;           console.log(data1);
+            data1=10;            console.log(data1);
+            data1=3.14;          console.log(data1);
+            data1="abc";         console.log(data1);
+            data1=["sally",7];   console.log(data1);
+            data1={};            console.log(data1);
+            data1=function(){};  console.log(data1);
+                                 console.log(typeof(data1));
+            data1=10;
+            console.log(data1 + Number("10")); // 10+"10"이 20이 나오면 좋겠다               
+        </script>
+    </div>
+   </div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,371 @@
+#1. 프레임워크
+    - 소프트웨어 개발의 뼈대 역할
+    - 실행흐름 담당
+
+#2. IOC
+    - 인스턴스 생성~ 소멸까지 생명주기를 스프링이 관리
+
+#3. DI
+    - 각 클래스의 의존관계를 [설정파일]을 통해서 컨테이너가 자동으로 연결
+
+#4. BEAN
+    - 관리되는 객체
+
+#5. 예시)
+------------------------------------------
+class MyA{
+    private String name;
+    private Animal ani;
+
+    public MyA(String name, Animal ani){
+        this.name = name;
+        this.name = ani;
+    }
+}
+------------------------------------------
+1. setter 방식
+<bean id="myA" class="com.company.MyA">
+    <property name="name" value="sally"/>
+    <property name="ani" value="cat"/>
+</bean>
+
+2. 생성자 방식
+<bean id="myA" class="com.company.MyA">
+    <constructor-arg value="sally"/>
+    <constructor-arg ref="ani"/>
+</bean>
+
+3. di-properties
+name=sally
+ani=cat
+<context:property-placeholder location="classpath:config/test.properties"/>
+
+<bean id="myA" class="com.company.MyA">
+    <constructor-arg value="sally"/>
+    <constructor-arg ref="ani"/>
+</bean>
+
+
+----------------------------------
+#3. bean
+----------------------------------
+
+1. xml vs Annotatoin
+>> xml : 운영
+>> Annotatoin : 개발
+
+2. @Component
+    - @Component 일반적인 컴포넌트 <bean> 스프링이 관리하는 객체
+    - @Component 구체화된 형식
+        @Constructor 웹 쵸펑받아서 응답
+        @Service 서비스 레이어, 비즈니스 로직
+        @Repository 데티어 베이스
+
+3. Bean 의존관계 주입
+ 1) @Autowirede 
+        - 정밀한 의존관계
+        - 프로퍼티, setter, 생성자, 적용
+
+ 2) @Qualifier 
+        - 동일한 타입의 bean 구분
+ 3) @Value 
+        - 단순값
+ 4) @Resource 
+        - 자원연결(.properties)
+
+4. Component-scan
+<context:Component-scan base-package="경로설정"/>
+
+----------------------------------
+#4. DB + Mybatis
+----------------------------------
+1. DataSource
++ SimpleDriverDataSource - 가장 단순한 버전
+
+2. Mybatis
+- sql을 별도로 파일분리해서 관리
+- orm (object relational mapping) 프레임워크
+
+3. 설정내용
+root - context.xml    : 환경정보 설정
+db.properties         :  db정보 설정
+SqlSessionFactoryBean : SqlSession 생성 및 관리
+SqlSession            : sql 실행, 트랜잭션
+mapper.xml
+
+■ Controller
+MVC
+>> 서로 영향없이 고칠 수 있는 어플리케이션을 만들 수 있음
+- MODEL : DB (TABLE, DTO, DAO, SERVICE)
+- VIEW  : 화면(HTML, CSS, JS/JQUERY)
+- CONTROLLER : MODEL과 VIEW 사이의 관리
+
+>> MVC1 VS MVC2
+
+>> Frontcontroller
+[클라이언트] → [Frontcontroller (*.do)] → 세부Controller → View
+                                     → 세부Controller → View
+                                     → 세부Controller → View
+
+1. Frontcontroller - 공통작업 먼저 수행
+2. 세부 Controller 작업 View 최종결과 생성
+
+>> SPRING MVC
+[클라이언트]
+     ↓   
+[Frontcontroller (*.do)] <<DispatcherServlet>>
+     ↓  ↑              Handler Mapping @Controller → View(ViewResolver)
+세부Controller 
+세부Controller 
+세부Controller
+
+1) 클라이언트 요청
+2) DispatcherServlet - Handler Mapping @Controller
+3) Controller 클라이언트의 요청처리
+4) DispatcherServlet - ViewResolver 통해서 응답결과 처리
+
+[실습]
+1. [pom.xml] - spring-webmvc, jstl / jackson-mapper-asl
+2. [web.xml] - ContextLoaderListener / DispatcherServlet(Frontcontroller)
+3. [servlet-context.xml] Controller위치설정, ViewResolver
+4. [controller] list.do(처리, view) ...설정
+
+■ view
+5. [view] 연동
+
+---------------------
+#6. Upload
+---------------------
+1. model
+   > table : 이미지 경로필드
+
+   SQL> desc sboard1;
+   Name                                      Null?    Type
+   ----------------------------------------- -------- ----------------------------
+   ID                                        NOT NULL NUMBER
+   APP_USER_ID                               NOT NULL NUMBER
+   BTITLE                                    NOT NULL VARCHAR2(1000)
+   BCONTENT                                  NOT NULL CLOB
+   BPASS                                     NOT NULL VARCHAR2(255)
+   BFILE                                              VARCHAR2(255)
+   BHIT                                               NUMBER(10)
+   BIP                                       NOT NULL VARCHAR2(255)
+   CREATED_AT                                         TIMESTAMP(6)
+
+
+    
+   > dto :  bfile
+   > dao :  insert, update
+
+2. view
+   form :  encType = "multipart/form-data"   method="post"
+         <input type="file"  />
+
+3. controller
+   pom.xml
+      <!-- img upload   start -->
+      <!-- img upload   start -->
+      <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+      <dependency>
+          <groupId>commons-fileupload</groupId>
+          <artifactId>commons-fileupload</artifactId>
+          <version>1.3.1</version>
+      </dependency>
+      <!-- img upload end -->
+      <!-- img upload end -->      
+
+   servlet-context.xml
+
+   FilUplad.java
+
+   Controller.java - service
+
+   1) model
+   > table, dto, dao#, service
+
+   2) controller
+   > RestController = @Controller + @ResponseBody
+
+   ---------------------
+#8. AOP + Mybatis
+---------------------
+1. AOP 개요
+STEP1)
+- 핵심기능 : (비지니스로직)
+- 부가기능 : 핵심기능(비지니스로직)을 도와줌
+>> AOP - 부가기능
+
+  @Controller    /list.do
+          ■ 부가기능                    ■ 부가기능
+         [시작]-  Service  (전체리스트뽑아주는 service) -[끝]
+             |  처리뷰   
+             ↓
+         [시작]- Repository(전체리스트뽑아주는 sql   )  -[끝]
+
+
+STEP2) Aspect
+- 기능분리
+- 런타임 시 필요한 위치에 동적으로 처리
+        Advice + PointCut = Aspect
+  부가기능정의   적용부위
+
+STEP3) 용어
+Target   -  대상
+Advice   -  부가기능
+PointCut -  적용할 타겟의 메서드를 선별하는 정규식
+Weaving  -  Target에 부가기능 처리(삽입)하는 과정
+
+
+STEP4) 
+<<BEFORE>>         
+application         
+[
+ [  비지니스로직    ]
+ [  보안, 인증, 로직]
+]
+
+<<AFTER>>
+application         
+[
+ **********************           
+ *[   PointCut 적용부위 ]    Weaving  →    [  비지니스로직    ]
+        ↑
+ *[   Advice 부가기능   ] *
+       ↑
+ *[  보안, 인증, 로직   ] *
+ *   [Aspect]
+ **********************  
+]
+Target   -  대상
+Advice   -  부가기능
+PointCut -  적용할 타겟의 메서드를 선별하는 정규식
+Weaving  -  Target에 부가기능 처리(삽입)하는 과정
+
+
+2. AOP 특징
+>> 프록시 기반 aop를 지원
+- 프록시는 advice(부가기능)을 target(대상객체)에 적용하면서 생성되는 객체
+- Target(대상객체)를 감싸는 프록시는 런타임 시에 생성됨.
+- 타겟객체에 대한 호출을 intercept(가로채서)해서  
+  A. 부가기능 수행 후 타겟의 핵심기능 로직호출(전처리)  , 
+  B. 타겟의 핵심기능 로직호출  부가기능 수행  (후처리) 
+  
+
+   호출 --->   [ Proxy  [Target]  ]
+
+3. 구현방식
+1) xml
+2) annotation
+
+실습1) pom.xml
+1. AspectJ runtime   -> AspectJrt
+2. AspectJ weaver    -> AspectJweaver
+3. Spring aop        -> spring-aop
+4. api 문서
+https://www.eclipse.org/aspectj/doc/next/runtime-api/
+
+<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjrt</artifactId>
+    <version>1.7.3</version>
+    <!-- <scope>runtime</scope>  -->
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.7.3</version>
+    <!-- <scope>runtime</scope> -->
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-aop</artifactId>
+    <version>4.3.28.RELEASE</version>
+</dependency>
+
+
+
+실습2)  Advice + PointCut = Aspect
+  부가기능정의   적용부위
+
+com.company.aop_xml
+>> AopTrace.java
+
+
+import org.aspectj.lang.ProceedingJoinPoint;
+
+public class AopTrace {
+   public Object trace( ProceedingJoinPoint  joinPoint)  throws Throwable{
+      // 타겟메서드의 정보
+      String signature = joinPoint.getSignature().toShortString();
+      System.out.println(">>>> " + signature + " START! ");
+      // 타겟메서드 호출시간확인
+      long start = System.currentTimeMillis();
+      // 타겟메서드 호출
+      Object  result = joinPoint.proceed();
+      long end  = System.currentTimeMillis();
+      System.out.println("..... 실행시간 : " + (end - start)  + "ms");
+      System.out.println(">>>> " + signature + " END! ");
+      return result;
+   }
+}
+
+
+실습3)  servlet-context.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:aop="http://www.springframework.org/schema/aop"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+   
+   <aop:config>
+      <aop:aspect  id="traceAspect"   ref="aopTrace" >
+         <aop:around     method="trace"  
+                    pointcut="execution(public * com.company.service..*(..))"
+          />
+      </aop:aspect>
+   </aop:config>
+   
+   <!-- Advice 클래스 Bean 등록 -->
+   <bean  id="aopTrace"   class="com.company.aop_xml.AopTrace" />
+</beans>
+
+
+
+Aop 설정    
+   1. aop:config  aop 설정정보  -  bean
+   2. aspect :  advice + point cut
+   3. aop:around
+   aop:around
+   aop:before  실행 전
+   aop:after   실행 후
+   aop:after-returning   정상 실행시  
+   aop:after-throwing    예외 발생시  
+   
+   1) exection(* hello(..) )  
+      hello라는 이름 메서드 / 파라미터종류는 모두
+   2) exection(* hello()   )  
+      hello라는 이름 메서드 / 파라미터종류는 안됨.
+   3) exection(* com.company.service.UserSeviceImpl.*(..)   )  
+      UserSeviceImpl 클래스의 모든메서드
+   4) exection(* com.company.service.*.*(..)   )      
+      service안의 모든클래스
+   5) exection(* com.company.service..*(..)   )  
+      .. 서브패키지의 모든클래스  
+
+   >> https://docs.spring.io/spring-framework/docs/2.0.x/reference/aop.html
+
+
+    ■ Mybatis
+    > 동적 sql
+
+    select * from emp;
+    select * from emp where ename = 'SCOTT'
+    select * from emp where job = 'SALSEMAN'
+
+-----------------------------------
+#9. PAGING
+-----------------------------------

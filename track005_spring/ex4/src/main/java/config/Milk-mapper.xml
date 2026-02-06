@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ex004.dao.MilkDao">
+  	<insert id="insert" parameterType="ex004.dto.MilkDto">
+ 		insert into milk (MNO, MNAME, MNUM, MTOTAL)  values (userinfo_seq.nextval, #{mno} , #{mname}, #{munm}, #{mtotal})
+ 	</insert>
+ 	
+ 	<select resultType="MilkDto" id="selectAll">
+ 		select * from milk  order by MNO desc
+ 	</select>
+ 	<select resultType="MilkDto" id="select" parameterType="int">
+ 		select * from milk  where  MNO=#{mno}
+ 	</select>
+ 	
+ 	<update id="update" parameterType="ex004.dto.MilkDto">
+ 		update milk  set  MNAME=#{mname}, MNUM=#{mnum} where MNO=#{mno}
+ 	</update>
+ 	
+ 	<delete id="delete" parameterType="int">
+ 		delete from milk  where  MNO=#{mno}
+ 	</delete>
+</mapper>

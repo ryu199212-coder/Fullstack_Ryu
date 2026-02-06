@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>핀볼 레이스</title>
+  <style>
+    body {
+      background: #000;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+    canvas {
+      background: #111;
+      display: block;
+      margin: 20px auto;
+      border: 2px solid #fff;
+    }
+    input {
+      margin: 5px;
+      padding: 5px;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #0f0;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎯 핀볼 레이스 설정</h2>
+  <label>공 개수 (1~5): 
+    <input type="number" id="ballCount" min="1" max="5" value="3">
+  </label>
+  <div id="nameInputs"></div>
+  <button onclick="applySettings()">🎮 게임 시작 / 수정</button>
+
+  <canvas id="gameCanvas" width="600" height="1200"></canvas>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const nameInputsDiv = document.getElementById("nameInputs");
+
+    let gravityBase = 0.25;
+    let friction = 0.995;
+    let ballCount = 3;
+    let ballNames = [];
+    let balls = [];
+    let obstacles = [];
+    let winner = null;
+    let gameOver = false;
+
+    document.getElementById("ballCount").addEventListener("change", createNameInputs);
+    createNameInputs();
+
+    function createNameInputs() {
+      nameInputsDiv.innerHTML = "";
+      const count = Math.min(5, parseInt(document.getElementById("ballCount").value));
+      for (let i = 0; i < count; i++) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = `공 ${i + 1} 이름`;
+        input.id = `ballName${i}`;
+        nameInputsDiv.appendChild(input);
+      }
+    }
+
+    function applySettings() {
+      ballCount = Math.min(5, parseInt(document.getElementById("ballCount").value));
+      ballNames = [];
+      for (let i = 0; i < ballCount; i++) {
+        const name = document.getElementById(`ballName${i}`).value || `공${i + 1}`;
+        ballNames.push(name);
+      }
+      resetGame();
+    }
+
+    function resetGame() {
+      winner = null;
+      gameOver = false;
+      initBalls();
+      initObstacles();
+      draw();
+    }
+
+    function initBalls() {
+      balls = [];
+      for (let i = 0; i < ballCount; i++) {
+        balls.push({
+          id: i + 1,
+          name: ballNames[i],
+          x: 70 + i * 100,
+          y: 50,
+          radius: 14,
+          color: `hsl(${i * 60}, 80%, 60%)`,
+          dx: (Math.random() - 0.5) * 2,
+          dy: 0,
+          gravity: gravityBase + Math.random() * 0.1,
+          finished: false
+        });
+      }
+    }
+
+    function initObstacles() {
+      obstacles = [];
+      for (let i = 0; i < 25; i++) {
+        const type = i % 5 === 0 ? 'spring' : i % 4 === 0 ? 'slow' : i % 3 === 0 ? 'rotator' : 'block';
+        obstacles.push({
+          type,
+          x: Math.random() * 500 + 20,
+          y: 100 + i * 45,
+          width: type === 'rotator' ? 60 : 80,
+          height: 10,
+          angle: 0
+        });
+      }
+    }
+
+    function drawBall(ball) {
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+      ctx.fillStyle = ball.color;
+      ctx.fill();
+      ctx.fillStyle = "#fff";
+      ctx.font = "12px Arial";
+      ctx.fillText(ball.name, ball.x - ball.radius, ball.y - ball.radius - 5);
+      ctx.closePath();
+    }
+
+    function drawObstacle(ob) {
+      ctx.save();
+      ctx.translate(ob.x + ob.width / 2, ob.y + ob.height / 2);
+      if (ob.type === 'rotator') {
+        ob.angle += 0.04;
+        ctx.rotate(ob.angle);
+        ctx.fillStyle = "#f90";
+      } else if (ob.type === 'spring') {
+        ctx.fillStyle = "#0cf";
+      } else if (ob.type === 'slow') {
+        ctx.fillStyle = "#c33";
+      } else {
+        ctx.fillStyle = "#888";
+      }
+      ctx.fillRect(-ob.width / 2, -ob.height / 2, ob.width, ob.height);
+      ctx.restore();
+    }
+
+    function updateBall(ball) {
+      if (ball.finished || gameOver) return;
+
+      ball.dy += ball.gravity;
+      ball.x += ball.dx;
+      ball.y += ball.dy;
+      ball.dx *= friction;
+
+      if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) {
+        ball.dx *= -1;
+        ball.x = Math.max(ball.radius, Math.min(canvas.width - ball.radius, ball.x));
+      }
+
+      for (let ob of obstacles) {
+        const withinX = ball.x > ob.x && ball.x < ob.x + ob.width;
+        const withinY = ball.y + ball.radius > ob.y && ball.y - ball.radius < ob.y + ob.height;
+        if (withinX && withinY) {
+          if (ob.type === 'spring') {
+            ball.dy = -Math.abs(ball.dy) * 1.5;
+          } else if (ob.type === 'slow') {
+            ball.dy *= 0.5;
+            ball.dx *= 0.5;
+          } else {
+            ball.dy *= -0.7;
+          }
+          ball.y = ob.y - ball.radius;
+        }
+      }
+
+      if (ball.y + ball.radius >= canvas.height) {
+        ball.finished = true;
+        ball.y = canvas.height - ball.radius;
+        if (!winner) {
+          winner = ball;
+          gameOver = true;
+        }
+      }
+    }
+
+    function drawWinner() {
+      if (winner) {
+        ctx.fillStyle = "#0f0";
+        ctx.font = "28px Arial";
+        ctx.fillText(`🏆 우승: ${winner.name}`, 180, 80);
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let ob of obstacles) drawObstacle(ob);
+      for (let ball of balls) {
+        updateBall(ball);
+        drawBall(ball);
+      }
+
+      drawWinner();
+      if (!gameOver) requestAnimationFrame(draw);
+    }
+
+    resetGame();
+  </script>
+</body>
+</html>

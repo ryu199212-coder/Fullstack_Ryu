@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ex006.dao.ExDao">
+
+	<resultMap id="exMap" type="ex006.dto.ExDto">
+		<result property="appUserId" column="APP_USER_ID" />
+		<result property="email" column="EMAIL" />
+		<result property="password" column="PASSWORD" />
+		<result property="mbtiTypeId" column="MBTI_TYPE_ID" />
+		<result property="createdAt" column="CREATED_AT" />
+		<result property="ufile" column="UFILE" />
+	</resultMap>
+
+	<insert id="insert" parameterType="ex006.dto.ExDto">
+		INSERT INTO appuser (
+		APP_USER_ID, EMAIL, PASSWORD, MBTI_TYPE_ID, CREATED_AT
+		) VALUES (
+		appuser_seq.nextval, #{email}, #{password}, #{mbtiTypeId},SYSTIMESTAMP
+		)
+	</insert>
+
+	<select resultMap="exMap" id="selectAll">
+		SELECT * FROM appuser ORDER BY app_User_Id DESC
+	</select>
+
+	<select resultMap="exMap" id="select" parameterType="int">
+		SELECT * FROM appuser WHERE app_User_Id = #{appUserId}
+	</select>
+
+	<select resultMap="exMap" id="selectEmail"
+		parameterType="ex006.dto.ExDto">
+		SELECT * FROM appuser WHERE email = #{email}
+	</select>
+
+	<update id="update" parameterType="ex006.dto.ExDto">
+		UPDATE appuser SET mbti_type_id = #{mbtiTypeId}, password = #{password}
+		WHERE app_user_id = #{appUserId}
+	</update>
+
+
+	<delete id="delete" parameterType="ex006.dto.ExDto">
+		DELETE FROM appuser WHERE app_User_Id = #{appUserId}
+	</delete>
+
+	<select id="Login" parameterType="ex006.dto.ExDto"
+		resultMap="exMap">
+		SELECT * FROM appuser WHERE email = #{email} AND password = #{password}
+	</select>
+
+	<!-- 이메일 중복 검사 -->
+	<select id="countByEmail" parameterType="ex006.dto.ExDto"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM appuser
+		WHERE email = #{email}
+	</select>
+
+	<!-- 파일 업로드 포함 회원가입 -->
+	<insert id="insert2" parameterType="ex006.dto.ExDto">
+    INSERT INTO appuser (
+        APP_USER_ID, EMAIL, PASSWORD, MBTI_TYPE_ID, UFILE, CREATED_AT
+    ) VALUES (
+        appuser_seq.nextval, #{email}, #{password}, #{mbtiTypeId}, #{ufile, jdbcType=VARCHAR}, SYSTIMESTAMP
+    )
+	</insert>
+	
+	<update id="update2" parameterType="ex006.dto.ExDto">
+	    UPDATE appuser
+	    SET mbti_type_id = #{mbtiTypeId},
+	        password = #{password},
+	        ufile = #{ufile, jdbcType=VARCHAR}
+	    WHERE app_user_id = #{appUserId}
+	</update>
+	
+	<!-- 관리자용 회원관리 -->
+	<delete id="adminDelete" parameterType="ex006.dto.ExDto">
+		DELETE FROM appuser WHERE app_User_Id = #{appUserId}
+	</delete>
+
+	<update id="adminEdit" parameterType="ex006.dto.ExDto">
+	    UPDATE appuser SET mbti_type_id = #{mbtiTypeId} WHERE app_user_id = #{appUserId}
+	</update>
+
+
+
+</mapper>

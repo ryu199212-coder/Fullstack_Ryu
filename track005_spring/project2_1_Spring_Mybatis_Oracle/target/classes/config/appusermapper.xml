@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thejoa703.dao.AppUserMapper">
+  <insert  id="insertAuth"    parameterType="AuthDto">
+	insert into  authorities  (email, auth)  values (#{email} , #{auth})
+  </insert>	
+
+  <insert  id="insert"   parameterType="AppUser">
+  	insert into appuser (APP_USER_ID , EMAIL , PASSWORD, MBTI_TYPE_ID ,UFILE   ,MOBILE ,  NICKNAME)  
+	values (appuser_seq.nextval, #{email} , #{password} ,#{mbtiTypeId} , #{ufile, jdbcType=VARCHAR} ,#{mobile} , #{nickname}  )
+  </insert>
+  <update  id="update"   parameterType="AppUser">
+    update  appuser  
+    set  MBTI_TYPE_ID=#{mbtiTypeId} ,UFILE=#{ufile, jdbcType=VARCHAR}   ,MOBILE=#{mobile} ,  NICKNAME=#{nickname}     
+    where   APP_USER_ID=#{appUserId} 
+  </update>
+  <delete  id="delete"   parameterType="AppUser">
+  	delete from   appuser   where   APP_USER_ID=#{appUserId}
+  </delete>
+  <resultMap type="AppUser" id="appUserMap">
+  	<result    property="appUserId"  column="APP_USER_ID" />
+  	<result    property="email"  	 column="EMAIL" />
+  	<result    property="password"   column="PASSWORD" />
+  	<result    property="mbtiTypeId" column="MBTI_TYPE_ID" />
+  	<result    property="createdAt"  column="CREATED_AT" />
+  	<result    property="ufile"  	 column="UFILE" />
+  	<result    property="mobile"  	 column="MOBILE" />
+  	<result    property="nickname"   column="NICKNAME" />
+  </resultMap>
+   
+  <resultMap type="AuthDto" id="authMap">
+  	<result    property="email"  	 column="EMAIL" />
+  	<result    property="auth"  	 column="AUTH" />
+  </resultMap>   
+  
+  <resultMap type="AppUserAuthDto" id="appUserAuthMap">
+  	<result    property="email"  	 	 column="EMAIL" />
+  	<result    property="password"  	 column="PASSWORD" />
+  	<collection    property="authList"  	 resultMap="authMap" />
+  </resultMap>   
+   
+  <select  resultMap="appUserAuthMap"  id="readAuth"        parameterType="AppUser">
+    select     u.email, password, auth
+    from       appuser u    left join   authorities a   on  u.email = a.email  
+    where      u.email=#{email} 
+  </select>
+  
+  <select   resultMap="appUserMap"        id="select"          parameterType="AppUser">
+  	select * from appuser  where  email=#{email} 
+  </select>
+  <select  resultMap="appUserMap"         id="selectPassword"  parameterType="AppUser">
+  	select password from appuser  where  email=#{email} 
+  </select>
+  
+  	<!-- 아이디중복검사  -->
+	<select resultType="int"  id="iddouble"  parameterType="String">
+	select count(*) cnt from appuser  where email=#{email}
+	</select>
+</mapper>

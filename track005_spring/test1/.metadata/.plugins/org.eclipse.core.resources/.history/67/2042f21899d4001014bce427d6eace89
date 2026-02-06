@@ -1,0 +1,19 @@
+package com.thejoa703.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+import com.thejoa703.dto.Sboard1Dto;
+
+@MbtiDao
+public interface Sboard1Dao {  
+	public int updateHit(int id);
+	public int delete(Sboard1Dto dto);
+	public List<Sboard1Dto>  selectAll();
+	public Sboard1Dto        select(int id);
+	 
+	public int insert2(Sboard1Dto dto); 
+  
+}
+
+ 

@@ -1,0 +1,4 @@
+#Tomcat publish data
+#Tue Dec 09 10:17:15 KST 2025
+org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\TJ-BU-703-\uAC15\uC0ACPC\\.m2\\repository\\org\\springframework\\spring-web\\4.3.27.RELEASE\\spring-web-4.3.27.RELEASE.jar=D\:\\tomcat9.02\\apache-tomcat-9.0.111\\wtpwebapps\\test1\\WEB-INF\\lib\\spring-web-4.3.27.RELEASE.jar
+org.eclipse.jst.jee.server\:test1=D\:\\tomcat9.02\\apache-tomcat-9.0.111\\wtpwebapps\\test1

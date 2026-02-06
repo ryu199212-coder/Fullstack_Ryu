@@ -1,0 +1,5 @@
+@charset "UTF-8";
+/* Q1 .mycontainer 가로사이즈 50% 페이지 정중앙배치*/
+.mycontainer{width: 50%; margin: 2em auto; background-color: burlywood; padding: 20px; border-radius: 20px;}
+/* Q2 .mycontainer h3 왼쪽선, 패딩, 배경색*/
+.mycontainer h3{border-left: 10px solid crimson ; padding: 1em; background-color: blanchedalmond;}

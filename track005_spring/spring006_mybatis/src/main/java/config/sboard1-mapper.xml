@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thejoa703.dao.Sboard1Dao">
+
+	  <!-- 명시적 매핑 -->
+	  <resultMap id="sboard1Map" type="Sboard1Dto">
+	    <result property="id" column="ID"/>
+	    <result property="appUserId" column="APP_USER_ID"/>
+	    <result property="btitle"    column="BTITLE"/>
+	    <result property="bcontent"  column="BCONTENT"/>
+	    <result property="bpass"     column="BPASS"/>
+	    <result property="bfile"     column="BFILE"/>
+	    <result property="bhit"      column="BHIT"/>
+	    <result property="bip" column="BIP"/>
+	    <result property="createdAt" column="CREATED_AT"/>
+	  </resultMap>
+
+	<insert     id="insert"  parameterType="Sboard1Dto">
+	insert into sboard1 ( ID    , APP_USER_ID , BTITLE , BCONTENT , BPASS , BIP)  
+	values (sboard1_seq.nextval ,#{appUserId}, #{btitle},#{bcontent},#{bpass}, #{bip})
+	</insert>
+	
+	<insert     id="insert2"  parameterType="Sboard1Dto">
+	insert into sboard1 ( ID    , APP_USER_ID , BTITLE , BCONTENT , BPASS , BFILE , BIP)  
+	values (sboard1_seq.nextval ,#{appUserId}, #{btitle},#{bcontent},#{bpass},  #{bfile} , #{bip})
+	</insert>
+	
+	<update     id="updateHit"   parameterType="int">
+	update  sboard1   set     bhit = bhit + 1    where   id=#{id}    
+	</update>	
+	
+	<update     id="update"  parameterType="Sboard1Dto">
+	update  sboard1  
+	set     BTITLE=#{btitle} , BCONTENT=#{bcontent} 
+	where   id=#{id}   and BPASS= #{bpass} 
+	</update>
+
+	<update     id="update2"  parameterType="Sboard1Dto">
+	update  sboard1  
+	set     BTITLE=#{btitle} , BCONTENT=#{bcontent} , BFILE=#{bfile}
+	where   id=#{id}   and BPASS= #{bpass} 
+	</update>	
+	
+	
+	<delete     id="delete"  parameterType="Sboard1Dto">
+	delete from sboard1   where    id=#{id}   and BPASS= #{bpass}  
+	</delete>
+	
+	<select    resultMap  ="sboard1Map"  id="selectAll"><!--  resultType="Sboard1Dto"  --> 
+	select * from sboard1  order by id desc 
+	</select>
+	
+	<select    resultMap  ="sboard1Map"   id="select"  parameterType="int">
+	select * from sboard1 where id=#{id}  
+	</select>
+	
+	<!--  ajax - search	 -->
+	<select   resultMap  ="sboard1Map"   id="selectSearch" parameterType="java.util.HashMap"  >
+	  select * from  sboard1  where btitle   like #{search}
+	</select>
+	
+</mapper>

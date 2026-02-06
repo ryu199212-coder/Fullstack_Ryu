@@ -1,0 +1,329 @@
+[33mcommit 1523500cd523b6d34a6a1c7ffcf5fce5d9bd983a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Mon Nov 3 18:25:51 2025 +0900
+
+    11.03
+
+[33mcommit 25f46c22cc8916335de6e935945abbe4446c0fe9[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Fri Oct 31 18:20:27 2025 +0900
+
+    10.31
+
+[33mcommit d2a4cf0acc195261dcf8e0fabe0f8ce89a8f4cd5[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Thu Oct 30 18:11:51 2025 +0900
+
+    10.30
+
+[33mcommit f0697d8239edfc889826c576659d58b54e9b9374[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Wed Oct 29 17:52:37 2025 +0900
+
+    10.29
+
+[33mcommit fe7fe6285688299e34005260008aca958c4420f8[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Tue Oct 28 17:44:54 2025 +0900
+
+    10.28
+
+[33mcommit 4ae521aae84137f9a5f9e04acf69ebb0c1a22e75[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Mon Oct 27 18:16:25 2025 +0900
+
+    10.27
+
+[33mcommit 579240a71e48c46662e34efab62840fd8d90fbfc[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Fri Oct 24 17:59:26 2025 +0900
+
+    jsp
+
+[33mcommit 786062dc463e816ae0e2d08cfc33f36847871e2b[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Fri Oct 24 17:24:46 2025 +0900
+
+    10.24
+
+[33mcommit c9f3b7b55676f84330e6e49ad6f8e4fbb20eabb8[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Thu Oct 23 17:57:37 2025 +0900
+
+    10.23
+
+[33mcommit 202c4178905830d94f5386e57b6c658d0ac79a76[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Wed Oct 22 17:32:41 2025 +0900
+
+    10.22
+
+[33mcommit 2345fd6a0e815a666fc026a18fcfc7f1e35840ce[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Tue Oct 21 17:36:13 2025 +0900
+
+    10.21
+
+[33mcommit 5439c4a6afd2381c2e2f73cdd2ad8ca6e9b27a87[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Mon Oct 20 17:04:04 2025 +0900
+
+    정상화 완료
+
+[33mcommit 380fd27656c6c695d461b68d9b70d57cf4cffc79[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Mon Oct 20 16:20:12 2025 +0900
+
+    정상화
+
+[33mcommit 7843560d751ecdc6e106403569b79c9e99b55637[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Mon Oct 20 16:15:24 2025 +0900
+
+    This reverts commit c9e71575cb29295fa0318c18541f31b8b23402a6.
+    q
+    git push origin master
+    :wq
+    :q!
+
+[33mcommit 2b28e58c0e5cb2c1f94629584c3fa9cf78adc75a[m
+Merge: 9023c4c dbd5e73
+Author: ryu199212-coder <ryu199212@gmail.com>
+Date:   Mon Oct 20 16:13:41 2025 +0900
+
+    Merge pull request #2 from ryu199212-coder/dev-ryu
+    
+    Dev ryu
+
+[33mcommit dbd5e73d42c3509fce1dea654933cc15570a37a5[m
+Merge: c9e7157 9023c4c
+Author: ryu199212-coder <ryu199212@gmail.com>
+Date:   Mon Oct 20 16:13:30 2025 +0900
+
+    Merge branch 'master' into dev-ryu
+
+[33mcommit c9e71575cb29295fa0318c18541f31b8b23402a6[m[33m ([m[1;31morigin/dev-ryu[m[33m, [m[1;32mdev-ryu[m[33m)[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Mon Oct 20 16:07:16 2025 +0900
+
+    revert
+
+[33mcommit 9023c4c77a3b67d848d7f23954579cb33eb0b350[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Fri Oct 17 16:45:06 2025 +0900
+
+    10.17
+
+[33mcommit f7fd97fb7812059ba8e54ca534279b4c21cb8e57[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Thu Oct 16 17:53:30 2025 +0900
+
+    10.16
+
+[33mcommit f07e07948c46b9d2e9d1a42d708553f954c076a1[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Thu Oct 16 14:53:43 2025 +0900
+
+    third
+
+[33mcommit 71eb24e1110cfba8b31b77473d52db4544c84921[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Thu Oct 16 14:53:23 2025 +0900
+
+    test
+
+[33mcommit c6f5efc2a9734e8abd4d12c0936e993e54416a7a[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Thu Oct 16 14:52:55 2025 +0900
+
+    first
+
+[33mcommit 2dfff3049b50e0a92c60b476104ed2d35eaf9630[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Thu Oct 16 14:49:14 2025 +0900
+
+    ds
+
+[33mcommit 5f26b5964ad8da25d030d4152253ab76310d7493[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Thu Oct 16 14:47:50 2025 +0900
+
+    test
+
+[33mcommit 0ca60ae8dae485529c8f38c01e2605c051c736ab[m
+Author: ryu199212-coder <ryu199212@gmail.com>
+Date:   Thu Oct 16 12:48:47 2025 +0900
+
+    Update test.md with fetch and pull sections
+
+[33mcommit b8b22682390e40148a2824ecb382d06bd440cc2c[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Thu Oct 16 12:46:08 2025 +0900
+
+    test추가
+
+[33mcommit 168746fc6184a66ced1568c77b6a68cbde0c9d7a[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Thu Oct 16 12:44:31 2025 +0900
+
+    test
+
+[33mcommit fa799996e7b483bba82018e2fdf34b61cd59acbd[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Thu Oct 16 12:15:58 2025 +0900
+
+    중간저장
+
+[33mcommit 3ac6db17a941d1ac15020465bb93701a9ab9861f[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Wed Oct 15 17:42:38 2025 +0900
+
+    10.15
+
+[33mcommit 7d8bb925a8f82cf95406216e1a527e69fe8123c8[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Tue Oct 14 16:51:13 2025 +0900
+
+    10.14
+
+[33mcommit dc3a7419004de4755cc16aed0b42456a40e4d38b[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Mon Oct 13 20:11:04 2025 +0900
+
+    수정
+
+[33mcommit d9232fc82d7b11436b0273bef405acc823f1fcc5[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Mon Oct 13 12:58:40 2025 +0900
+
+    마무리
+
+[33mcommit c732461acd0937522e45d9f55b8f849a60793209[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Sun Oct 12 23:18:37 2025 +0900
+
+    학원 가기전 최종
+
+[33mcommit 83b5ff3f688b1f9e3497ae7cf4197480dece1241[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Sun Oct 12 17:58:54 2025 +0900
+
+    사진수정
+
+[33mcommit 4a66d1741777e45a2763306fbae2dee14aee05b4[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Sun Oct 12 16:26:21 2025 +0900
+
+    프로필수정
+
+[33mcommit 012efb5dc28fa82a0ddb36aeab37bf8877b1105d[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Fri Oct 10 18:22:38 2025 +0900
+
+    마무리
+
+[33mcommit 8073f168a62ea13d71b0bd021bdc8c031a427380[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Fri Oct 10 10:51:06 2025 +0900
+
+    d
+
+[33mcommit 394c1b32c0d25561c48e9b58634df0a1287805b6[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Fri Oct 10 10:34:55 2025 +0900
+
+    모듈추가
+
+[33mcommit 49d59a4fdda9b4e04a3bac764a8496c48d484edb[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Fri Oct 10 10:29:47 2025 +0900
+
+    서브모듈 복구 완료
+
+[33mcommit 818c6219ae5f6014ee4bea12517a0e127e5b1827[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Fri Oct 10 10:09:34 2025 +0900
+
+    Remove broken submodule
+
+[33mcommit 3102f5388e717025f2edb985daf18f761bc0f5e7[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Fri Oct 10 10:05:02 2025 +0900
+
+    수정
+
+[33mcommit 219727fb6edea89839e9323d0bcfec80d4f8a610[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Thu Oct 2 17:59:43 2025 +0900
+
+    10/2
+
+[33mcommit 6e3599978cc3bf3d859923048be1665ef904c896[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Wed Oct 1 18:09:19 2025 +0900
+
+    10월1일
+
+[33mcommit d009b7c8e77e388d8e976761e9fbb4e6d2a1a1b3[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Tue Sep 30 18:01:49 2025 +0900
+
+    9/29~9/30
+
+[33mcommit 29cbff6553695896b65984a254479ddd7dd7500b[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Tue Sep 30 17:56:51 2025 +0900
+
+    9/30
+
+[33mcommit aa5b65fd4121e0cf683e37e59486d7b2a7e4cd3b[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Tue Sep 30 10:12:47 2025 +0900
+
+    어제
+
+[33mcommit aebb95690037d410278749997074baf3aa35f7eb[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Mon Sep 29 10:00:50 2025 +0900
+
+    9/29
+
+[33mcommit d0adab5d2de08783d1a4fa38c106a2beed865114[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Mon Sep 29 09:48:33 2025 +0900
+
+    9.29
+
+[33mcommit a78f4d42eaf91477c2ac5c32913a30a2c6f25c33[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Fri Sep 26 18:17:37 2025 +0900
+
+    9/26
+
+[33mcommit 039c6802f1b79e9f2add7298fab4a38ad08bd18c[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Thu Sep 25 18:13:16 2025 +0900
+
+    9/25
+
+[33mcommit 24e202a63d16853a1cbab6377d633c5beb1cd71a[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Wed Sep 24 18:06:55 2025 +0900
+
+    9/24
+
+[33mcommit 5a1572ed5a06697c34c5f0344263b53ec1977530[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Tue Sep 23 18:13:36 2025 +0900
+
+    9/23
+
+[33mcommit 516b6a7d2440a8965fe1a46ae18e5ce23979d13d[m
+Author: Ryu <ryu199212@gmail.com>
+Date:   Fri Sep 19 17:46:28 2025 +0900
+
+    9/19일 마무리
+
+[33mcommit fd9ce54d703cefc4233312b44453020e6d2d63b4[m
+Author: Ryu <ryu199212@gmail.com>
+D

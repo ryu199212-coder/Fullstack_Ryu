@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration> 
+	<typeAliases>
+		<typeAlias type="com.thejoa703.dto.Sboard1Dto"      alias="Sboard1Dto"  />
+		<typeAlias type="com.thejoa703.dto.EmpDto"          alias="EmpDto"  />
+		<typeAlias type="com.thejoa703.dto.AppUserAuthDto"  alias="AppUserAuthDto"  />
+		<typeAlias type="com.thejoa703.dto.AuthDto"         alias="AuthDto"  />
+		<typeAlias type="com.thejoa703.dto.AppUserDto"  	alias="AppUserDto"/>
+	</typeAliases>
+</configuration>

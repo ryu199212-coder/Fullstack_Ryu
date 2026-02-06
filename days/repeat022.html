@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head> 
+    <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+</head>
+<body>
+    <div>
+    <input type="button"  value="addEventEx"  
+    title="버튼5"  id="addEventEx"  class="btn btn-success" />
+    <script>
+    window.addEventListener("load" , function(){ 
+    document.getElementById("addEventEx").onclick=function(){
+    let like = prompt("좋아하는 숫자1~5" , "1~5");
+    alert("좋아하는 숫자는 " + like);}; 
+    });   
+    </script>   
+    </div> 
+</body>
+</html>

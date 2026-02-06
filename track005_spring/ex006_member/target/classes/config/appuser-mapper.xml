@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thejoa703.dao.AppUserDao">
+	  <!-- 명시적 매핑 -->
+	  <resultMap id="appUserMap" type="AppUserDto">
+	    <result property="id" column="ID"/>
+	    <result property="appUserId" 	  column="APP_USER_ID"/>
+	    <result property="email"    	  column="EMAIL"/>
+	    <result property="password"  	  column="PASSWORD"/>
+	    <result property="mbtiTypeId"     column="MBTI_TYPE_ID"/>
+	    <result property="createdAt" 	  column="CREATED_AT"/>
+	    <result property="ufile" 	  	  column="UFILE"/>
+	  </resultMap>
+
+	<insert id="insert"  parameterType="AppUserDto">
+		insert into appuser (APP_USER_ID , EMAIL, PASSWORD, MBTI_TYPE_ID)  
+		values (appuser_seq.nextval, #{email} , #{password},#{mbtiTypeId})
+	</insert>
+	<update id="update"  parameterType="AppUserDto">
+		update appuser  set  password=#{password} , MBTI_TYPE_ID=#{mbtiTypeId}  
+		where app_user_id=#{appUserId}
+	</update>
+	<delete id="delete"  parameterType="AppUserDto">
+		delete from appuser where app_user_id=#{appUserId}  and password=#{password}
+	</delete>
+	<select resultMap="appUserMap"  id="selectAll">
+		select * from appuser   order by app_user_id desc
+	</select>
+	<select resultMap="appUserMap"  id="select" parameterType="AppUserDto">
+		select * from appuser   where app_user_id=#{appUserId} 
+	</select>
+	
+	<select resultMap="appUserMap"  id="selectEmail"  parameterType="AppUserDto">
+		select * from appuser   where email=#{email} 
+	</select>
+	
+	<select resultType="int"  id="selectLogin" parameterType="AppUserDto">
+		select count(*) cnt from appuser  where  email=#{email}   and password=#{password}
+	</select>
+	
+	<!-- upload -->
+	<!-- upload -->
+	<insert id="insert2"  parameterType="AppUserDto">
+		insert into appuser (APP_USER_ID , EMAIL, PASSWORD, MBTI_TYPE_ID , UFILE)  
+		values (appuser_seq.nextval, #{email} , #{password},#{mbtiTypeId} ,#{ufile})
+	</insert>
+	<update id="update2"  parameterType="AppUserDto">
+		update appuser  set  password=#{password} , MBTI_TYPE_ID=#{mbtiTypeId}  ,UFILE=#{ufile}
+		where app_user_id=#{appUserId}
+	</update>
+	<!-- upload -->
+	<!-- upload -->
+	
+	<!-- 아이디중복검사  -->
+	<select resultType="int"  id="iddouble"  parameterType="String">
+	select count(*) cnt from appuser  where email=#{email}
+	</select>
+	
+	<!-- 관리자 해당유저  -->
+	<!-- 관리자 해당유저  -->
+	<delete id="deleteAdmin"  parameterType="AppUserDto">
+		delete from appuser where app_user_id=#{appUserId}   
+	</delete>
+	<update id="updateAdmin"  parameterType="AppUserDto">
+		update appuser  set  MBTI_TYPE_ID=#{mbtiTypeId}  
+		where app_user_id=#{appUserId}
+	</update>
+		
+</mapper>

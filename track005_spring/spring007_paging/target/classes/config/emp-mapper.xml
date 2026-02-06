@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thejoa703.dao.EmpDao">
+	<select resultType="EmpDto" id="test1"
+		parameterType="java.util.HashMap">
+		select * from emp where ${searchType} = #{keyword}
+	</select>
+
+
+	<select resultType="EmpDto" id="test2" parameterType="EmpDto">
+		select * from emp where ename=#{ename}
+		<if test="job!=null"> and job=#{job}</if>
+	</select>
+
+	<select resultType="EmpDto" id="test3" parameterType="EmpDto">
+		select * from emp where empno=#{empno}
+		<choose>
+			<when test="ename != null"> and ename=#{ename} </when>
+			<when test="job   != null"> and job=#{job}</when>
+			<otherwise> and mgr=#{mgr} </otherwise>
+		</choose>
+	</select>
+
+	<select resultType="EmpDto" id="test4" parameterType="EmpDto">
+		select * from emp
+		<where>
+			<if test="ename != null"> and ename=#{ename}  </if>
+			<if test="job != null"> and job=#{job}  </if>
+		</where>
+	</select>
+
+	<update id="test5" parameterType="EmpDto">
+		update emp
+		<set>
+			<if test="ename != null"> ename=#{ename} ,  </if>
+			<if test="job   != null"> job=#{job} ,  </if>
+		</set>
+		where empno=#{empno}
+	</update>
+
+	<select resultType="EmpDto" id="test6">
+		select * from emp
+		<where>
+			empno in
+			<foreach item="no" collection="list" separator="," open="("
+				close=")"> #{no} </foreach>
+		</where>
+	</select>
+
+	<resultMap id="authMap" type="AuthDto">
+		<result property="email" column="email" />
+		<result property="auth" column="auth" />
+	</resultMap>
+	<resultMap id="appUserAuthMap" type="AppUserAuthDto">
+		<result property="email" column="email" />
+		<result property="password" column="password" />
+		<collection property="authList" resultMap="authMap" />
+	</resultMap>
+	<select resultMap="appUserAuthMap" id="readAuth"
+		parameterType="AppUserAuthDto"> select u.email, u.password, a.auth from appuser u left
+		outer join authorities a on u.email = a.email where u.email = #{email}
+	</select>
+
+</mapper>

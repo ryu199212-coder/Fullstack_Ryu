@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<!-- 	#1. layout 렌더링	 -->
+<head lang="ko">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<script type="text/javascript"
+			src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=ded9jfxufa&callback=initMap"></script>
+
+		<h2 class="mb-3">📍 현재 위치 기반 매장 추천</h2>
+
+		<!-- 버튼 영역 -->
+		<div class="mb-3">
+			<button id="locateBtn" class="btn btn-primary me-2">내 위치 찾기</button>
+			<button id="showAllBtn" class="btn btn-secondary">모든 매장 표시</button>
+		</div>
+
+		<!-- 지도 영역 -->
+		<div id="map" class="border rounded"
+			style="width: 100%; height: 500px;"></div>
+
+		<!-- 결과 패널 -->
+		<div class="card mt-3">
+			<div class="card-body">
+				<h5 class="card-title">추천 결과</h5>
+				<p id="resultText" class="card-text">아직 위치를 찾지 않았습니다.</p>
+				<div id="storeList" class="list-group"></div>
+			</div>
+		</div>
+		<!-- 지도 넣기 -->
+		<script id="code">
+			let map;
+			let userMarker;
+			let storeMarkers = [];
+			let stores = [];
+		
+			function initMap() {
+		
+				//1. 지도 초기화 - 매장좌표
+				stores = [
+					{ name: "강남점", lat: 37.498095, lng: 127.027610 },
+					{ name: "홍대점", lat: 37.556343, lng: 126.922651 },
+					{ name: "인천점", lat: 37.447275, lng: 126.690894 },
+					{ name: "시청점", lat: 37.566295, lng: 126.977945 }
+				];
+		
+				//2. 지도 초기화 - 중심위치
+				map = new naver.maps.Map('map', {
+					center: new naver.maps.LatLng(37.3595704, 127.105399),
+					zoom: 13
+				});
+		
+				userMarker = new naver.maps.Marker({
+					position: new naver.maps.LatLng(37.3595704, 127.105399),
+					map: map,
+					zIndex: 9999
+				});
+		
+				document.getElementById("locateBtn").onclick = Recommend;
+				document.getElementById("showAllBtn").onclick = ShowStores;
+			}
+		
+				//3. 모든 매장 - 마커 표시
+				function ShowStores() {
+			
+					storeMarkers.forEach(m => m.setMap(null));
+					storeMarkers = [];
+			
+					stores.forEach(store => {
+						const marker = new naver.maps.Marker({
+							position: new naver.maps.LatLng(store.lat, store.lng),
+							map: map
+						});
+						storeMarkers.push(marker);
+					});
+			
+					map.setZoom(10);
+					document.getElementById("resultText").innerText =
+						"모든 매장을 지도에 표시했습니다.";
+				}
+			
+				// 거리 계산 함수 (Haversine 공식)
+				function haversine(lat1, lng1, lat2, lng2) {
+					const R = 6371;
+					const toRad = deg => deg * Math.PI / 180;
+					const dLat = toRad(lat2 - lat1);
+					const dLng = toRad(lng2 - lng1);
+					const a =
+						Math.sin(dLat / 2) ** 2 +
+						Math.cos(toRad(lat1)) *
+						Math.cos(toRad(lat2)) *
+						Math.sin(dLng / 2) ** 2;
+					return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+				}
+			
+				//4. 현재 위치 + 가장 가까운 매장 추천
+				function Recommend() {
+			
+					if (!navigator.geolocation) {
+						alert("위치 정보를 지원하지 않습니다.");
+						return;
+					}
+			
+					navigator.geolocation.getCurrentPosition(pos => {
+			
+						const lat = pos.coords.latitude;
+						const lng = pos.coords.longitude;
+			
+						const userLatLng = new naver.maps.LatLng(lat, lng);
+			
+						userMarker.setPosition(userLatLng);
+						map.setCenter(userLatLng);
+						map.setZoom(15);
+			
+						let nearestStore = null;
+						let minDistance = Infinity;
+			
+						stores.forEach(store => {
+							const dist = haversine(lat, lng, store.lat, store.lng);
+							if (dist < minDistance) {
+								minDistance = dist;
+								nearestStore = { ...store, dist };
+							}
+						});
+			
+						// 결과 출력
+						document.getElementById("resultText").innerHTML =
+							`가장 가까운 매장 :
+							<span class="text-primary fw-bold">${nearestStore.name}</span>
+							(${nearestStore.dist.toFixed(2)} km)`;
+			
+						// 매장 리스트 출력
+						document.getElementById("storeList").innerHTML =
+							stores.map(s => {
+								const d = haversine(lat, lng, s.lat, s.lng).toFixed(2);
+								const active = s.name === nearestStore.name ? "active" : "";
+								return `<div class="list-group-item ${active}">
+									${s.name} - ${d} km
+								</div>`;
+							}).join("");
+					});
+				}
+			</script>
+
+
+	</div>
+	<!--    http://localhost:8484/boot001/board/list -->
+</body>
+</html>
