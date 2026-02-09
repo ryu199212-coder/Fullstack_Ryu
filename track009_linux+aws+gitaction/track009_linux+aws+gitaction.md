@@ -303,7 +303,88 @@ sudo systemctl restart nginx
 
 
 
+■7. IM 사용자/역할 생성
+1. IAM 콘솔 → 사용자 추가  
+2. 권한 정책: `AmazonEC2FullAccess`, `AmazonECS_FullAccess`, `AmazonEC2ContainerRegistryFullAccess`  
+3. Access Key / Secret Key 발급  
+4. GitHub Secrets에 저장  
 
+- `AmazonEC2FullAccess`   →  EC2 인스턴스 관리 
+- `AmazonECS_FullAccess`     →  ECS/Faragate 서비스관리
+- `AmazonEC2ContainerRegistryFullAccess`   →  Docker이미지를 푸시/풀 할수 있게. 레지스트리 접근  
+ 
+
+```
+Access Key : YOUR_AWS_ACCESS_KEY
+Secret Key : YOUR_AWS_ACCESS_KEY
+```
+
+
+## Part003. ci/cd
+
+■8. GitHub Secrets 설정
+> ci/cd
+ci : (지속적 통합)
+  - 공용저장소에 자주병합
+  - 자동빌드/테스트를 통해서 버그 조기에 발견
+cd : (지속적 제공/배포)
+  - 자동으로 프로덕션 환경에 배포
+
+```
+Name: EC2_HOST
+Secret: 13.xxx.xxx.xxx (현재 EC2 퍼블릭 IP)   43.200.175.169
+
+Name: EC2_USER
+Secret: ubuntu
+
+Name: EC2_SSH_KEY
+Secret: .pem 파일 내용을 그대로 붙여넣기
+
+Name: AWS_ACCESS_KEY_ID
+Secret: IAM에서 발급받은 Access Key      YOUR_AWS_ACCESS_KEY
+
+Name: AWS_SECRET_ACCESS_KEY
+Secret: IAM에서 발급받은 Secret Key      YOUR_AWS_ACCESS_KEY
+
+Name: AWS_REGION
+Secret: ap-northeast-2
+
+Name: AWS_ACCOUNT_ID
+Secret: 12자리 숫자      677035504456
+
+Name: ECR_REPO
+Secret: ECR 저장소 이름 (예: my-app-repo)    thejoa
+```
+677035504456.dkr.ecr.ap-northeast-2.amazonaws.com/thejoa
+
+```
+Name: DB_USERNAME
+Secret: scott
+
+Name: DB_PASSWORD
+Secret: tiger 
+
+Name: JWT_SECRET
+Secret: this-is-a-very-long-random-secret-key-64chars-minimum-1234567890!@#$%^&*() 
+
+Name: GOOGLE_CLIENT_ID
+Secret: 64846044024-nh70uh12qkhkvlhnaiifl7q316svssm1.apps.googleusercontent.com
+
+Name: GOOGLE_CLIENT_SECRET
+Secret: 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
+
+Name: KAKAO_CLIENT_ID 
+Secret: 01e8784b1e7533ea33b7e7a3f9af11f2 
+
+Name: NAVER_CLIENT_ID
+Secret: 0OURtR8HMXxp5CL5pVdi
+
+Name: NAVER_CLIENT_SECRET
+Secret: qtVfwbBEBl
+```
+```
+Name: NEXT_PUBLIC_API_BASE_URL
+Secret: http://43.200.175.169
 ```
 
 
@@ -350,7 +431,7 @@ sudo vi   /etc/nginx/sites-available/default
  
 server {
     listen 80;
-    server_name 54.180.92.192;
+    server_name 43.200.175.169;
 
     # 프론트엔드 (Next.js SSR 서버)
     location / {
