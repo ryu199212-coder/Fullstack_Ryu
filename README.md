@@ -20,7 +20,7 @@ alt="프로필" width=200>
 |-|-|
 |이름|유희재|
 |이메일|ryu199212@gmail.com|
-|깃허브|https://github.com/ryu199212-coder|
+|팀깃허브|[https://github.com/ryu199212-coder](https://github.com/shgil0618-glitch/Bug-Hunters.git)|
 |포트폴리오|https://www.notion.so/3008ff006d2f809e888ec3e7928c3bc3|
 
 
